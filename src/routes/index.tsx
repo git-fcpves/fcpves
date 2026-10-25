@@ -41,18 +41,7 @@ function Section({ id, title, children }: { id: string; title: string; children:
 }
 
 function Index() {
-  const { to } = Route.useSearch();
   const [active, setActive] = useState(FIRST_ID);
-
-  useEffect(() => {
-    if (!to) return;
-    const el = document.getElementById(to);
-    if (!el) return;
-    window.scrollTo({
-      top: to === "home" ? 0 : el.getBoundingClientRect().top + window.scrollY - 16,
-      behavior: "auto",
-    });
-  }, [to]);
 
   useEffect(() => {
     const onScroll = () => {
