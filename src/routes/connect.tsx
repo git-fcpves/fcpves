@@ -78,6 +78,8 @@ function Group({ title, items }: { title: string; items: Option[] }) {
 }
 
 function Connect() {
+  const [active, setActive] = useState("connect");
+
   return (
     <>
       <main className="mx-auto min-h-screen max-w-md px-6 pb-32 pt-14">
@@ -92,7 +94,7 @@ function Connect() {
         <footer className="mt-14 text-center text-xs text-muted-foreground">© FCPVES</footer>
       </main>
 
-      <Dock active="connect" />
+      <Dock active={active} onPick={setActive} />
     </>
   );
 }
