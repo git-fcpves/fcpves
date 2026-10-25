@@ -1,6 +1,8 @@
 # Roadmap
 
-- [x] Bottom dock with 5 categories (fixed, solid background, scroll spy)
-- [x] Connect moved off the home page into its own page with all social + contact options
-- [ ] 4th dock item "Jobs" becomes "Projects"; inside it: AI projects, GPT projects, GitHub projects, editing projects, automation projects
-- [ ] Fix dock navigation between pages (hash became `##work`, and the landing scroll misses the target section)
+- [x] Bottom dock with 5 categories (Home, About, Work, Projects, Connect)
+- [x] Connect page with all social + contact options
+- [x] Projects page: AI, GPT, GitHub, editing, automation projects
+- [x] Dock navigation between pages (hash jump lands on the right section)
+- [ ] Work: nine categories (cinematic, candid, teasers, corporate, ad films, promotional, ai, biography, political), each with sample files to preview
+- [ ] Replace placeholder sample clips with Sagar's real videos (needs his files or links)
