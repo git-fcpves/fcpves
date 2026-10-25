@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { Dock } from "../components/dock";
+import { WorkSection } from "../components/work-section";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -21,7 +22,6 @@ const stats = [
   { n: "100+", l: "Cinematic films" },
   { n: "100+", l: "Teasers" },
 ];
-const work = ["Wedding films", "Cinematic edits", "Reels & shorts", "Promo & brand films", "AI videos", "Motion graphics"];
 const experience = [
   { t: "Clickers Cabin Photography & Academy", s: "Current" },
   { t: "Million's Photography & Films", s: "Video Editor · 6 months" },
@@ -94,11 +94,7 @@ function Index() {
         </Section>
 
         <Section id="work" title="Work">
-          <div className="flex flex-wrap gap-2">
-            {work.map((w) => (
-              <span key={w} className="rounded-full border px-3 py-1.5 text-sm">{w}</span>
-            ))}
-          </div>
+          <WorkSection />
         </Section>
 
         <Section id="experience" title="Experience">
