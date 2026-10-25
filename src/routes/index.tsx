@@ -1,9 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { z } from "zod";
 import { Dock, dockItems } from "../components/dock";
-
-const searchSchema = z.object({ to: z.string().optional() });
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -16,7 +13,6 @@ export const Route = createFileRoute("/")({
       { name: "twitter:card", content: "summary" },
     ],
   }),
-  validateSearch: (search) => searchSchema.parse(search),
   component: Index,
 });
 

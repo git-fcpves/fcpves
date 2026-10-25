@@ -24,7 +24,7 @@ export function Dock({ active }: { active: string }) {
       const top = id === "home" ? 0 : el.getBoundingClientRect().top + window.scrollY - 16;
       window.scrollTo({ top, behavior: "smooth" });
     } else {
-      navigate({ to: "/", search: { to: id } });
+      navigate({ to: "/", hash: id === "home" ? "" : `#${id}` });
     }
   };
 
