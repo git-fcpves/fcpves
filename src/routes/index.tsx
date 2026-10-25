@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { Briefcase, Clapperboard, Home, Send, User } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Dock } from "../components/dock";
+import { WorkSection } from "../components/work-section";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -21,28 +22,12 @@ const stats = [
   { n: "100+", l: "Cinematic films" },
   { n: "100+", l: "Teasers" },
 ];
-const work = ["Wedding films", "Cinematic edits", "Reels & shorts", "Promo & brand films", "AI videos", "Motion graphics"];
 const experience = [
   { t: "Clickers Cabin Photography & Academy", s: "Current" },
   { t: "Million's Photography & Films", s: "Video Editor · 6 months" },
 ];
-const links = [
-  { l: "Instagram", h: "https://www.instagram.com/ig.fcpves/" },
-  { l: "YouTube", h: "https://www.youtube.com/@yt.fcpves" },
-  { l: "Website", h: "https://fcpves.in" },
-  { l: "Email", h: "mailto:support@fcpves.in" },
-];
 
-const dock = [
-  { id: "home", label: "Home", Icon: Home },
-  { id: "about", label: "About", Icon: User },
-  { id: "work", label: "Work", Icon: Clapperboard },
-  { id: "experience", label: "Jobs", Icon: Briefcase },
-  { id: "connect", label: "Connect", Icon: Send },
-];
-
-const FIRST_ID = dock[0]?.id ?? "home";
-const LAST_ID = dock[dock.length - 1]?.id ?? "connect";
+const homeIds = ["home", "about", "work"];
 
 function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
   return (
@@ -53,58 +38,23 @@ function Section({ id, title, children }: { id: string; title: string; children:
   );
 }
 
-function Dock({ active, onPick }: { active: string; onPick: (id: string) => void }) {
-  const go = (id: string) => {
-    onPick(id);
-    const el = document.getElementById(id);
-    if (!el) return;
-    const top = id === "home" ? 0 : el.getBoundingClientRect().top + window.scrollY - 16;
-    window.scrollTo({ top, behavior: "smooth" });
+function Index() {
+  const [active, setActive] = useState("home");
+  const lock = useRef(0);
+
+  const pick = (id: string) => {
+    lock.current = Date.now() + 800;
+    setActive(id);
   };
 
-  return (
-    <nav
-      aria-label="Sections"
-      className="fixed inset-x-0 bottom-0 z-50 flex justify-center pb-[max(0.75rem,env(safe-area-inset-bottom))]"
-    >
-      <div className="mx-4 flex w-full max-w-sm items-stretch gap-1 rounded-full border bg-card p-1.5 shadow-[0_-6px_30px_rgba(0,0,0,0.55)]">
-        {dock.map(({ id, label, Icon }) => {
-          const on = active === id;
-          return (
-            <button
-              key={id}
-              type="button"
-              onClick={() => go(id)}
-              aria-label={label}
-              aria-current={on ? "true" : undefined}
-              className={`flex flex-1 flex-col items-center gap-1 rounded-full py-2 transition-colors duration-200 ${
-                on ? "bg-primary/15 text-primary" : "text-muted-foreground"
-              }`}
-            >
-              <Icon className="h-[18px] w-[18px]" strokeWidth={on ? 2.2 : 1.6} />
-              <span className="text-[9px] tracking-wide">{label}</span>
-            </button>
-          );
-        })}
-      </div>
-    </nav>
-  );
-}
-
-function Index() {
-  const [active, setActive] = useState(FIRST_ID);
-
   useEffect(() => {
-    const ids = dock.map((d) => d.id);
     const onScroll = () => {
+      if (Date.now() < lock.current) return;
       const line = window.scrollY + 96;
-      let current = FIRST_ID;
-      for (const id of ids) {
+      let current = "home";
+      for (const id of homeIds) {
         const el = document.getElementById(id);
         if (el && el.offsetTop <= line) current = id;
-      }
-      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8) {
-        current = LAST_ID;
       }
       setActive(current);
     };
@@ -144,11 +94,7 @@ function Index() {
         </Section>
 
         <Section id="work" title="Work">
-          <div className="flex flex-wrap gap-2">
-            {work.map((w) => (
-              <span key={w} className="rounded-full border px-3 py-1.5 text-sm">{w}</span>
-            ))}
-          </div>
+          <WorkSection />
         </Section>
 
         <Section id="experience" title="Experience">
@@ -166,24 +112,10 @@ function Index() {
           <p className="text-muted-foreground">Final Cut Pro · Adobe Photoshop</p>
         </Section>
 
-        <Section id="connect" title="Connect">
-          <div className="grid grid-cols-2 gap-3">
-            {links.map((k) => (
-              <a key={k.l} href={k.h} target="_blank" rel="noreferrer"
-                className="rounded-xl border bg-card py-3 text-center text-sm transition-colors hover:border-primary hover:text-primary">
-                {k.l}
-              </a>
-            ))}
-          </div>
-          <a href="tel:7619633201" className="mt-3 block rounded-xl bg-primary py-3 text-center font-medium text-primary-foreground">
-            Call 76196 33201
-          </a>
-        </Section>
-
         <footer className="mt-14 text-center text-xs text-muted-foreground">© FCPVES</footer>
       </main>
 
-      <Dock active={active} onPick={setActive} />
+      <Dock active={active} onPick={pick} />
     </>
   );
 }
