@@ -1,4 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
+import { Briefcase, Clapperboard, Home, Send, User } from "lucide-react";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -31,79 +33,157 @@ const links = [
   { l: "Email", h: "mailto:support@fcpves.in" },
 ];
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+const dock = [
+  { id: "home", label: "Home", Icon: Home },
+  { id: "about", label: "About", Icon: User },
+  { id: "work", label: "Work", Icon: Clapperboard },
+  { id: "experience", label: "Jobs", Icon: Briefcase },
+  { id: "connect", label: "Connect", Icon: Send },
+];
+
+const FIRST_ID = dock[0]?.id ?? "home";
+const LAST_ID = dock[dock.length - 1]?.id ?? "connect";
+
+function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
   return (
-    <section className="mt-12">
+    <section id={id} className="mt-12 scroll-mt-6">
       <h2 className="mb-4 text-xs uppercase tracking-[0.3em] text-primary">{title}</h2>
       {children}
     </section>
   );
 }
 
-function Index() {
+function Dock({ active, onPick }: { active: string; onPick: (id: string) => void }) {
+  const go = (id: string) => {
+    onPick(id);
+    const el = document.getElementById(id);
+    if (!el) return;
+    const top = id === "home" ? 0 : el.getBoundingClientRect().top + window.scrollY - 16;
+    window.scrollTo({ top, behavior: "smooth" });
+  };
+
   return (
-    <main className="mx-auto min-h-screen max-w-md px-6 py-14">
-      <header className="text-center">
-        <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full border border-primary/40 font-display text-4xl text-primary">
-          SS
-        </div>
-        <h1 className="mt-6 font-display text-4xl">Sagar Salimath</h1>
-        <p className="mt-2 text-sm text-muted-foreground">Video Editor · Visual Storyteller · Creative Technologist</p>
-      </header>
-
-      <div className="mt-10 grid grid-cols-3 gap-3">
-        {stats.map((s) => (
-          <div key={s.l} className="rounded-xl border bg-card py-4 text-center">
-            <div className="font-display text-2xl text-primary">{s.n}</div>
-            <div className="mt-1 text-[11px] text-muted-foreground">{s.l}</div>
-          </div>
-        ))}
+    <nav
+      aria-label="Sections"
+      className="fixed inset-x-0 bottom-0 z-50 flex justify-center pb-[max(0.75rem,env(safe-area-inset-bottom))]"
+    >
+      <div className="mx-4 flex w-full max-w-sm items-stretch gap-1 rounded-full border bg-card p-1.5 shadow-[0_-6px_30px_rgba(0,0,0,0.55)]">
+        {dock.map(({ id, label, Icon }) => {
+          const on = active === id;
+          return (
+            <button
+              key={id}
+              type="button"
+              onClick={() => go(id)}
+              aria-label={label}
+              aria-current={on ? "true" : undefined}
+              className={`flex flex-1 flex-col items-center gap-1 rounded-full py-2 transition-colors duration-200 ${
+                on ? "bg-primary/15 text-primary" : "text-muted-foreground"
+              }`}
+            >
+              <Icon className="h-[18px] w-[18px]" strokeWidth={on ? 2.2 : 1.6} />
+              <span className="text-[9px] tracking-wide">{label}</span>
+            </button>
+          );
+        })}
       </div>
+    </nav>
+  );
+}
 
-      <Section title="About">
-        <p className="leading-relaxed text-muted-foreground">
-          I craft cinematic wedding films, reels and brand stories — with a focus on natural skin tones and elegant color grading in Final Cut Pro.
-        </p>
-      </Section>
+function Index() {
+  const [active, setActive] = useState(FIRST_ID);
 
-      <Section title="Work">
-        <div className="flex flex-wrap gap-2">
-          {work.map((w) => (
-            <span key={w} className="rounded-full border px-3 py-1.5 text-sm">{w}</span>
+  useEffect(() => {
+    const ids = dock.map((d) => d.id);
+    const onScroll = () => {
+      const line = window.scrollY + 96;
+      let current = FIRST_ID;
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (el && el.offsetTop <= line) current = id;
+      }
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8) {
+        current = LAST_ID;
+      }
+      setActive(current);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, []);
+
+  return (
+    <>
+      <main className="mx-auto min-h-screen max-w-md px-6 pb-32 pt-14">
+        <header id="home" className="scroll-mt-6 text-center">
+          <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full border border-primary/40 font-display text-4xl text-primary">
+            SS
+          </div>
+          <h1 className="mt-6 font-display text-4xl">Sagar Salimath</h1>
+          <p className="mt-2 text-sm text-muted-foreground">Video Editor · Visual Storyteller · Creative Technologist</p>
+        </header>
+
+        <div className="mt-10 grid grid-cols-3 gap-3">
+          {stats.map((s) => (
+            <div key={s.l} className="rounded-xl border bg-card py-4 text-center">
+              <div className="font-display text-2xl text-primary">{s.n}</div>
+              <div className="mt-1 text-[11px] text-muted-foreground">{s.l}</div>
+            </div>
           ))}
         </div>
-      </Section>
 
-      <Section title="Experience">
-        <ul className="space-y-3">
-          {experience.map((e) => (
-            <li key={e.t} className="rounded-xl border bg-card p-4">
-              <div className="font-medium">{e.t}</div>
-              <div className="text-sm text-muted-foreground">{e.s}</div>
-            </li>
-          ))}
-        </ul>
-      </Section>
+        <Section id="about" title="About">
+          <p className="leading-relaxed text-muted-foreground">
+            I craft cinematic wedding films, reels and brand stories — with a focus on natural skin tones and elegant color grading in Final Cut Pro.
+          </p>
+        </Section>
 
-      <Section title="Tools">
-        <p className="text-muted-foreground">Final Cut Pro · Adobe Photoshop</p>
-      </Section>
+        <Section id="work" title="Work">
+          <div className="flex flex-wrap gap-2">
+            {work.map((w) => (
+              <span key={w} className="rounded-full border px-3 py-1.5 text-sm">{w}</span>
+            ))}
+          </div>
+        </Section>
 
-      <Section title="Connect">
-        <div className="grid grid-cols-2 gap-3">
-          {links.map((k) => (
-            <a key={k.l} href={k.h} target="_blank" rel="noreferrer"
-              className="rounded-xl border bg-card py-3 text-center text-sm transition-colors hover:border-primary hover:text-primary">
-              {k.l}
-            </a>
-          ))}
-        </div>
-        <a href="tel:7619633201" className="mt-3 block rounded-xl bg-primary py-3 text-center font-medium text-primary-foreground">
-          Call 76196 33201
-        </a>
-      </Section>
+        <Section id="experience" title="Experience">
+          <ul className="space-y-3">
+            {experience.map((e) => (
+              <li key={e.t} className="rounded-xl border bg-card p-4">
+                <div className="font-medium">{e.t}</div>
+                <div className="text-sm text-muted-foreground">{e.s}</div>
+              </li>
+            ))}
+          </ul>
+        </Section>
 
-      <footer className="mt-14 text-center text-xs text-muted-foreground">© FCPVES</footer>
-    </main>
+        <Section id="tools" title="Tools">
+          <p className="text-muted-foreground">Final Cut Pro · Adobe Photoshop</p>
+        </Section>
+
+        <Section id="connect" title="Connect">
+          <div className="grid grid-cols-2 gap-3">
+            {links.map((k) => (
+              <a key={k.l} href={k.h} target="_blank" rel="noreferrer"
+                className="rounded-xl border bg-card py-3 text-center text-sm transition-colors hover:border-primary hover:text-primary">
+                {k.l}
+              </a>
+            ))}
+          </div>
+          <a href="tel:7619633201" className="mt-3 block rounded-xl bg-primary py-3 text-center font-medium text-primary-foreground">
+            Call 76196 33201
+          </a>
+        </Section>
+
+        <footer className="mt-14 text-center text-xs text-muted-foreground">© FCPVES</footer>
+      </main>
+
+      <Dock active={active} onPick={setActive} />
+    </>
   );
 }
