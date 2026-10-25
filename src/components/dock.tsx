@@ -1,21 +1,26 @@
 import { useNavigate, useRouterState } from "@tanstack/react-router";
-import { Briefcase, Clapperboard, Home, Send, User } from "lucide-react";
+import { Clapperboard, FolderOpen, Home, Send, User } from "lucide-react";
 
 export const dockItems = [
   { id: "home", label: "Home", Icon: Home },
   { id: "about", label: "About", Icon: User },
   { id: "work", label: "Work", Icon: Clapperboard },
-  { id: "experience", label: "Jobs", Icon: Briefcase },
+  { id: "projects", label: "Projects", Icon: FolderOpen },
   { id: "connect", label: "Connect", Icon: Send },
 ];
 
-export function Dock({ active }: { active: string }) {
+export function Dock({ active, onPick }: { active: string; onPick: (id: string) => void }) {
   const navigate = useNavigate();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   const go = (id: string) => {
+    onPick(id);
     if (id === "connect") {
       navigate({ to: "/connect" });
+      return;
+    }
+    if (id === "projects") {
+      navigate({ to: "/projects" });
       return;
     }
     if (pathname === "/") {

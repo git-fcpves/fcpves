@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { Dock, dockItems } from "../components/dock";
+import { useEffect, useRef, useState } from "react";
+import { Dock } from "../components/dock";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -27,9 +27,7 @@ const experience = [
   { t: "Million's Photography & Films", s: "Video Editor · 6 months" },
 ];
 
-const homeIds = dockItems.filter((d) => d.id !== "connect").map((d) => d.id);
-const FIRST_ID = homeIds[0] ?? "home";
-const LAST_ID = homeIds[homeIds.length - 1] ?? "experience";
+const homeIds = ["home", "about", "work"];
 
 function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
   return (
@@ -41,18 +39,22 @@ function Section({ id, title, children }: { id: string; title: string; children:
 }
 
 function Index() {
-  const [active, setActive] = useState(FIRST_ID);
+  const [active, setActive] = useState("home");
+  const lock = useRef(0);
+
+  const pick = (id: string) => {
+    lock.current = Date.now() + 800;
+    setActive(id);
+  };
 
   useEffect(() => {
     const onScroll = () => {
+      if (Date.now() < lock.current) return;
       const line = window.scrollY + 96;
-      let current = FIRST_ID;
+      let current = "home";
       for (const id of homeIds) {
         const el = document.getElementById(id);
         if (el && el.offsetTop <= line) current = id;
-      }
-      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8) {
-        current = LAST_ID;
       }
       setActive(current);
     };
@@ -117,7 +119,7 @@ function Index() {
         <footer className="mt-14 text-center text-xs text-muted-foreground">© FCPVES</footer>
       </main>
 
-      <Dock active={active} />
+      <Dock active={active} onPick={pick} />
     </>
   );
 }
