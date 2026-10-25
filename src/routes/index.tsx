@@ -41,6 +41,9 @@ const dock = [
   { id: "connect", label: "Connect", Icon: Send },
 ];
 
+const FIRST_ID = dock[0]?.id ?? "home";
+const LAST_ID = dock[dock.length - 1]?.id ?? "connect";
+
 function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
   return (
     <section id={id} className="mt-12 scroll-mt-6">
@@ -50,8 +53,9 @@ function Section({ id, title, children }: { id: string; title: string; children:
   );
 }
 
-function Dock({ active }: { active: string }) {
+function Dock({ active, onPick }: { active: string; onPick: (id: string) => void }) {
   const go = (id: string) => {
+    onPick(id);
     const el = document.getElementById(id);
     if (!el) return;
     const top = id === "home" ? 0 : el.getBoundingClientRect().top + window.scrollY - 16;
@@ -88,19 +92,19 @@ function Dock({ active }: { active: string }) {
 }
 
 function Index() {
-  const [active, setActive] = useState("home");
+  const [active, setActive] = useState(FIRST_ID);
 
   useEffect(() => {
     const ids = dock.map((d) => d.id);
     const onScroll = () => {
-      const line = window.scrollY + window.innerHeight * 0.35;
-      let current = ids[0];
+      const line = window.scrollY + 96;
+      let current = FIRST_ID;
       for (const id of ids) {
         const el = document.getElementById(id);
         if (el && el.offsetTop <= line) current = id;
       }
       if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 8) {
-        current = ids[ids.length - 1];
+        current = LAST_ID;
       }
       setActive(current);
     };
@@ -179,7 +183,7 @@ function Index() {
         <footer className="mt-14 text-center text-xs text-muted-foreground">© FCPVES</footer>
       </main>
 
-      <Dock active={active} />
+      <Dock active={active} onPick={setActive} />
     </>
   );
 }
