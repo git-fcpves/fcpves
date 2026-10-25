@@ -67,7 +67,7 @@ function Dock({ active, onPick }: { active: string; onPick: (id: string) => void
       aria-label="Sections"
       className="fixed inset-x-0 bottom-0 z-50 flex justify-center pb-[max(0.75rem,env(safe-area-inset-bottom))]"
     >
-      <div className="mx-4 flex w-full max-w-sm items-stretch gap-1 rounded-full border bg-card/95 p-1.5 shadow-[0_-6px_30px_rgba(0,0,0,0.55)] backdrop-blur-xl">
+      <div className="mx-4 flex w-full max-w-sm items-stretch gap-1 rounded-full border bg-card p-1.5 shadow-[0_-6px_30px_rgba(0,0,0,0.55)]">
         {dock.map(({ id, label, Icon }) => {
           const on = active === id;
           return (
