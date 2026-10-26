@@ -11,10 +11,11 @@ import thumbPark from "../assets/thumb-samplelib.jpg";
 import thumbTest from "../assets/thumb-testvideos.jpg";
 import thumbShortA from "../assets/thumb-w3a.jpg";
 import thumbShortB from "../assets/thumb-w3b.jpg";
+import thumbRooted from "../assets/thumb-rooted-in-love.jpg";
 
 type Clip = { title: string; src: string };
 type Category = { name: string; clips: Clip[] };
-export type Featured = { title: string; src: string; poster: string };
+export type Featured = { title: string; src: string; poster: string; href?: string };
 
 const SOURCES: string[] = [clip1, clip2, clip3, clip4, clip5]
   .map((c) => (typeof c.url === "string" ? c.url : ""))
@@ -43,7 +44,12 @@ export const workCategories: Category[] = NAMES.map((name, i) => ({
 }));
 
 export const featuredWork: Featured[] = [
-  { title: "Cinematic film", src: clipSrc(0), poster: thumbBeach },
+  {
+    title: "Rooted in Love",
+    src: clipSrc(0),
+    poster: thumbRooted,
+    href: "https://youtu.be/er1WXxV_5KA",
+  },
   { title: "Teaser cut", src: clipSrc(1), poster: thumbTest },
   { title: "Macro reel", src: clipSrc(2), poster: thumbFlower },
   { title: "Short film", src: clipSrc(3), poster: thumbShortA },
