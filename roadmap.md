@@ -17,4 +17,5 @@
 - [ ] Wire tiles 4-6 to their own video links (needs Sagar's links)
 - [x] Embed supplied YouTube films inside the app and retain native playback for remaining samples
 - [x] Add the three supplied films to Cinematic videos in order, using the shared in-app player
+- [ ] Home: Instagram @ig.fcpves and YouTube @KANNADABHAKTHIGEETHEYGALU bar and circle graphs using verified real figures (awaiting accessible account analytics)
 
