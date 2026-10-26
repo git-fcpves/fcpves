@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Bot, Film, FolderOpen, Github, Sparkles, Workflow } from "lucide-react";
 import { Dock } from "../components/dock";
+import { BackButton } from "../components/back-button";
 
 export const Route = createFileRoute("/projects")({
   head: () => ({
@@ -31,6 +32,7 @@ function Projects() {
   return (
     <>
       <main className="mx-auto min-h-screen max-w-md px-6 pb-32 pt-14">
+        <BackButton />
         <h1 className="font-display text-4xl">Projects</h1>
         <p className="mt-2 text-sm text-muted-foreground">
           Five kinds of work I keep building. Pick a category.

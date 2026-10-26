@@ -11,3 +11,6 @@
 
 ## Video playback
 - Use the shared VideoPreview for featured films: YouTube links become privacy-enhanced embeds and local samples use native video, so thumbnails never need external navigation.
+
+## Page navigation
+- Use the shared BackButton on content pages for router-history navigation with a Home fallback, keeping back behavior consistent.
