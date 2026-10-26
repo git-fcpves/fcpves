@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Dock } from "../components/dock";
+import { BackButton } from "../components/back-button";
 import { WorkSection } from "../components/work-section";
 
 export const Route = createFileRoute("/work")({
@@ -23,6 +24,7 @@ function Work() {
   return (
     <>
       <main className="mx-auto min-h-screen max-w-md px-6 pb-32 pt-14">
+        <BackButton />
         <h1 className="font-display text-4xl">Work</h1>
         <p className="mt-2 text-sm text-muted-foreground">
           Nine kinds of edits. Tap a category to preview sample clips.

@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Dock } from "../components/dock";
+import { BackButton } from "../components/back-button";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -33,6 +34,7 @@ function AboutPage() {
   return (
     <>
       <main className="mx-auto min-h-screen max-w-md px-6 pb-32 pt-14">
+        <BackButton />
         <h1 className="font-display text-4xl">About</h1>
         <p className="mt-4 leading-relaxed text-muted-foreground">
           I craft cinematic wedding films, reels and brand stories, with a focus on natural skin tones and elegant color grading in Final Cut Pro.
