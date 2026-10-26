@@ -80,7 +80,7 @@ function GptRow({ l, d, h }: GPT) {
       href={h}
       target="_blank"
       rel="noreferrer"
-      className="flex items-center gap-4 rounded-xl border bg-card p-4 transition-colors hover:border-border"
+      className="flex items-center gap-4 rounded-xl border bg-card p-4 card-hover"
     >
       <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border text-accent">
         <Bot className="h-[18px] w-[18px]" />
@@ -145,7 +145,7 @@ function Index() {
 
         <div className="mt-10 grid grid-cols-3 gap-3">
           {stats.map((s) => (
-            <div key={s.l} className="rounded-xl border bg-card py-4 text-center">
+            <div key={s.l} className="rounded-xl border bg-card py-4 text-center card-hover">
               <div className="font-display text-2xl text-accent">{s.n}</div>
               <div className="mt-1 text-[11px] text-muted-foreground">{s.l}</div>
             </div>
@@ -168,7 +168,7 @@ function Index() {
                 aria-label={`Play ${w.title}`}
                 className="group block h-auto min-w-0 whitespace-normal p-0 text-left hover:bg-transparent"
               >
-                <span className="block overflow-hidden rounded-lg border bg-card">
+                <span className="block overflow-hidden rounded-lg border bg-card card-hover">
                   <img
                     src={w.poster}
                     alt={w.title}
@@ -200,7 +200,7 @@ function Index() {
               <li key={l}>
                 <Link
                   to="/projects"
-                  className="flex items-center gap-4 rounded-xl border bg-card p-4 transition-colors hover:border-border"
+                  className="flex items-center gap-4 rounded-xl border bg-card p-4 card-hover"
                 >
                   <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border text-accent">
                     <Icon className="h-[18px] w-[18px]" />
