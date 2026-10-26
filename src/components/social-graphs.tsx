@@ -57,6 +57,7 @@ function Donut({ stat, share }: { stat: SocialStat; share: number }) {
         </text>
       </svg>
       <span className="mt-2 text-sm">{stat.platform}</span>
+      <span className="max-w-full truncate text-[10px] text-muted-foreground">{stat.handle}</span>
       <span className="text-[11px] text-muted-foreground">{formatCount(stat.value)}</span>
     </a>
   );
