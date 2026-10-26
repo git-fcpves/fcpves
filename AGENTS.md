@@ -10,7 +10,7 @@
 <!-- LOVABLE:END -->
 
 ## Video playback
-- Use the shared VideoPreview for featured films: YouTube links become privacy-enhanced embeds and local samples use native video, so thumbnails never need external navigation.
+- Play every featured clip inside the app with the native video player: clips come only from uploaded assets, never from YouTube links, and the player sets controlsList="nodownload", disablePictureInPicture and blocks the right-click menu so visitors cannot save the files.
 
 ## Page navigation
 - Use the shared BackButton on content pages (not Home); it always returns to Home at the top, because every page is one step from Home.
