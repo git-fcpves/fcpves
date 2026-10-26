@@ -9,7 +9,11 @@ import clip5 from "../assets/sample-samplelib.mp4.asset.json";
 type Clip = { title: string; src: string };
 type Category = { name: string; clips: Clip[] };
 
-const SOURCES = [clip1.url, clip2.url, clip3.url, clip4.url, clip5.url];
+const SOURCES: string[] = [clip1, clip2, clip3, clip4, clip5]
+  .map((c) => (typeof c.url === "string" ? c.url : ""))
+  .filter((u) => u.length > 0);
+
+const clipSrc = (i: number): string => SOURCES[i % SOURCES.length] ?? "";
 
 const NAMES = [
   "Cinematic videos",
@@ -26,8 +30,8 @@ const NAMES = [
 export const workCategories: Category[] = NAMES.map((name, i) => ({
   name,
   clips: [
-    { title: "Sample clip 1", src: SOURCES[(i * 2) % SOURCES.length] },
-    { title: "Sample clip 2", src: SOURCES[(i * 2 + 1) % SOURCES.length] },
+    { title: "Sample clip 1", src: clipSrc(i * 2) },
+    { title: "Sample clip 2", src: clipSrc(i * 2 + 1) },
   ],
 }));
 
