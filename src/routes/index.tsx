@@ -21,21 +21,7 @@ const stats = [
   { n: "100+", l: "Cinematic films" },
   { n: "100+", l: "Teasers" },
 ];
-const experience = [
-  { t: "Clickers Cabin Photography & Academy", s: "Current" },
-  { t: "Million's Photography & Films", s: "Video Editor · 6 months" },
-];
-
-const homeIds = ["home", "about"];
-
-function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
-  return (
-    <section id={id} className="mt-12 scroll-mt-6">
-      <h2 className="mb-4 text-xs uppercase tracking-[0.3em] text-primary">{title}</h2>
-      {children}
-    </section>
-  );
-}
+const homeIds = ["home"];
 
 function Index() {
   const [active, setActive] = useState("home");
