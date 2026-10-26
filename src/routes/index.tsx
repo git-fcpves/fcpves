@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Bot, Github, Sparkles, Workflow } from "lucide-react";
 import { Dock } from "../components/dock";
@@ -6,6 +7,7 @@ import { BackButton } from "../components/back-button";
 import { featuredWork } from "../components/work-section";
 import { VideoPreview, type VideoClip } from "../components/video-preview";
 import { SocialGraphs } from "../components/social-graphs";
+import { audienceQueryOptions, fallbackPayload } from "../lib/audience";
 import { Button } from "../components/ui/button";
 import founderPortrait from "../assets/founder-portrait.png.asset.json";
 
@@ -99,6 +101,7 @@ function Index() {
   const [selectedVideo, setSelectedVideo] = useState<VideoClip | null>(null);
   const [active, setActive] = useState("home");
   const lock = useRef(0);
+  const { data: audience } = useQuery(audienceQueryOptions());
 
   const pick = (id: string) => {
     lock.current = Date.now() + 800;
@@ -154,7 +157,7 @@ function Index() {
 
         <section className="mt-12">
           <SectionHead title="Audience" to="/connect" label="Connect" />
-          <SocialGraphs />
+          <SocialGraphs payload={audience ?? fallbackPayload} />
         </section>
 
         <section className="mt-12">

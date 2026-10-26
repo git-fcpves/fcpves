@@ -14,3 +14,7 @@
 
 ## Page navigation
 - Use the shared BackButton on content pages for router-history navigation with a Home fallback, keeping back behavior consistent.
+
+## Audience figures
+- Read social counts live server-side in src/routes/api/public/audience.ts behind a shared 5-minute cache, and poll from the client on the same interval; the saved figures in src/lib/social-stats.ts are fallback only. This keeps every visitor on one upstream read and never shows invented numbers.
+- Outbound reads must send accept-language: en-US,en;q=0.9, because YouTube only shows the subscriber count with it; a source that throttles or fails is retried once and the newest real figure is kept rather than an older or invented one.

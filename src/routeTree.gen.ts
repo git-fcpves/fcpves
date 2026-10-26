@@ -14,6 +14,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as ConnectRouteImport } from './routes/connect'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as WorkRouteImport } from './routes/work'
+import { Route as ApiPublicAudienceRouteImport } from './routes/api/public/audience'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,6 +41,11 @@ const WorkRoute = WorkRouteImport.update({
   path: '/work',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicAudienceRoute = ApiPublicAudienceRouteImport.update({
+  id: '/api/public/audience',
+  path: '/api/public/audience',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -47,6 +53,7 @@ export interface FileRoutesByFullPath {
   '/connect': typeof ConnectRoute
   '/projects': typeof ProjectsRoute
   '/work': typeof WorkRoute
+  '/api/public/audience': typeof ApiPublicAudienceRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +61,7 @@ export interface FileRoutesByTo {
   '/connect': typeof ConnectRoute
   '/projects': typeof ProjectsRoute
   '/work': typeof WorkRoute
+  '/api/public/audience': typeof ApiPublicAudienceRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,13 +70,23 @@ export interface FileRoutesById {
   '/connect': typeof ConnectRoute
   '/projects': typeof ProjectsRoute
   '/work': typeof WorkRoute
+  '/api/public/audience': typeof ApiPublicAudienceRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/connect' | '/projects' | '/work'
+  fullPaths:
+    '/' | '/about' | '/connect' | '/projects' | '/work' | '/api/public/audience'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/connect' | '/projects' | '/work'
-  id: '__root__' | '/' | '/about' | '/connect' | '/projects' | '/work'
+  to:
+    '/' | '/about' | '/connect' | '/projects' | '/work' | '/api/public/audience'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/connect'
+    | '/projects'
+    | '/work'
+    | '/api/public/audience'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,6 +95,7 @@ export interface RootRouteChildren {
   ConnectRoute: typeof ConnectRoute
   ProjectsRoute: typeof ProjectsRoute
   WorkRoute: typeof WorkRoute
+  ApiPublicAudienceRoute: typeof ApiPublicAudienceRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -116,6 +135,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WorkRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/audience': {
+      id: '/api/public/audience'
+      path: '/api/public/audience'
+      fullPath: '/api/public/audience'
+      preLoaderRoute: typeof ApiPublicAudienceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -125,6 +151,7 @@ const rootRouteChildren: RootRouteChildren = {
   ConnectRoute: ConnectRoute,
   ProjectsRoute: ProjectsRoute,
   WorkRoute: WorkRoute,
+  ApiPublicAudienceRoute: ApiPublicAudienceRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
