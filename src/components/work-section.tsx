@@ -35,6 +35,13 @@ export const workCategories: Category[] = NAMES.map((name, i) => ({
   ],
 }));
 
+export const featuredClips: Clip[] = [
+  { title: "Cinematic film", src: clipSrc(0) },
+  { title: "Teaser cut", src: clipSrc(2) },
+  { title: "Reel", src: clipSrc(4) },
+];
+
+
 export function WorkSection() {
   const [openName, setOpenName] = useState<string | null>(null);
   const open = workCategories.find((c) => c.name === openName) ?? null;

@@ -1,14 +1,23 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
+import { ArrowUpRight, Bot, Github, Sparkles, Workflow } from "lucide-react";
 import { Dock } from "../components/dock";
+import { featuredClips } from "../components/work-section";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Sagar Salimath · Video Editor & Visual Storyteller" },
-      { name: "description", content: "Cinematic wedding films, reels and brand videos edited by Sagar Salimath." },
+      {
+        name: "description",
+        content:
+          "Cinematic wedding films, reels and brand videos edited by Sagar Salimath, plus his GPTs and automation projects.",
+      },
       { property: "og:title", content: "Sagar Salimath · Video Editor" },
-      { property: "og:description", content: "Cinematic wedding films, reels and brand videos." },
+      {
+        property: "og:description",
+        content: "Cinematic wedding films, reels, brand videos, GPTs and automations.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
     ],
@@ -22,6 +31,63 @@ const stats = [
   { n: "100+", l: "Teasers" },
 ];
 const homeIds = ["home"];
+
+type GPT = { l: string; d: string; h: string };
+
+const gpts: GPT[] = [
+  {
+    l: "Photography GPT",
+    d: "Shoot planning, posing and client replies",
+    h: "https://chatgpt.com/g/g-6adc3f9c53548191bd24c45cc65cb238-photographygpt",
+  },
+  {
+    l: "FCPVES Colorist AI",
+    d: "Color grading notes for Final Cut Pro",
+    h: "https://chatgpt.com/g/g-6ade2ca1a7108191ab900c44c0a34817-fcpves-colorist-ai",
+  },
+  {
+    l: "Editor Sagar",
+    d: "Business and creativity helper for editors",
+    h: "https://chatgpt.com/g/g-6a381ae33a888191bfa37c8f283fd371-editor-sagar",
+  },
+];
+
+const internal = [
+  { l: "Automation projects", d: "Workflow automations", Icon: Workflow },
+  { l: "AI projects", d: "Built with AI tools", Icon: Sparkles },
+  { l: "GitHub projects", d: "Code and small tools", Icon: Github },
+];
+
+function SectionHead({ title, to, label }: { title: string; to: string; label: string }) {
+  return (
+    <div className="mb-3 flex items-baseline justify-between gap-3">
+      <h2 className="text-xs uppercase tracking-[0.3em] text-primary">{title}</h2>
+      <Link to={to} className="text-xs text-muted-foreground transition-colors hover:text-primary">
+        {label}
+      </Link>
+    </div>
+  );
+}
+
+function GptRow({ l, d, h }: GPT) {
+  return (
+    <a
+      href={h}
+      target="_blank"
+      rel="noreferrer"
+      className="flex items-center gap-4 rounded-xl border bg-card p-4 transition-colors hover:border-primary"
+    >
+      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-primary/30 text-primary">
+        <Bot className="h-[18px] w-[18px]" />
+      </span>
+      <span className="min-w-0 flex-1">
+        <span className="block text-sm font-medium">{l}</span>
+        <span className="block truncate text-sm text-muted-foreground">{d}</span>
+      </span>
+      <ArrowUpRight className="h-4 w-4 shrink-0 text-muted-foreground" />
+    </a>
+  );
+}
 
 function Index() {
   const [active, setActive] = useState("home");
@@ -60,7 +126,9 @@ function Index() {
             SS
           </div>
           <h1 className="mt-6 font-display text-4xl">Sagar Salimath</h1>
-          <p className="mt-2 text-sm text-muted-foreground">Video Editor · Visual Storyteller · Creative Technologist</p>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Video Editor · Visual Storyteller · Creative Technologist
+          </p>
         </header>
 
         <div className="mt-10 grid grid-cols-3 gap-3">
@@ -72,6 +140,57 @@ function Index() {
           ))}
         </div>
 
+        <section className="mt-12">
+          <SectionHead title="Sample work" to="/work" label="All work" />
+          <div className="-mx-6 flex snap-x snap-mandatory gap-3 overflow-x-auto px-6">
+            {featuredClips.map((c) => (
+              <figure key={c.src} className="w-[78%] shrink-0 snap-start space-y-2">
+                <video
+                  src={c.src}
+                  controls
+                  playsInline
+                  muted
+                  loop
+                  preload="metadata"
+                  className="aspect-video w-full rounded-xl border bg-black object-cover"
+                />
+                <figcaption className="text-xs text-muted-foreground">{c.title}</figcaption>
+              </figure>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-12">
+          <SectionHead title="My GPTs" to="/projects" label="All projects" />
+          <div className="space-y-3">
+            {gpts.map((g) => (
+              <GptRow key={g.l} {...g} />
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-12">
+          <SectionHead title="More projects" to="/projects" label="Open" />
+          <ul className="space-y-3">
+            {internal.map(({ l, d, Icon }) => (
+              <li key={l}>
+                <Link
+                  to="/projects"
+                  className="flex items-center gap-4 rounded-xl border bg-card p-4 transition-colors hover:border-primary"
+                >
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-primary/30 text-primary">
+                    <Icon className="h-[18px] w-[18px]" />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-sm font-medium">{l}</span>
+                    <span className="block truncate text-sm text-muted-foreground">{d}</span>
+                  </span>
+                  <ArrowUpRight className="h-4 w-4 shrink-0 text-muted-foreground" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
 
         <footer className="mt-14 text-center text-xs text-muted-foreground">© FCPVES</footer>
       </main>
