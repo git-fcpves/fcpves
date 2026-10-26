@@ -13,7 +13,7 @@
 - Use the shared VideoPreview for featured films: YouTube links become privacy-enhanced embeds and local samples use native video, so thumbnails never need external navigation.
 
 ## Page navigation
-- Use the shared BackButton on content pages for router-history navigation with a Home fallback, keeping back behavior consistent.
+- Use the shared BackButton on content pages (not Home); it always returns to Home at the top, because every page is one step from Home.
 
 ## Audience figures
 - Read social counts live server-side in src/routes/api/public/audience.ts behind a shared 5-minute cache, and poll from the client on the same interval; the saved figures in src/lib/social-stats.ts are fallback only. This keeps every visitor on one upstream read and never shows invented numbers.

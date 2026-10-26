@@ -73,19 +73,8 @@ export function SocialGraphs({ payload }: { payload: AudiencePayload }) {
   const stats = payload.stats;
   const max = Math.max(...stats.map((s) => s.value), 1);
   const total = stats.reduce((sum, s) => sum + s.value, 0);
-  const checked = payload.fetchedAt ? new Date(payload.fetchedAt) : null;
-  const time =
-    checked && !Number.isNaN(checked.getTime())
-      ? checked.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
-      : "";
   return (
     <div className="space-y-3">
-      <div className="flex items-center gap-2 rounded-xl border bg-card px-3 py-2">
-        <span className="h-2 w-2 shrink-0 animate-pulse rounded-full bg-primary" aria-hidden />
-        <span className="text-[11px] text-muted-foreground">
-          Auto-updates every 5 minutes{time ? ` · last checked ${time}` : ""}
-        </span>
-      </div>
       {stats.map((s) => (
         <Bar key={s.handle} stat={s} max={max} />
       ))}
