@@ -78,9 +78,9 @@ function GptRow({ l, d, h }: GPT) {
       href={h}
       target="_blank"
       rel="noreferrer"
-      className="flex items-center gap-4 rounded-xl border bg-card p-4 transition-colors hover:border-primary"
+      className="flex items-center gap-4 rounded-xl border bg-card p-4 transition-colors hover:border-border"
     >
-      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-primary/30 text-primary">
+      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border text-primary">
         <Bot className="h-[18px] w-[18px]" />
       </span>
       <span className="min-w-0 flex-1">
@@ -132,7 +132,7 @@ function Index() {
             alt="Sagar Salimath, founder of FCPVES"
             width={96}
             height={96}
-            className="mx-auto h-24 w-24 rounded-full border border-primary/40 object-cover"
+            className="mx-auto h-24 w-24 rounded-full border border-border object-cover"
           />
           <h1 className="mt-6 font-display text-4xl">Sagar Salimath</h1>
           <p className="mt-2 text-sm text-muted-foreground">
@@ -192,9 +192,9 @@ function Index() {
               <li key={l}>
                 <Link
                   to="/projects"
-                  className="flex items-center gap-4 rounded-xl border bg-card p-4 transition-colors hover:border-primary"
+                  className="flex items-center gap-4 rounded-xl border bg-card p-4 transition-colors hover:border-border"
                 >
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-primary/30 text-primary">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border text-primary">
                     <Icon className="h-[18px] w-[18px]" />
                   </span>
                   <span className="min-w-0 flex-1">

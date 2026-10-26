@@ -39,7 +39,7 @@ function Projects() {
         <ul className="mt-10 space-y-3">
           {groups.map(({ l, d, Icon }) => (
             <li key={l} className="flex items-center gap-4 rounded-xl border bg-card p-4">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-primary/30 text-primary">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border text-primary">
                 <Icon className="h-[18px] w-[18px]" />
               </span>
               <span className="min-w-0 flex-1">

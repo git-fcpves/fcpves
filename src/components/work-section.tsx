@@ -102,7 +102,7 @@ export function WorkSection() {
             key={c.name}
             type="button"
             onClick={() => setOpenName(c.name)}
-            className="block h-auto whitespace-normal rounded-xl border bg-card p-4 text-left transition-colors hover:border-primary"
+            className="block h-auto whitespace-normal rounded-xl border bg-card p-4 text-left transition-colors hover:border-border"
           >
             <span className="block text-sm font-medium">{c.name}</span>
             <span className="mt-1 block text-[11px] text-muted-foreground">
@@ -127,7 +127,7 @@ export function WorkSection() {
               type="button"
               onClick={() => setOpenName(null)}
               aria-label="Close"
-              className="rounded-full border p-2 transition-colors hover:border-primary hover:text-primary"
+              className="rounded-full border p-2 transition-colors hover:border-border hover:text-primary"
             >
               <X className="h-4 w-4" />
             </Button>
