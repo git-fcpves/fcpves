@@ -73,7 +73,7 @@ export function VideoPreview({
           className="mx-auto aspect-video w-full max-w-4xl rounded-lg border bg-background"
         />
         )}
-        <p className="text-xs text-muted-foreground">{clip.title}</p>
+        <p className="mx-auto text-center text-xs text-muted-foreground">{clip.title}</p>
       </div>
     </div>
   );
