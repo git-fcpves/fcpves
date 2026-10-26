@@ -149,7 +149,7 @@ function Index() {
             {featuredWork.map((w) => (
               <a
                 key={w.title}
-                href={YT_CHANNEL}
+                href={w.href ?? YT_CHANNEL}
                 target="_blank"
                 rel="noreferrer"
                 aria-label={`Watch ${w.title} on YouTube`}
