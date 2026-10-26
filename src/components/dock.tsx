@@ -23,6 +23,10 @@ export function Dock({ active, onPick }: { active: string; onPick: (id: string) 
       navigate({ to: "/projects" });
       return;
     }
+    if (id === "work") {
+      navigate({ to: "/work" });
+      return;
+    }
     if (pathname === "/") {
       const el = document.getElementById(id);
       if (!el) return;

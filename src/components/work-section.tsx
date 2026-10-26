@@ -97,7 +97,7 @@ export function WorkSection() {
                   className="w-full rounded-xl border bg-black"
                 />
                 <figcaption className="text-xs text-muted-foreground">
-                  {open.name} — {clip.title}
+                  {open.name} · {clip.title}
                 </figcaption>
               </figure>
             ))}

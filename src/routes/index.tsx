@@ -1,14 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { Dock } from "../components/dock";
-import { WorkSection } from "../components/work-section";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Sagar Salimath — Video Editor & Visual Storyteller" },
+      { title: "Sagar Salimath · Video Editor & Visual Storyteller" },
       { name: "description", content: "Cinematic wedding films, reels and brand videos edited by Sagar Salimath." },
-      { property: "og:title", content: "Sagar Salimath — Video Editor" },
+      { property: "og:title", content: "Sagar Salimath · Video Editor" },
       { property: "og:description", content: "Cinematic wedding films, reels and brand videos." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -27,7 +26,7 @@ const experience = [
   { t: "Million's Photography & Films", s: "Video Editor · 6 months" },
 ];
 
-const homeIds = ["home", "about", "work"];
+const homeIds = ["home", "about"];
 
 function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
   return (
@@ -89,13 +88,11 @@ function Index() {
 
         <Section id="about" title="About">
           <p className="leading-relaxed text-muted-foreground">
-            I craft cinematic wedding films, reels and brand stories — with a focus on natural skin tones and elegant color grading in Final Cut Pro.
+            I craft cinematic wedding films, reels and brand stories, with a focus on natural skin tones and elegant color grading in Final Cut Pro.
           </p>
         </Section>
 
-        <Section id="work" title="Work">
-          <WorkSection />
-        </Section>
+
 
         <Section id="experience" title="Experience">
           <ul className="space-y-3">
