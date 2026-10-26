@@ -15,7 +15,7 @@ export const socialStats: SocialStat[] = [
     platform: "Instagram",
     handle: "@ig.fcpves",
     metric: "Followers",
-    value: 0,
+    value: 10000,
     href: "https://www.instagram.com/ig.fcpves",
   },
   {

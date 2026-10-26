@@ -18,5 +18,5 @@
 - [x] Embed supplied YouTube films inside the app and retain native playback for remaining samples
 - [x] Add the three supplied films to Cinematic videos in order, using the shared in-app player
 - [x] Home: Audience section with bar and circle graphs for Instagram @ig.fcpves and YouTube @KANNADABHAKTHIGEETHEYGALU (figures live in src/lib/social-stats.ts)
-- [ ] Set Instagram @ig.fcpves follower count to the real current number (needs Sagar to send it; sandbox cannot read it live)
+- [x] Instagram @ig.fcpves followers set to 10K per Sagar; update src/lib/social-stats.ts whenever the real count changes
 
