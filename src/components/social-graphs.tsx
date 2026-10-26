@@ -68,11 +68,11 @@ export function SocialGraphs() {
   return (
     <div className="space-y-3">
       {socialStats.map((s) => (
-        <Bar key={s.platform} stat={s} max={max} />
+        <Bar key={s.handle} stat={s} max={max} />
       ))}
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-3 gap-2">
         {socialStats.map((s) => (
-          <Donut key={s.platform} stat={s} share={total > 0 ? s.value / total : 0} />
+          <Donut key={s.handle} stat={s} share={total > 0 ? s.value / total : 0} />
         ))}
       </div>
     </div>
