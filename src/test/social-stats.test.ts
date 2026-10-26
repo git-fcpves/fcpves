@@ -15,7 +15,7 @@ describe("social stats shown on Home graphs", () => {
     expect(yt?.value).toBe(1300);
     const ig = socialStats.find((s) => s.platform === "Instagram");
     expect(ig?.metric).toBe("Followers");
-    expect(ig?.value).toBeGreaterThanOrEqual(0);
+    expect(ig?.value).toBe(10000);
   });
 
   it("formats counts in compact form", () => {

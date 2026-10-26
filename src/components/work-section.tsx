@@ -127,7 +127,7 @@ export function WorkSection() {
               type="button"
               onClick={() => setOpenName(null)}
               aria-label="Close"
-              className="rounded-full border p-2 transition-colors hover:border-border hover:text-primary"
+              className="rounded-full border p-2 transition-colors hover:border-border hover:text-accent"
             >
               <X className="h-4 w-4" />
             </Button>

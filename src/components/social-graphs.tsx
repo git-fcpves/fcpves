@@ -11,7 +11,7 @@ function Bar({ stat, max }: { stat: SocialStat; max: number }) {
     >
       <div className="flex items-baseline justify-between gap-3">
         <span className="text-sm">{stat.platform}</span>
-        <span className="font-display text-xl text-primary">{formatCount(stat.value)}</span>
+        <span className="font-display text-xl text-accent">{formatCount(stat.value)}</span>
       </div>
       <div className="mt-1 text-[11px] text-muted-foreground">
         {stat.handle} · {stat.metric}

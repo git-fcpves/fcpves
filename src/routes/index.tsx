@@ -65,8 +65,8 @@ const internal = [
 function SectionHead({ title, to, label }: { title: string; to: string; label: string }) {
   return (
     <div className="mb-3 flex items-baseline justify-between gap-3">
-      <h2 className="text-xs uppercase tracking-[0.3em] text-primary">{title}</h2>
-      <Link to={to} className="text-xs text-muted-foreground transition-colors hover:text-primary">
+      <h2 className="text-xs uppercase tracking-[0.3em] text-accent">{title}</h2>
+      <Link to={to} className="text-xs text-muted-foreground transition-colors hover:text-accent">
         {label}
       </Link>
     </div>
@@ -81,7 +81,7 @@ function GptRow({ l, d, h }: GPT) {
       rel="noreferrer"
       className="flex items-center gap-4 rounded-xl border bg-card p-4 transition-colors hover:border-border"
     >
-      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border text-primary">
+      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border text-accent">
         <Bot className="h-[18px] w-[18px]" />
       </span>
       <span className="min-w-0 flex-1">
@@ -144,7 +144,7 @@ function Index() {
         <div className="mt-10 grid grid-cols-3 gap-3">
           {stats.map((s) => (
             <div key={s.l} className="rounded-xl border bg-card py-4 text-center">
-              <div className="font-display text-2xl text-primary">{s.n}</div>
+              <div className="font-display text-2xl text-accent">{s.n}</div>
               <div className="mt-1 text-[11px] text-muted-foreground">{s.l}</div>
             </div>
           ))}
@@ -200,7 +200,7 @@ function Index() {
                   to="/projects"
                   className="flex items-center gap-4 rounded-xl border bg-card p-4 transition-colors hover:border-border"
                 >
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border text-primary">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border text-accent">
                     <Icon className="h-[18px] w-[18px]" />
                   </span>
                   <span className="min-w-0 flex-1">
