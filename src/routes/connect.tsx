@@ -14,9 +14,9 @@ import { Dock } from "../components/dock";
 export const Route = createFileRoute("/connect")({
   head: () => ({
     meta: [
-      { title: "Connect — Sagar Salimath" },
+      { title: "Connect · Sagar Salimath" },
       { name: "description", content: "Reach Sagar Salimath on Instagram, YouTube, WhatsApp, email or phone." },
-      { property: "og:title", content: "Connect — Sagar Salimath" },
+      { property: "og:title", content: "Connect · Sagar Salimath" },
       { property: "og:description", content: "Reach Sagar Salimath on Instagram, YouTube, WhatsApp, email or phone." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -85,7 +85,7 @@ function Connect() {
       <main className="mx-auto min-h-screen max-w-md px-6 pb-32 pt-14">
         <h1 className="font-display text-4xl">Connect</h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Pick whichever works for you — I usually reply fastest on WhatsApp.
+          Pick whichever works for you. I usually reply fastest on WhatsApp.
         </p>
 
         <Group title="Social" items={social} />

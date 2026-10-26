@@ -6,9 +6,9 @@ import { Dock } from "../components/dock";
 export const Route = createFileRoute("/projects")({
   head: () => ({
     meta: [
-      { title: "Projects — Sagar Salimath" },
+      { title: "Projects · Sagar Salimath" },
       { name: "description", content: "AI, GPT, GitHub, editing and automation projects by Sagar Salimath." },
-      { property: "og:title", content: "Projects — Sagar Salimath" },
+      { property: "og:title", content: "Projects · Sagar Salimath" },
       { property: "og:description", content: "AI, GPT, GitHub, editing and automation projects by Sagar Salimath." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
@@ -33,7 +33,7 @@ function Projects() {
       <main className="mx-auto min-h-screen max-w-md px-6 pb-32 pt-14">
         <h1 className="font-display text-4xl">Projects</h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Five kinds of work I keep building — pick a category.
+          Five kinds of work I keep building. Pick a category.
         </p>
 
         <ul className="mt-10 space-y-3">

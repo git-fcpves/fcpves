@@ -1,20 +1,19 @@
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
+import clip1 from "../assets/sample-filesamples.mp4.asset.json";
+import clip2 from "../assets/sample-testvideos.mp4.asset.json";
+import clip3 from "../assets/sample-mdn.mp4.asset.json";
+import clip4 from "../assets/sample-w3.mp4.asset.json";
+import clip5 from "../assets/sample-samplelib.mp4.asset.json";
 
 type Clip = { title: string; src: string };
 type Category = { name: string; clips: Clip[] };
 
-const SOURCES = [
-  "https://media.w3.org/2010/05/sintel/trailer.mp4",
-  "https://vjs.zencdn.net/v/oceans.mp4",
-  "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
-  "https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4",
-  "https://filesamples.com/samples/video/mp4/sample_640x360.mp4",
-  "https://media.w3.org/2010/05/bunny/trailer.mp4",
-  "https://media.w3.org/2010/05/video/movie_300.mp4",
-  "https://download.samplelib.com/mp4/sample-5s.mp4",
-  "https://download.samplelib.com/mp4/sample-10s.mp4",
-];
+const SOURCES: string[] = [clip1, clip2, clip3, clip4, clip5]
+  .map((c) => (typeof c.url === "string" ? c.url : ""))
+  .filter((u) => u.length > 0);
+
+const clipSrc = (i: number): string => SOURCES[i % SOURCES.length] ?? "";
 
 const NAMES = [
   "Cinematic videos",
@@ -31,8 +30,8 @@ const NAMES = [
 export const workCategories: Category[] = NAMES.map((name, i) => ({
   name,
   clips: [
-    { title: "Sample clip 1", src: SOURCES[(i * 2) % SOURCES.length] },
-    { title: "Sample clip 2", src: SOURCES[(i * 2 + 1) % SOURCES.length] },
+    { title: "Sample clip 1", src: clipSrc(i * 2) },
+    { title: "Sample clip 2", src: clipSrc(i * 2 + 1) },
   ],
 }));
 
@@ -102,7 +101,7 @@ export function WorkSection() {
                   className="w-full rounded-xl border bg-black"
                 />
                 <figcaption className="text-xs text-muted-foreground">
-                  {open.name} — {clip.title}
+                  {open.name} · {clip.title}
                 </figcaption>
               </figure>
             ))}
