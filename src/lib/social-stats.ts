@@ -1,6 +1,7 @@
-// Social account figures shown on the Home graphs.
-// These must always mirror the real accounts exactly.
-// Update the numbers here whenever the real counts change.
+// Saved social figures for the Home graphs.
+// The app reads the real accounts every 5 minutes; these are the figures
+// shown before a live reading arrives and whenever a reading cannot be made.
+// Keep them in step with the accounts whenever the real counts change.
 
 export type SocialStat = {
   platform: string;
@@ -15,14 +16,14 @@ export const socialStats: SocialStat[] = [
     platform: "Instagram",
     handle: "@ig.fcpves",
     metric: "Followers",
-    value: 10000,
+    value: 10967,
     href: "https://www.instagram.com/ig.fcpves",
   },
   {
     platform: "YouTube",
     handle: "@KANNADABHAKTHIGEETHEYGALU",
     metric: "Subscribers",
-    value: 1300,
+    value: 1730,
     href: "https://www.youtube.com/@KANNADABHAKTHIGEETHEYGALU",
   },
   {
