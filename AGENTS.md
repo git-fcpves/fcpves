@@ -10,7 +10,11 @@
 <!-- LOVABLE:END -->
 
 ## Video playback
-- Play every featured clip inside the app with the native video player: clips come only from uploaded assets, never from YouTube links, and the player sets controlsList="nodownload", disablePictureInPicture and blocks the right-click menu so visitors cannot save the files.
+- Play every featured clip inside the app with the native video player: clips come only from uploaded assets, never from YouTube links.
+- Never offer a download option for videos: the player hides the download control, blocks picture-in-picture and ignores the right-click save menu.
+
+## Verifying clips
+- The sandbox browser cannot decode H.264, so any MP4 (uploaded or from an external CDN) reports "no supported sources" there while WebM plays; verify clip tiles, thumbnails and player controls in the preview and treat codec playback as unverified rather than broken.
 
 ## Page navigation
 - Use the shared BackButton on content pages (not Home); it always returns to Home at the top, because every page is one step from Home.
