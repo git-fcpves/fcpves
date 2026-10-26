@@ -19,14 +19,14 @@
 
 :root {
   --radius: 1rem;
-  --background: oklch(0.13 0.004 80);
-  --foreground: oklch(0.95 0.015 85);
-  --card: oklch(0.18 0.015 70);
-  --primary: oklch(0.76 0.12 85);
-  --primary-foreground: oklch(0.13 0.004 80);
-  --muted-foreground: oklch(0.72 0.03 80);
-  --accent: oklch(0.32 0.09 15);
-  --border: oklch(0.76 0.12 85 / 18%);
+  --background: #000000;
+  --foreground: #ff3333;
+  --card: #000000;
+  --primary: #ff3333;
+  --primary-foreground: #000000;
+  --muted-foreground: #ff3333;
+  --accent: #000000;
+  --border: #ffffff;
 }
 
 @layer base {
