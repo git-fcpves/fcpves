@@ -21,4 +21,5 @@
 - [x] Add the three supplied films to Cinematic videos in order, using the shared in-app player
 - [x] Home: Audience section with bar and circle graphs for Instagram @ig.fcpves and YouTube @KANNADABHAKTHIGEETHEYGALU (figures live in src/lib/social-stats.ts)
 - [x] Instagram @ig.fcpves followers set to 10K per Sagar; update src/lib/social-stats.ts whenever the real count changes
+- [x] About page rebuilt from uploaded professional profile: portrait + name hero, summary, 13-role experience timeline, skills, tools, education, 8 awards, Bili Haale project, sports, animated language bars, interests; staggered fade-up animations
 
