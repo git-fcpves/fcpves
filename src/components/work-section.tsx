@@ -1,20 +1,15 @@
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
+import clip1 from "../assets/sample-filesamples.mp4.asset.json";
+import clip2 from "../assets/sample-testvideos.mp4.asset.json";
+import clip3 from "../assets/sample-mdn.mp4.asset.json";
+import clip4 from "../assets/sample-w3.mp4.asset.json";
+import clip5 from "../assets/sample-samplelib.mp4.asset.json";
 
 type Clip = { title: string; src: string };
 type Category = { name: string; clips: Clip[] };
 
-const SOURCES = [
-  "https://media.w3.org/2010/05/sintel/trailer.mp4",
-  "https://vjs.zencdn.net/v/oceans.mp4",
-  "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
-  "https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4",
-  "https://filesamples.com/samples/video/mp4/sample_640x360.mp4",
-  "https://media.w3.org/2010/05/bunny/trailer.mp4",
-  "https://media.w3.org/2010/05/video/movie_300.mp4",
-  "https://download.samplelib.com/mp4/sample-5s.mp4",
-  "https://download.samplelib.com/mp4/sample-10s.mp4",
-];
+const SOURCES = [clip1.url, clip2.url, clip3.url, clip4.url, clip5.url];
 
 const NAMES = [
   "Cinematic videos",
