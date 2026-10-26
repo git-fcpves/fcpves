@@ -5,6 +5,7 @@ import { Dock } from "../components/dock";
 import { featuredWork } from "../components/work-section";
 import { VideoPreview, type VideoClip } from "../components/video-preview";
 import { Button } from "../components/ui/button";
+import founderPortrait from "../assets/founder-portrait.png.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -126,9 +127,13 @@ function Index() {
     <>
       <main className="mx-auto min-h-screen max-w-md px-6 pb-32 pt-14">
         <header id="home" className="scroll-mt-6 text-center">
-          <div className="mx-auto flex h-24 w-24 items-center justify-center rounded-full border border-primary/40 font-display text-4xl text-primary">
-            SS
-          </div>
+          <img
+            src={founderPortrait.url}
+            alt="Sagar Salimath, founder of FCPVES"
+            width={96}
+            height={96}
+            className="mx-auto h-24 w-24 rounded-full border border-primary/40 object-cover"
+          />
           <h1 className="mt-6 font-display text-4xl">Sagar Salimath</h1>
           <p className="mt-2 text-sm text-muted-foreground">
             Video Editor · Visual Storyteller · Creative Technologist
