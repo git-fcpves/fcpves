@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { X } from "lucide-react";
+import { Button } from "./ui/button";
+import { VideoPreview, type VideoClip } from "./video-preview";
 import clip1 from "../assets/sample-filesamples.mp4.asset.json";
 import clip2 from "../assets/sample-testvideos.mp4.asset.json";
 import clip3 from "../assets/sample-mdn.mp4.asset.json";
@@ -12,7 +14,7 @@ import thumbShortB from "../assets/thumb-w3b.jpg";
 import thumbRooted from "../assets/thumb-rooted-in-love.jpg";
 import thumbModern from "../assets/thumb-modern-love.jpg";
 
-type Clip = { title: string; src: string };
+type Clip = VideoClip;
 type Category = { name: string; clips: Clip[] };
 export type Featured = { title: string; src: string; poster: string; href?: string };
 
@@ -33,14 +35,6 @@ const NAMES = [
   "Biography videos",
   "Political videos",
 ];
-
-export const workCategories: Category[] = NAMES.map((name, i) => ({
-  name,
-  clips: [
-    { title: "Sample clip 1", src: clipSrc(i * 2) },
-    { title: "Sample clip 2", src: clipSrc(i * 2 + 1) },
-  ],
-}));
 
 export const featuredWork: Featured[] = [
   {
@@ -66,20 +60,35 @@ export const featuredWork: Featured[] = [
   { title: "Reel", src: clipSrc(3), poster: thumbShortB },
 ];
 
+export const workCategories: Category[] = NAMES.map((name, i) => ({
+  name,
+  clips: name === "Cinematic videos" ? featuredWork.slice(0, 3) : [
+    { title: "Sample clip 1", src: clipSrc(i * 2) },
+    { title: "Sample clip 2", src: clipSrc(i * 2 + 1) },
+  ],
+}));
+
 export function WorkSection() {
   const [openName, setOpenName] = useState<string | null>(null);
+  const [selectedClip, setSelectedClip] = useState<VideoClip | null>(null);
   const open = workCategories.find((c) => c.name === openName) ?? null;
 
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpenName(null);
+      if (e.key === "Escape" && !selectedClip) setOpenName(null);
     };
     window.addEventListener("keydown", onKey);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [open, selectedClip]);
+
+  useEffect(() => {
+    if (!open) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
-      window.removeEventListener("keydown", onKey);
       document.body.style.overflow = prev;
     };
   }, [open]);
@@ -88,21 +97,22 @@ export function WorkSection() {
     <>
       <div className="grid grid-cols-2 gap-3">
         {workCategories.map((c) => (
-          <button
+          <Button
+            variant="ghost"
             key={c.name}
             type="button"
             onClick={() => setOpenName(c.name)}
-            className="rounded-xl border bg-card p-4 text-left transition-colors hover:border-primary"
+            className="block h-auto whitespace-normal rounded-xl border bg-card p-4 text-left transition-colors hover:border-primary"
           >
             <span className="block text-sm font-medium">{c.name}</span>
             <span className="mt-1 block text-[11px] text-muted-foreground">
-              {c.clips.length} sample clips
+              {c.clips.length} {c.name === "Cinematic videos" ? "films" : "sample clips"}
             </span>
-          </button>
+          </Button>
         ))}
       </div>
 
-      {open && (
+      {open && !selectedClip && (
         <div
           role="dialog"
           aria-modal="true"
@@ -111,26 +121,39 @@ export function WorkSection() {
         >
           <div className="flex items-center justify-between border-b px-5 py-4">
             <h3 className="font-display text-xl">{open.name}</h3>
-            <button
+            <Button
+              variant="outline"
+              size="icon"
               type="button"
               onClick={() => setOpenName(null)}
               aria-label="Close"
               className="rounded-full border p-2 transition-colors hover:border-primary hover:text-primary"
             >
               <X className="h-4 w-4" />
-            </button>
+            </Button>
           </div>
 
           <div className="flex-1 space-y-6 overflow-y-auto px-5 py-5 pb-28">
             {open.clips.map((clip) => (
-              <figure key={clip.src} className="space-y-2">
-                <video
+              <figure key={clip.href ?? clip.src} className="space-y-2">
+                {clip.href ? (
+                  <Button
+                    variant="ghost"
+                    aria-label={`Play ${clip.title}`}
+                    onClick={() => setSelectedClip(clip)}
+                    className="block h-auto w-full overflow-hidden rounded-lg border p-0"
+                  >
+                    <img src={clip.poster} alt={clip.title} className="aspect-video w-full object-cover" />
+                  </Button>
+                ) : (
+                  <video
                   src={clip.src}
                   controls
                   playsInline
                   preload="metadata"
-                  className="w-full rounded-xl border bg-black"
+                  className="w-full rounded-xl border bg-background"
                 />
+                )}
                 <figcaption className="text-xs text-muted-foreground">
                   {open.name} · {clip.title}
                 </figcaption>
@@ -139,6 +162,7 @@ export function WorkSection() {
           </div>
         </div>
       )}
+      <VideoPreview clip={selectedClip} onClose={() => setSelectedClip(null)} />
     </>
   );
 }
