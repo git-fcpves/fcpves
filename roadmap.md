@@ -12,5 +12,7 @@
 - [x] Home sample work: 3x2 grid of 3:2 thumbnails, tap opens YouTube channel (youtube.com/@yt.fcpves) in a new tab
 - [x] Home sample work: 1st tile "Rooted in Love" opens its own video (youtu.be/er1WXxV_5KA) with its real YouTube thumbnail
 - [x] Home sample work: 2nd tile "Modern Love" opens its own video (youtu.be/0ASm37QZjdc) with its real YouTube thumbnail
-- [ ] Wire tiles 3-6 to their own video links (needs Sagar's links)
+- [x] Home sample work: 3rd tile opens its own video (youtu.be/rJB3l8hkYB0), but that video is private so visitors can't play it
+- [ ] Fix 3rd tile: video must be public/unlisted, or Sagar sends a different link, title and frame
+- [ ] Wire tiles 4-6 to their own video links (needs Sagar's links)
 

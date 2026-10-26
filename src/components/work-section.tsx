@@ -55,7 +55,12 @@ export const featuredWork: Featured[] = [
     poster: thumbModern,
     href: "https://youtu.be/0ASm37QZjdc",
   },
-  { title: "Macro reel", src: clipSrc(2), poster: thumbFlower },
+  {
+    title: "Macro reel",
+    src: clipSrc(2),
+    poster: thumbFlower,
+    href: "https://youtu.be/rJB3l8hkYB0",
+  },
   { title: "Short film", src: clipSrc(3), poster: thumbShortA },
   { title: "Promo clip", src: clipSrc(4), poster: thumbPark },
   { title: "Reel", src: clipSrc(3), poster: thumbShortB },
