@@ -10,13 +10,14 @@ describe("social stats shown on Home graphs", () => {
     ]);
   });
 
-  it("shows the exact saved figures, never invented ones", () => {
-    const yt = socialStats.find((s) => s.platform === "YouTube");
-    expect(yt?.metric).toBe("Subscribers");
-    expect(yt?.value).toBe(1300);
-    const ig = socialStats.find((s) => s.platform === "Instagram");
-    expect(ig?.metric).toBe("Followers");
-    expect(ig?.value).toBe(10000);
+  it("holds the latest real figures as the fallback reading", () => {
+    const byHandle = Object.fromEntries(socialStats.map((s) => [s.handle, s]));
+    expect(byHandle["@ig.fcpves"].metric).toBe("Followers");
+    expect(byHandle["@ig.fcpves"].value).toBe(10967);
+    expect(byHandle["@KANNADABHAKTHIGEETHEYGALU"].metric).toBe("Subscribers");
+    expect(byHandle["@KANNADABHAKTHIGEETHEYGALU"].value).toBe(1730);
+    expect(byHandle["@yt.fcpves"].metric).toBe("Subscribers");
+    expect(byHandle["@yt.fcpves"].value).toBe(1300);
   });
 
   it("formats counts in compact form", () => {
