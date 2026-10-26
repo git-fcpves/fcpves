@@ -9,4 +9,5 @@
 - [x] Remove every long dash (—) from all wording on every page
 - [ ] Replace placeholder sample clips with Sagar's real videos (needs his files or links)
 - [x] Home: sample work clips row + GPT links (Photography GPT, FCPVES Colorist AI, Editor Sagar) + project teasers
+- [x] Home sample work: 3x2 grid of 3:2 thumbnails, tap opens the video full screen
 
