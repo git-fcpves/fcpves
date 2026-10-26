@@ -18,6 +18,7 @@
   --color-ring: var(--primary);
   --color-input: var(--border);
   --color-soft-gold: var(--soft-gold);
+  --color-highlight: var(--highlight);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-muted-foreground: var(--muted-foreground);
@@ -27,16 +28,18 @@
 
 :root {
   --radius: 1rem;
-  --background: #0d080a;
-  --secondary: #241116;
+  --background: #080608;
+  --secondary: #190c11;
   --foreground: #fff1f3;
-  --card: #241116;
+  --card: #190c11;
   --primary: #8f263d;
   --primary-foreground: #fff1f3;
   --muted-foreground: #b99aa1;
-  --accent: #e85d75;
-  --accent-foreground: #0d080a;
-  --soft-gold: #b99aa1;
+  --accent: #ffbd66;
+  --accent-foreground: #080608;
+  --soft-gold: #ffbd66;
+  --highlight: #ff4568;
+  --gradient-accent: linear-gradient(90deg, var(--primary), var(--soft-gold));
   --border: #43232d;
   --cherry: #3a1722;
 }
