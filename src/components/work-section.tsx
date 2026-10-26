@@ -9,10 +9,24 @@ import clip4 from "../assets/sample-w3.mp4.asset.json";
 import clip5 from "../assets/sample-samplelib.mp4.asset.json";
 import thumbFlower from "../assets/thumb-mdn.jpg";
 import thumbPark from "../assets/thumb-samplelib.jpg";
-import thumbShortA from "../assets/thumb-w3a.jpg";
-import thumbShortB from "../assets/thumb-w3b.jpg";
 import thumbRooted from "../assets/thumb-rooted-in-love.jpg";
 import thumbModern from "../assets/thumb-modern-love.jpg";
+import muhurtham from "../assets/muhurtham-reel.mp4.asset.json";
+import reception from "../assets/reception-reel.mp4.asset.json";
+import wedding from "../assets/wedding-reel.mp4.asset.json";
+import preWedding1 from "../assets/pre-wedding-1.mp4.asset.json";
+import preWedding2 from "../assets/pre-wedding-2.mp4.asset.json";
+import teaser4k from "../assets/teaser-4k.mp4.asset.json";
+import teaser2 from "../assets/teaser-2.mp4.asset.json";
+import aiVideo from "../assets/ai-video.mp4.asset.json";
+import thumbMuhurtham from "../assets/thumb-muhurtham.jpg";
+import thumbReception from "../assets/thumb-reception.jpg";
+import thumbWedding from "../assets/thumb-wedding.jpg";
+import thumbPreWedding1 from "../assets/thumb-pre-wedding-1.jpg";
+import thumbPreWedding2 from "../assets/thumb-pre-wedding-2.jpg";
+import thumbTeaser4k from "../assets/thumb-teaser-4k.jpg";
+import thumbTeaser2 from "../assets/thumb-teaser-2.jpg";
+import thumbAiVideo from "../assets/thumb-ai-video.jpg";
 
 type Clip = VideoClip;
 type Category = { name: string; clips: Clip[] };
@@ -55,9 +69,14 @@ export const featuredWork: Featured[] = [
     poster: thumbFlower,
     href: "https://youtu.be/rJB3l8hkYB0",
   },
-  { title: "Short film", src: clipSrc(3), poster: thumbShortA },
-  { title: "Promo clip", src: clipSrc(4), poster: thumbPark },
-  { title: "Reel", src: clipSrc(3), poster: thumbShortB },
+  { title: "Muhurtham Reel", src: muhurtham.url, poster: thumbMuhurtham },
+  { title: "Reception Reel", src: reception.url, poster: thumbReception },
+  { title: "Wedding Reel", src: wedding.url, poster: thumbWedding },
+  { title: "Pre Wedding 1", src: preWedding1.url, poster: thumbPreWedding1 },
+  { title: "Pre Wedding 2", src: preWedding2.url, poster: thumbPreWedding2 },
+  { title: "Teaser 4K", src: teaser4k.url, poster: thumbTeaser4k },
+  { title: "Teaser 2", src: teaser2.url, poster: thumbTeaser2 },
+  { title: "AI Video", src: aiVideo.url, poster: thumbAiVideo },
 ];
 
 export const workCategories: Category[] = NAMES.map((name, i) => ({
