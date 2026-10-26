@@ -9,8 +9,6 @@ import clip4 from "../assets/sample-w3.mp4.asset.json";
 import clip5 from "../assets/sample-samplelib.mp4.asset.json";
 import thumbFlower from "../assets/thumb-mdn.jpg";
 import thumbPark from "../assets/thumb-samplelib.jpg";
-import thumbRooted from "../assets/thumb-rooted-in-love.jpg";
-import thumbModern from "../assets/thumb-modern-love.jpg";
 import muhurtham from "../assets/muhurtham-reel.mp4.asset.json";
 import reception from "../assets/reception-reel.mp4.asset.json";
 import wedding from "../assets/wedding-reel.mp4.asset.json";
@@ -31,10 +29,15 @@ import teaser from "../assets/teaser.mp4.asset.json";
 import weddingTeaser from "../assets/wedding-teaser.mp4.asset.json";
 import thumbTeaser from "../assets/thumb-teaser.jpg";
 import thumbWeddingTeaser from "../assets/thumb-wedding-teaser.jpg";
+import farmer from "../assets/farmer.mp4.asset.json";
+import modern from "../assets/modern.mp4.asset.json";
+import retro from "../assets/retro.mp4.asset.json";
+import thumbFarmer from "../assets/thumb-farmer.jpg";
+import thumbModern from "../assets/thumb-modern.jpg";
+import thumbRetro from "../assets/thumb-retro.jpg";
 
 type Clip = VideoClip;
 type Category = { name: string; clips: Clip[] };
-export type Featured = { title: string; src: string; poster: string; href?: string };
 
 const SOURCES: string[] = [clip1, clip2, clip3, clip4, clip5]
   .map((c) => (typeof c.url === "string" ? c.url : ""))
@@ -54,25 +57,10 @@ const NAMES = [
   "Political videos",
 ];
 
-export const featuredWork: Featured[] = [
-  {
-    title: "Rooted in Love",
-    src: clipSrc(0),
-    poster: thumbRooted,
-    href: "https://youtu.be/er1WXxV_5KA",
-  },
-  {
-    title: "Modern Love",
-    src: clipSrc(1),
-    poster: thumbModern,
-    href: "https://youtu.be/0ASm37QZjdc",
-  },
-  {
-    title: "Vintage Love",
-    src: clipSrc(2),
-    poster: thumbFlower,
-    href: "https://youtu.be/rJB3l8hkYB0",
-  },
+export const featuredWork: Clip[] = [
+  { title: "Farmer", src: farmer.url, poster: thumbFarmer },
+  { title: "Modern", src: modern.url, poster: thumbModern },
+  { title: "Retro", src: retro.url, poster: thumbRetro },
   { title: "Muhurtham Reel", src: muhurtham.url, poster: thumbMuhurtham },
   { title: "Reception Reel", src: reception.url, poster: thumbReception },
   { title: "Wedding Reel", src: wedding.url, poster: thumbWedding },
@@ -160,25 +148,19 @@ export function WorkSection() {
 
           <div className="flex-1 space-y-6 overflow-y-auto px-5 py-5 pb-28">
             {open.clips.map((clip) => (
-              <figure key={clip.href ?? clip.src} className="space-y-2">
-                {clip.href ? (
-                  <Button
-                    variant="ghost"
-                    aria-label={`Play ${clip.title}`}
-                    onClick={() => setSelectedClip(clip)}
-                    className="group block h-auto w-full overflow-hidden rounded-lg border p-0 card-hover"
-                  >
-                    <img src={clip.poster} alt={clip.title} className="aspect-video w-full object-cover transition-transform duration-300 group-hover:scale-105" />
-                  </Button>
-                ) : (
-                  <video
-                  src={clip.src}
-                  controls
-                  playsInline
-                  preload="metadata"
-                  className="w-full rounded-xl border bg-background"
-                />
-                )}
+              <figure key={clip.src} className="space-y-2">
+                <Button
+                  variant="ghost"
+                  aria-label={`Play ${clip.title}`}
+                  onClick={() => setSelectedClip(clip)}
+                  className="group block h-auto w-full overflow-hidden rounded-lg border p-0 card-hover"
+                >
+                  <img
+                    src={clip.poster}
+                    alt={clip.title}
+                    className="aspect-video w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                </Button>
                 <figcaption className="text-xs text-muted-foreground">
                   {open.name} · {clip.title}
                 </figcaption>
