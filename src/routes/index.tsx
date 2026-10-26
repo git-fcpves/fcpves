@@ -4,6 +4,7 @@ import { ArrowUpRight, Bot, Github, Sparkles, Workflow } from "lucide-react";
 import { Dock } from "../components/dock";
 import { featuredWork } from "../components/work-section";
 import { VideoPreview, type VideoClip } from "../components/video-preview";
+import { SocialGraphs } from "../components/social-graphs";
 import { Button } from "../components/ui/button";
 import founderPortrait from "../assets/founder-portrait.png.asset.json";
 
@@ -148,6 +149,11 @@ function Index() {
             </div>
           ))}
         </div>
+
+        <section className="mt-12">
+          <SectionHead title="Audience" to="/connect" label="Connect" />
+          <SocialGraphs />
+        </section>
 
         <section className="mt-12">
           <SectionHead title="Sample work" to="/work" label="All work" />
