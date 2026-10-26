@@ -44,6 +44,8 @@
 body,
 body :where(*) {
   font-weight: 700;
+  font-variant-caps: all-small-caps;
+  letter-spacing: 0.02em;
 }
 
 @layer base {
