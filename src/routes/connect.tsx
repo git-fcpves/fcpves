@@ -51,7 +51,7 @@ function Row({ l, v, h, Icon, blank }: Option) {
     <a
       href={h}
       {...(blank ? { target: "_blank", rel: "noreferrer" } : {})}
-      className="flex items-center gap-4 rounded-xl border bg-card p-4 transition-colors hover:border-border"
+      className="flex items-center gap-4 rounded-xl border bg-card p-4 card-hover"
     >
       <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border text-accent">
         <Icon className="h-[18px] w-[18px]" />

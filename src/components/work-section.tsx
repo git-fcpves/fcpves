@@ -102,7 +102,7 @@ export function WorkSection() {
             key={c.name}
             type="button"
             onClick={() => setOpenName(c.name)}
-            className="block h-auto whitespace-normal rounded-xl border bg-card p-4 text-left transition-colors hover:border-border"
+            className="block h-auto whitespace-normal rounded-xl border bg-card p-4 text-left card-hover"
           >
             <span className="block text-sm font-medium">{c.name}</span>
             <span className="mt-1 block text-[11px] text-muted-foreground">
@@ -141,9 +141,9 @@ export function WorkSection() {
                     variant="ghost"
                     aria-label={`Play ${clip.title}`}
                     onClick={() => setSelectedClip(clip)}
-                    className="block h-auto w-full overflow-hidden rounded-lg border p-0"
+                    className="group block h-auto w-full overflow-hidden rounded-lg border p-0 card-hover"
                   >
-                    <img src={clip.poster} alt={clip.title} className="aspect-video w-full object-cover" />
+                    <img src={clip.poster} alt={clip.title} className="aspect-video w-full object-cover transition-transform duration-300 group-hover:scale-105" />
                   </Button>
                 ) : (
                   <video

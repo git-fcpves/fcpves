@@ -119,7 +119,7 @@ function AboutPage() {
           <ol className="relative space-y-4 border-l border-border pl-5">
             {experience.map((e, i) => (
               <Reveal i={i + 2} key={`${e.y}-${e.t}`}>
-                <li className="relative rounded-xl border bg-card p-4">
+                <li className="relative rounded-xl border bg-card p-4 card-hover">
                   <span className="absolute -left-[27px] top-5 h-3 w-3 rounded-full bg-accent shadow-[0_0_12px_var(--accent)]" />
                   <div className="text-xs text-accent">{e.y}</div>
                   <div className="mt-1 font-medium">{e.t}</div>
@@ -135,7 +135,7 @@ function AboutPage() {
           <div className="flex flex-wrap gap-2">
             {skills.map((s, i) => (
               <Reveal i={i} key={s}>
-                <span className="rounded-full border bg-card px-3 py-1.5 text-xs text-muted-foreground">{s}</span>
+                <span className="rounded-full border bg-card px-3 py-1.5 text-xs text-muted-foreground chip-hover">{s}</span>
               </Reveal>
             ))}
           </div>
@@ -145,7 +145,7 @@ function AboutPage() {
           <div className="flex flex-wrap gap-2">
             {tools.map((t, i) => (
               <Reveal i={i} key={t}>
-                <span className="rounded-full border border-primary/40 bg-card px-3 py-1.5 text-xs">{t}</span>
+                <span className="rounded-full border border-primary/40 bg-card px-3 py-1.5 text-xs chip-hover">{t}</span>
               </Reveal>
             ))}
           </div>
@@ -154,13 +154,13 @@ function AboutPage() {
         <Block title="Education">
           <div className="space-y-3">
             <Reveal i={0}>
-              <div className="rounded-xl border bg-card p-4">
+              <div className="rounded-xl border bg-card p-4 card-hover">
                 <div className="font-medium">SSLC</div>
                 <div className="text-sm text-muted-foreground">KRCES English Medium School, Bailhongal</div>
               </div>
             </Reveal>
             <Reveal i={1}>
-              <div className="rounded-xl border bg-card p-4">
+              <div className="rounded-xl border bg-card p-4 card-hover">
                 <div className="font-medium">PUC</div>
                 <div className="text-sm text-muted-foreground">Government Pre-University College, Bailwad</div>
               </div>
@@ -172,7 +172,7 @@ function AboutPage() {
           <ol className="space-y-3">
             {awards.map((a, i) => (
               <Reveal i={i} key={a}>
-                <li className="flex items-start gap-3 rounded-xl border bg-card p-4">
+                <li className="flex items-start gap-3 rounded-xl border bg-card p-4 card-hover">
                   <span className="font-display text-lg text-accent">{i + 1}</span>
                   <span className="text-sm leading-relaxed">{a}</span>
                 </li>
@@ -183,7 +183,7 @@ function AboutPage() {
 
         <Block title="Personal Project">
           <Reveal i={0}>
-            <div className="rounded-xl border bg-card p-4">
+            <div className="rounded-xl border bg-card p-4 card-hover">
               <div className="font-medium">Bili Haale · Short Movie</div>
               <div className="text-sm text-muted-foreground">Filmmaker and Editor · June 2017 to Present</div>
             </div>
@@ -194,7 +194,7 @@ function AboutPage() {
           <ul className="space-y-3">
             {sports.map((s, i) => (
               <Reveal i={i} key={s}>
-                <li className="rounded-xl border bg-card p-4 text-sm">{s}</li>
+                <li className="rounded-xl border bg-card p-4 text-sm card-hover">{s}</li>
               </Reveal>
             ))}
           </ul>
@@ -225,7 +225,7 @@ function AboutPage() {
           <div className="flex flex-wrap gap-2">
             {interests.map((it, i) => (
               <Reveal i={i} key={it}>
-                <span className="rounded-full border bg-card px-3 py-1.5 text-xs text-muted-foreground">{it}</span>
+                <span className="rounded-full border bg-card px-3 py-1.5 text-xs text-muted-foreground chip-hover">{it}</span>
               </Reveal>
             ))}
           </div>
