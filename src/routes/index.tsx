@@ -21,21 +21,7 @@ const stats = [
   { n: "100+", l: "Cinematic films" },
   { n: "100+", l: "Teasers" },
 ];
-const experience = [
-  { t: "Clickers Cabin Photography & Academy", s: "Current" },
-  { t: "Million's Photography & Films", s: "Video Editor · 6 months" },
-];
-
-const homeIds = ["home", "about"];
-
-function Section({ id, title, children }: { id: string; title: string; children: React.ReactNode }) {
-  return (
-    <section id={id} className="mt-12 scroll-mt-6">
-      <h2 className="mb-4 text-xs uppercase tracking-[0.3em] text-primary">{title}</h2>
-      {children}
-    </section>
-  );
-}
+const homeIds = ["home"];
 
 function Index() {
   const [active, setActive] = useState("home");
@@ -86,28 +72,6 @@ function Index() {
           ))}
         </div>
 
-        <Section id="about" title="About">
-          <p className="leading-relaxed text-muted-foreground">
-            I craft cinematic wedding films, reels and brand stories, with a focus on natural skin tones and elegant color grading in Final Cut Pro.
-          </p>
-        </Section>
-
-
-
-        <Section id="experience" title="Experience">
-          <ul className="space-y-3">
-            {experience.map((e) => (
-              <li key={e.t} className="rounded-xl border bg-card p-4">
-                <div className="font-medium">{e.t}</div>
-                <div className="text-sm text-muted-foreground">{e.s}</div>
-              </li>
-            ))}
-          </ul>
-        </Section>
-
-        <Section id="tools" title="Tools">
-          <p className="text-muted-foreground">Final Cut Pro · Adobe Photoshop</p>
-        </Section>
 
         <footer className="mt-14 text-center text-xs text-muted-foreground">© FCPVES</footer>
       </main>
