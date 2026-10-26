@@ -1,10 +1,10 @@
-import { useCanGoBack, useRouter } from "@tanstack/react-router";
+import { useRouter } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "./ui/button";
 
+// Every content page is one step from Home, so Back always returns Home at the top.
 export function BackButton() {
   const router = useRouter();
-  const canGoBack = useCanGoBack();
 
   return (
     <Button
@@ -15,11 +15,7 @@ export function BackButton() {
       title="Back"
       className="mb-6 rounded-full text-accent"
       onClick={() => {
-        if (canGoBack) {
-          router.history.back();
-        } else {
-          void router.navigate({ to: "/" });
-        }
+        void router.navigate({ to: "/" }).then(() => window.scrollTo({ top: 0 }));
       }}
     >
       <ArrowLeft />

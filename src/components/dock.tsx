@@ -32,12 +32,9 @@ export function Dock({ active, onPick }: { active: string; onPick: (id: string) 
       return;
     }
     if (pathname === "/") {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const top = id === "home" ? 0 : el.getBoundingClientRect().top + window.scrollY - 16;
-      window.scrollTo({ top, behavior: "smooth" });
+      window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
-      navigate({ to: "/", hash: id === "home" ? "" : id });
+      void navigate({ to: "/" }).then(() => window.scrollTo({ top: 0 }));
     }
   };
 

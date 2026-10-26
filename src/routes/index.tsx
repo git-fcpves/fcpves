@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Bot, Github, Sparkles, Workflow } from "lucide-react";
 import { Dock } from "../components/dock";
-import { BackButton } from "../components/back-button";
 import { featuredWork } from "../components/work-section";
 import { VideoPreview, type VideoClip } from "../components/video-preview";
 import { SocialGraphs } from "../components/social-graphs";
@@ -131,7 +130,6 @@ function Index() {
   return (
     <>
       <main className="mx-auto min-h-screen max-w-md px-6 pb-32 pt-14">
-        <BackButton />
         <header id="home" className="scroll-mt-6 text-center">
           <img
             src={founderPortrait.url}
