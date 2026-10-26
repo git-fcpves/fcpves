@@ -11,13 +11,13 @@ describe("social stats shown on Home graphs", () => {
   });
 
   it("holds the latest real figures as the fallback reading", () => {
-    const byHandle = Object.fromEntries(socialStats.map((s) => [s.handle, s]));
-    expect(byHandle["@ig.fcpves"].metric).toBe("Followers");
-    expect(byHandle["@ig.fcpves"].value).toBe(10967);
-    expect(byHandle["@KANNADABHAKTHIGEETHEYGALU"].metric).toBe("Subscribers");
-    expect(byHandle["@KANNADABHAKTHIGEETHEYGALU"].value).toBe(1730);
-    expect(byHandle["@yt.fcpves"].metric).toBe("Subscribers");
-    expect(byHandle["@yt.fcpves"].value).toBe(1300);
+    const byHandle = Object.fromEntries(socialStats.map((s) => [s.handle, s] as const));
+    expect(byHandle["@ig.fcpves"]?.metric).toBe("Followers");
+    expect(byHandle["@ig.fcpves"]?.value).toBe(10967);
+    expect(byHandle["@KANNADABHAKTHIGEETHEYGALU"]?.metric).toBe("Subscribers");
+    expect(byHandle["@KANNADABHAKTHIGEETHEYGALU"]?.value).toBe(1730);
+    expect(byHandle["@yt.fcpves"]?.metric).toBe("Subscribers");
+    expect(byHandle["@yt.fcpves"]?.value).toBe(1300);
   });
 
   it("formats counts in compact form", () => {
