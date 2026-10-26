@@ -23,7 +23,7 @@ const experience = [
 function Block({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <section className="mt-10">
-      <h2 className="mb-4 text-xs uppercase tracking-[0.3em] text-primary">{title}</h2>
+      <h2 className="mb-4 text-xs uppercase tracking-[0.3em] text-accent">{title}</h2>
       {children}
     </section>
   );

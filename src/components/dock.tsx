@@ -57,7 +57,7 @@ export function Dock({ active, onPick }: { active: string; onPick: (id: string) 
               aria-label={label}
               aria-current={on ? "true" : undefined}
               className={`flex flex-1 flex-col items-center gap-1 rounded-full py-2 transition-colors duration-200 ${
-                on ? "bg-background text-primary ring-1 ring-border" : "text-muted-foreground"
+                on ? "bg-background text-accent ring-1 ring-border" : "text-muted-foreground"
               }`}
             >
               <Icon className="h-[18px] w-[18px]" strokeWidth={on ? 2.2 : 1.6} />

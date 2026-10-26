@@ -52,7 +52,7 @@ function Row({ l, v, h, Icon, blank }: Option) {
       {...(blank ? { target: "_blank", rel: "noreferrer" } : {})}
       className="flex items-center gap-4 rounded-xl border bg-card p-4 transition-colors hover:border-border"
     >
-      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border text-primary">
+      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border text-accent">
         <Icon className="h-[18px] w-[18px]" />
       </span>
       <span className="min-w-0 flex-1">
@@ -67,7 +67,7 @@ function Row({ l, v, h, Icon, blank }: Option) {
 function Group({ title, items }: { title: string; items: Option[] }) {
   return (
     <section className="mt-10">
-      <h2 className="mb-3 text-xs uppercase tracking-[0.3em] text-primary">{title}</h2>
+      <h2 className="mb-3 text-xs uppercase tracking-[0.3em] text-accent">{title}</h2>
       <div className="space-y-3">
         {items.map((o) => (
           <Row key={o.l} {...o} />
