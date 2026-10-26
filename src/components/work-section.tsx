@@ -5,7 +5,6 @@ import clip2 from "../assets/sample-testvideos.mp4.asset.json";
 import clip3 from "../assets/sample-mdn.mp4.asset.json";
 import clip4 from "../assets/sample-w3.mp4.asset.json";
 import clip5 from "../assets/sample-samplelib.mp4.asset.json";
-import thumbBeach from "../assets/thumb-filesamples.jpg";
 import thumbFlower from "../assets/thumb-mdn.jpg";
 import thumbPark from "../assets/thumb-samplelib.jpg";
 import thumbTest from "../assets/thumb-testvideos.jpg";
