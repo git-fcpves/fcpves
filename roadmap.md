@@ -8,3 +8,5 @@
 - [x] Work is its own page (/work), removed from Home; dock Work opens it
 - [x] Remove every long dash (—) from all wording on every page
 - [ ] Replace placeholder sample clips with Sagar's real videos (needs his files or links)
+- [x] Home: sample work clips row + GPT links (Photography GPT, FCPVES Colorist AI, Editor Sagar) + project teasers
+
