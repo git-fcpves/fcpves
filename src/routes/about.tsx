@@ -132,10 +132,10 @@ function AboutPage() {
         </Block>
 
         <Block title="Skills">
-          <div className="flex flex-wrap gap-2">
+          <div className="grid grid-cols-2 gap-2">
             {skills.map((s, i) => (
-              <Reveal i={i} key={s}>
-                <span className="rounded-full border bg-card px-3 py-1.5 text-xs text-muted-foreground chip-hover">{s}</span>
+              <Reveal i={i} key={s} className="h-full">
+                <span className="flex h-full min-h-12 items-center justify-center rounded-xl border bg-card px-3 py-2 text-center text-xs leading-snug text-muted-foreground chip-hover">{s}</span>
               </Reveal>
             ))}
           </div>
