@@ -20,11 +20,11 @@
 :root {
   --radius: 1rem;
   --background: #000000;
-  --foreground: #c62828;
+  --foreground: #e60000;
   --card: #000000;
-  --primary: #c62828;
+  --primary: #e60000;
   --primary-foreground: #000000;
-  --muted-foreground: #c62828;
+  --muted-foreground: #e60000;
   --accent: #000000;
   --border: #ffffff;
 }
