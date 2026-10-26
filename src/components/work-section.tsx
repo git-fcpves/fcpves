@@ -158,6 +158,9 @@ export function WorkSection() {
                   <img
                     src={clip.poster}
                     alt={clip.title}
+                    loading="lazy"
+                    width={720}
+                    height={405}
                     className="aspect-video w-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </Button>

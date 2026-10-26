@@ -8,7 +8,7 @@ import { VideoPreview, type VideoClip } from "../components/video-preview";
 import { SocialGraphs } from "../components/social-graphs";
 import { audienceQueryOptions, fallbackPayload } from "../lib/audience";
 import { Button } from "../components/ui/button";
-import founderPortrait from "../assets/founder-portrait.png.asset.json";
+import founderPortrait from "../assets/founder-portrait.webp.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -174,6 +174,8 @@ function Index() {
                     src={w.poster}
                     alt={w.title}
                     loading="lazy"
+                    width={720}
+                    height={480}
                     className="aspect-[3/2] w-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </span>
