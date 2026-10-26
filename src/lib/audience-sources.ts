@@ -57,7 +57,7 @@ export const audienceSources: AudienceSource[] = [
 export function parseCompactNumber(raw: string): number | null {
   const match = raw.trim().match(/^([0-9][0-9.,]*)\s*([KMB])?$/i);
   if (!match) return null;
-  const base = Number(match[1].replace(/,/g, ""));
+  const base = Number((match[1] ?? "").replace(/,/g, ""));
   if (!Number.isFinite(base)) return null;
   const suffix = (match[2] || "").toUpperCase();
   const multipliers: Record<string, number> = { K: 1_000, M: 1_000_000, B: 1_000_000_000 };
@@ -67,7 +67,7 @@ export function parseCompactNumber(raw: string): number | null {
 // Channel pages show the count as "1.73K subscribers".
 export function parseSubscribers(html: string): number | null {
   const match = html.match(/([0-9][0-9.,]*\s*[KMB]?)\s+subscribers/i);
-  return match ? parseCompactNumber(match[1]) : null;
+  return match ? parseCompactNumber(match[1] ?? "") : null;
 }
 
 export function parseInstagramFollowers(json: unknown): number | null {
