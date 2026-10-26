@@ -26,5 +26,6 @@ describe("Home sample work clips", () => {
 
   it("keeps every sample work tile on one in-app player", () => {
     expect(featuredWork.every((w) => w.src.length > 0 && w.poster.length > 0)).toBe(true);
+    expect(featuredWork.every((w) => w.href === undefined)).toBe(true);
   });
 });
