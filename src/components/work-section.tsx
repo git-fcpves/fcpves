@@ -79,13 +79,19 @@ export function WorkSection() {
       if (e.key === "Escape" && !selectedClip) setOpenName(null);
     };
     window.addEventListener("keydown", onKey);
+    return () => {
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [open, selectedClip]);
+
+  useEffect(() => {
+    if (!open) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
-      window.removeEventListener("keydown", onKey);
       document.body.style.overflow = prev;
     };
-  }, [open, selectedClip]);
+  }, [open]);
 
   return (
     <>
