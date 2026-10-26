@@ -24,14 +24,35 @@ const NO_STORE = {
 let cached: { at: number; payload: AudiencePayload } | null = null;
 let inflight: Promise<AudiencePayload> | null = null;
 
+// Most recent reading per account, so a throttled source still shows the
+// newest real figure instead of dropping back to an older saved one.
+const lastRead = new Map<string, number>();
+
 async function readText(url: string, headers: Record<string, string> = {}): Promise<string> {
   const res = await fetch(url, {
-    headers: { "user-agent": USER_AGENT, ...headers },
+    headers: { "user-agent": USER_AGENT, "accept-language": "en-US,en;q=0.9", ...headers },
     redirect: "follow",
     signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
   });
   if (!res.ok) throw new Error(`upstream responded ${res.status}`);
   return res.text();
+}
+
+async function readCount(source: AudienceSource): Promise<number | null> {
+  if (source.kind === "instagram") {
+    const json = JSON.parse(
+      await readText(source.url, { "x-ig-app-id": INSTAGRAM_APP_ID }),
+    ) as unknown;
+    const count = parseInstagramFollowers(json);
+    if (count !== null) return count;
+    // Instagram throttles bursts; ask once more after a short pause.
+    await new Promise((resolve) => setTimeout(resolve, 1200));
+    const retry = JSON.parse(
+      await readText(source.url, { "x-ig-app-id": INSTAGRAM_APP_ID }),
+    ) as unknown;
+    return parseInstagramFollowers(retry);
+  }
+  return parseSubscribers(await readText(source.url));
 }
 
 async function readStat(source: AudienceSource): Promise<AudienceStat> {
@@ -43,16 +64,12 @@ async function readStat(source: AudienceSource): Promise<AudienceStat> {
   };
   const saved = socialStats.find((s) => s.handle === source.handle)?.value ?? 0;
   try {
-    const value =
-      source.kind === "instagram"
-        ? parseInstagramFollowers(
-            JSON.parse(await readText(source.url, { "x-ig-app-id": INSTAGRAM_APP_ID })),
-          )
-        : parseSubscribers(await readText(source.url));
+    const value = await readCount(source);
     if (value === null) throw new Error("count not present");
+    lastRead.set(source.handle, value);
     return { ...base, value, live: true };
   } catch {
-    return { ...base, value: saved, live: false };
+    return { ...base, value: lastRead.get(source.handle) ?? saved, live: false };
   }
 }
 
