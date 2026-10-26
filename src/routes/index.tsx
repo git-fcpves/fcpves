@@ -1,9 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { ArrowUpRight, Bot, Github, Play, Sparkles, Workflow } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { ArrowUpRight, Bot, Github, Play, Sparkles, Workflow, Youtube } from "lucide-react";
 import { Dock } from "../components/dock";
 import { featuredWork } from "../components/work-section";
-import { VideoPreview, type VideoClip } from "../components/video-preview";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -25,6 +24,8 @@ export const Route = createFileRoute("/")({
   }),
   component: Index,
 });
+
+const YT_CHANNEL = "https://www.youtube.com/@yt.fcpves";
 
 const stats = [
   { n: "300+", l: "Reels" },
@@ -93,9 +94,7 @@ function GptRow({ l, d, h }: GPT) {
 
 function Index() {
   const [active, setActive] = useState("home");
-  const [openClip, setOpenClip] = useState<VideoClip | null>(null);
   const lock = useRef(0);
-  const closeClip = useCallback(() => setOpenClip(null), []);
 
   const pick = (id: string) => {
     lock.current = Date.now() + 800;
@@ -148,11 +147,12 @@ function Index() {
           <SectionHead title="Sample work" to="/work" label="All work" />
           <div className="grid grid-cols-3 gap-2">
             {featuredWork.map((w) => (
-              <button
+              <a
                 key={w.title}
-                type="button"
-                onClick={() => setOpenClip(w)}
-                aria-label={`Play ${w.title}`}
+                href={YT_CHANNEL}
+                target="_blank"
+                rel="noreferrer"
+                aria-label={`Watch ${w.title} on YouTube`}
                 className="group text-left"
               >
                 <span className="relative block overflow-hidden rounded-lg border bg-black">
@@ -163,15 +163,27 @@ function Index() {
                     className="aspect-[3/2] w-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                   <span className="absolute inset-0 flex items-center justify-center bg-black/25 transition-colors group-hover:bg-black/10">
-                    <Play className="h-5 w-5 text-background drop-shadow" fill="currentColor" />
+                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-sm ring-1 ring-background/60">
+                      <Youtube className="h-3.5 w-3.5" fill="currentColor" />
+                    </span>
                   </span>
                 </span>
                 <span className="mt-1 block truncate text-[10px] text-muted-foreground">
                   {w.title}
                 </span>
-              </button>
+              </a>
             ))}
           </div>
+          <a
+            href={YT_CHANNEL}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-3 flex items-center justify-center gap-2 rounded-xl border bg-card py-3 text-xs text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+          >
+            <Play className="h-3.5 w-3.5" fill="currentColor" />
+            Watch all films on YouTube
+            <ArrowUpRight className="h-3.5 w-3.5" />
+          </a>
         </section>
 
         <section className="mt-12">
@@ -208,8 +220,6 @@ function Index() {
 
         <footer className="mt-14 text-center text-xs text-muted-foreground">© FCPVES</footer>
       </main>
-
-      <VideoPreview clip={openClip} onClose={closeClip} />
 
       <Dock active={active} onPick={pick} />
     </>
