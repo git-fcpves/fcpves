@@ -7,10 +7,10 @@ import clip4 from "../assets/sample-w3.mp4.asset.json";
 import clip5 from "../assets/sample-samplelib.mp4.asset.json";
 import thumbFlower from "../assets/thumb-mdn.jpg";
 import thumbPark from "../assets/thumb-samplelib.jpg";
-import thumbTest from "../assets/thumb-testvideos.jpg";
 import thumbShortA from "../assets/thumb-w3a.jpg";
 import thumbShortB from "../assets/thumb-w3b.jpg";
 import thumbRooted from "../assets/thumb-rooted-in-love.jpg";
+import thumbModern from "../assets/thumb-modern-love.jpg";
 
 type Clip = { title: string; src: string };
 type Category = { name: string; clips: Clip[] };
@@ -49,7 +49,12 @@ export const featuredWork: Featured[] = [
     poster: thumbRooted,
     href: "https://youtu.be/er1WXxV_5KA",
   },
-  { title: "Teaser cut", src: clipSrc(1), poster: thumbTest },
+  {
+    title: "Modern Love",
+    src: clipSrc(1),
+    poster: thumbModern,
+    href: "https://youtu.be/0ASm37QZjdc",
+  },
   { title: "Macro reel", src: clipSrc(2), poster: thumbFlower },
   { title: "Short film", src: clipSrc(3), poster: thumbShortA },
   { title: "Promo clip", src: clipSrc(4), poster: thumbPark },
