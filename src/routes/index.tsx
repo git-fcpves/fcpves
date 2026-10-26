@@ -163,7 +163,9 @@ function Index() {
                     className="aspect-[3/2] w-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                   <span className="absolute inset-0 flex items-center justify-center bg-black/25 transition-colors group-hover:bg-black/10">
-                    <Youtube className="h-5 w-5 text-background drop-shadow" fill="currentColor" />
+                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-background/85 text-primary shadow-sm">
+                      <Youtube className="h-3.5 w-3.5" fill="currentColor" />
+                    </span>
                   </span>
                 </span>
                 <span className="mt-1 block truncate text-[10px] text-muted-foreground">
