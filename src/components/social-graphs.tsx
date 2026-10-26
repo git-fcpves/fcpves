@@ -1,6 +1,7 @@
-import { socialStats, formatCount, type SocialStat } from "../lib/social-stats";
+import { formatCount } from "../lib/social-stats";
+import type { AudiencePayload, AudienceStat } from "../lib/audience-sources";
 
-function Bar({ stat, max }: { stat: SocialStat; max: number }) {
+function Bar({ stat, max }: { stat: AudienceStat; max: number }) {
   const pct = max > 0 ? Math.max((stat.value / max) * 100, stat.value > 0 ? 4 : 0) : 0;
   return (
     <a
@@ -28,7 +29,7 @@ function Bar({ stat, max }: { stat: SocialStat; max: number }) {
   );
 }
 
-function Donut({ stat, share }: { stat: SocialStat; share: number }) {
+function Donut({ stat, share }: { stat: AudienceStat; share: number }) {
   const r = 34;
   const c = 2 * Math.PI * r;
   const filled = Math.min(Math.max(share, 0), 1) * c;
@@ -39,7 +40,12 @@ function Donut({ stat, share }: { stat: SocialStat; share: number }) {
       rel="noreferrer"
       className="flex flex-col items-center rounded-xl border bg-card p-4 transition-colors hover:border-border"
     >
-      <svg viewBox="0 0 96 96" className="h-24 w-24" role="img" aria-label={`${stat.platform} share of total audience`}>
+      <svg
+        viewBox="0 0 96 96"
+        className="h-24 w-24"
+        role="img"
+        aria-label={`${stat.platform} share of total audience`}
+      >
         <circle cx="48" cy="48" r={r} fill="none" strokeWidth="10" className="stroke-secondary" />
         <circle
           cx="48"
@@ -63,16 +69,28 @@ function Donut({ stat, share }: { stat: SocialStat; share: number }) {
   );
 }
 
-export function SocialGraphs() {
-  const max = Math.max(...socialStats.map((s) => s.value), 1);
-  const total = socialStats.reduce((sum, s) => sum + s.value, 0);
+export function SocialGraphs({ payload }: { payload: AudiencePayload }) {
+  const stats = payload.stats;
+  const max = Math.max(...stats.map((s) => s.value), 1);
+  const total = stats.reduce((sum, s) => sum + s.value, 0);
+  const checked = payload.fetchedAt ? new Date(payload.fetchedAt) : null;
+  const time =
+    checked && !Number.isNaN(checked.getTime())
+      ? checked.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+      : "";
   return (
     <div className="space-y-3">
-      {socialStats.map((s) => (
+      <div className="flex items-center gap-2 rounded-xl border bg-card px-3 py-2">
+        <span className="h-2 w-2 shrink-0 animate-pulse rounded-full bg-primary" aria-hidden />
+        <span className="text-[11px] text-muted-foreground">
+          Auto-updates every 5 minutes{time ? ` · last checked ${time}` : ""}
+        </span>
+      </div>
+      {stats.map((s) => (
         <Bar key={s.handle} stat={s} max={max} />
       ))}
       <div className="grid grid-cols-3 gap-2">
-        {socialStats.map((s) => (
+        {stats.map((s) => (
           <Donut key={s.handle} stat={s} share={total > 0 ? s.value / total : 0} />
         ))}
       </div>
