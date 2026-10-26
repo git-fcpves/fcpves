@@ -82,7 +82,8 @@ function GptRow({ l, d, h }: GPT) {
       </span>
       <span className="min-w-0 flex-1">
         <span className="block text-sm font-medium">{l}</span>
-        <span className="block truncate text-sm text-muted-foreground">{d}</span>
+        <span className="block text-sm leading-snug text-muted-foreground">{d}</span>
+
       </span>
       <ArrowUpRight className="h-4 w-4 shrink-0 text-muted-foreground" />
     </a>
@@ -183,7 +184,7 @@ function Index() {
                   </span>
                   <span className="min-w-0 flex-1">
                     <span className="block text-sm font-medium">{l}</span>
-                    <span className="block truncate text-sm text-muted-foreground">{d}</span>
+                    <span className="block text-sm leading-snug text-muted-foreground">{d}</span>
                   </span>
                   <ArrowUpRight className="h-4 w-4 shrink-0 text-muted-foreground" />
                 </Link>
