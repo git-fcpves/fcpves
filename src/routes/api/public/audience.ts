@@ -55,6 +55,16 @@ async function readCount(source: AudienceSource): Promise<number | null> {
   return parseSubscribers(await readText(source.url));
 }
 
+// Sources throttle bursts, so give a failed read one more try after a pause.
+async function withRetry<T>(read: () => Promise<T>): Promise<T> {
+  try {
+    return await read();
+  } catch {
+    await new Promise((resolve) => setTimeout(resolve, 1500));
+    return read();
+  }
+}
+
 async function readStat(source: AudienceSource): Promise<AudienceStat> {
   const base = {
     platform: source.platform,
@@ -64,7 +74,7 @@ async function readStat(source: AudienceSource): Promise<AudienceStat> {
   };
   const saved = socialStats.find((s) => s.handle === source.handle)?.value ?? 0;
   try {
-    const value = await readCount(source);
+    const value = await withRetry(() => readCount(source));
     if (value === null) throw new Error("count not present");
     lastRead.set(source.handle, value);
     return { ...base, value, live: true };
