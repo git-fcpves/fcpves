@@ -2,10 +2,11 @@ import { describe, expect, it } from "vitest";
 import { socialStats, formatCount } from "../lib/social-stats";
 
 describe("social stats shown on Home graphs", () => {
-  it("covers exactly Instagram @ig.fcpves and YouTube @KANNADABHAKTHIGEETHEYGALU", () => {
+  it("covers Instagram @ig.fcpves and both YouTube channels", () => {
     expect(socialStats.map((s) => s.handle)).toEqual([
       "@ig.fcpves",
       "@KANNADABHAKTHIGEETHEYGALU",
+      "@yt.fcpves",
     ]);
   });
 

@@ -57,6 +57,7 @@ function Donut({ stat, share }: { stat: SocialStat; share: number }) {
         </text>
       </svg>
       <span className="mt-2 text-sm">{stat.platform}</span>
+      <span className="max-w-full truncate text-[10px] text-muted-foreground">{stat.handle}</span>
       <span className="text-[11px] text-muted-foreground">{formatCount(stat.value)}</span>
     </a>
   );
@@ -68,11 +69,11 @@ export function SocialGraphs() {
   return (
     <div className="space-y-3">
       {socialStats.map((s) => (
-        <Bar key={s.platform} stat={s} max={max} />
+        <Bar key={s.handle} stat={s} max={max} />
       ))}
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-3 gap-2">
         {socialStats.map((s) => (
-          <Donut key={s.platform} stat={s} share={total > 0 ? s.value / total : 0} />
+          <Donut key={s.handle} stat={s} share={total > 0 ? s.value / total : 0} />
         ))}
       </div>
     </div>

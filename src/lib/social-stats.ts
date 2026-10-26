@@ -25,6 +25,13 @@ export const socialStats: SocialStat[] = [
     value: 1300,
     href: "https://www.youtube.com/@KANNADABHAKTHIGEETHEYGALU",
   },
+  {
+    platform: "YouTube",
+    handle: "@yt.fcpves",
+    metric: "Subscribers",
+    value: 1300,
+    href: "https://www.youtube.com/@yt.fcpves",
+  },
 ];
 
 export function formatCount(n: number): string {
