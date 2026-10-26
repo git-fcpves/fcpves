@@ -50,7 +50,7 @@ export const featuredWork: Featured[] = [
     href: "https://youtu.be/0ASm37QZjdc",
   },
   {
-    title: "Macro reel",
+    title: "Vintage Love",
     src: clipSrc(2),
     poster: thumbFlower,
     href: "https://youtu.be/rJB3l8hkYB0",
