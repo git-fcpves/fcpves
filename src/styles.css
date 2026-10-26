@@ -20,13 +20,18 @@
 :root {
   --radius: 1rem;
   --background: #000000;
-  --foreground: #ff3333;
+  --foreground: #c62828;
   --card: #000000;
-  --primary: #ff3333;
+  --primary: #c62828;
   --primary-foreground: #000000;
-  --muted-foreground: #ff3333;
+  --muted-foreground: #c62828;
   --accent: #000000;
   --border: #ffffff;
+}
+
+body,
+body :where(*) {
+  font-weight: 700;
 }
 
 @layer base {
