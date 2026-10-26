@@ -86,28 +86,6 @@ function Index() {
           ))}
         </div>
 
-        <Section id="about" title="About">
-          <p className="leading-relaxed text-muted-foreground">
-            I craft cinematic wedding films, reels and brand stories, with a focus on natural skin tones and elegant color grading in Final Cut Pro.
-          </p>
-        </Section>
-
-
-
-        <Section id="experience" title="Experience">
-          <ul className="space-y-3">
-            {experience.map((e) => (
-              <li key={e.t} className="rounded-xl border bg-card p-4">
-                <div className="font-medium">{e.t}</div>
-                <div className="text-sm text-muted-foreground">{e.s}</div>
-              </li>
-            ))}
-          </ul>
-        </Section>
-
-        <Section id="tools" title="Tools">
-          <p className="text-muted-foreground">Final Cut Pro · Adobe Photoshop</p>
-        </Section>
 
         <footer className="mt-14 text-center text-xs text-muted-foreground">© FCPVES</footer>
       </main>

@@ -27,6 +27,10 @@ export function Dock({ active, onPick }: { active: string; onPick: (id: string) 
       navigate({ to: "/work" });
       return;
     }
+    if (id === "about") {
+      navigate({ to: "/about" });
+      return;
+    }
     if (pathname === "/") {
       const el = document.getElementById(id);
       if (!el) return;
