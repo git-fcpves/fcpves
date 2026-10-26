@@ -1,8 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
-import { ArrowUpRight, Bot, Github, Sparkles, Workflow } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { ArrowUpRight, Bot, Github, Play, Sparkles, Workflow } from "lucide-react";
 import { Dock } from "../components/dock";
-import { featuredClips } from "../components/work-section";
+import { featuredWork } from "../components/work-section";
+import { VideoPreview, type VideoClip } from "../components/video-preview";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -92,7 +93,9 @@ function GptRow({ l, d, h }: GPT) {
 
 function Index() {
   const [active, setActive] = useState("home");
+  const [openClip, setOpenClip] = useState<VideoClip | null>(null);
   const lock = useRef(0);
+  const closeClip = useCallback(() => setOpenClip(null), []);
 
   const pick = (id: string) => {
     lock.current = Date.now() + 800;
@@ -143,20 +146,30 @@ function Index() {
 
         <section className="mt-12">
           <SectionHead title="Sample work" to="/work" label="All work" />
-          <div className="-mx-6 flex snap-x snap-mandatory gap-3 overflow-x-auto px-6">
-            {featuredClips.map((c) => (
-              <figure key={c.src} className="w-[78%] shrink-0 snap-start space-y-2">
-                <video
-                  src={c.src}
-                  controls
-                  playsInline
-                  muted
-                  loop
-                  preload="metadata"
-                  className="aspect-video w-full rounded-xl border bg-black object-cover"
-                />
-                <figcaption className="text-xs text-muted-foreground">{c.title}</figcaption>
-              </figure>
+          <div className="grid grid-cols-3 gap-2">
+            {featuredWork.map((w) => (
+              <button
+                key={w.title}
+                type="button"
+                onClick={() => setOpenClip(w)}
+                aria-label={`Play ${w.title}`}
+                className="group text-left"
+              >
+                <span className="relative block overflow-hidden rounded-lg border bg-black">
+                  <img
+                    src={w.poster}
+                    alt={w.title}
+                    loading="lazy"
+                    className="aspect-[3/2] w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <span className="absolute inset-0 flex items-center justify-center bg-black/25 transition-colors group-hover:bg-black/10">
+                    <Play className="h-5 w-5 text-background drop-shadow" fill="currentColor" />
+                  </span>
+                </span>
+                <span className="mt-1 block truncate text-[10px] text-muted-foreground">
+                  {w.title}
+                </span>
+              </button>
             ))}
           </div>
         </section>
@@ -195,6 +208,8 @@ function Index() {
 
         <footer className="mt-14 text-center text-xs text-muted-foreground">© FCPVES</footer>
       </main>
+
+      <VideoPreview clip={openClip} onClose={closeClip} />
 
       <Dock active={active} onPick={pick} />
     </>
