@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+## Video playback
+- Use the shared VideoPreview for featured films: YouTube links become privacy-enhanced embeds and local samples use native video, so thumbnails never need external navigation.
