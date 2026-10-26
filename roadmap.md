@@ -23,5 +23,6 @@
 - [x] Audience graphs refresh themselves every 5 minutes from the real accounts via /api/public/audience, with the saved figures as fallback
 - [x] Instagram @ig.fcpves followers set to 10K per Sagar; update src/lib/social-stats.ts whenever the real count changes
 - [x] About page rebuilt from uploaded professional profile: portrait + name hero, summary, 13-role experience timeline, skills, tools, education, 8 awards, Bili Haale project, sports, animated language bars, interests; staggered fade-up animations
+- [x] Home sample work: Teaser and Wedding Teaser added as tiles 12 and 13 (13 tiles total); teaser_new_4k-3 and Wedding_Reel-2 were identical copies of clips already in the app, so they were not added again
 - [ ] Move the real clips into the matching /work categories (Cinematic, Teasers, AI videos) once Sagar confirms the mapping; the other categories still use placeholder clips
 

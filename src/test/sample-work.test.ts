@@ -10,6 +10,8 @@ const REAL_CLIPS: [string, string][] = [
   ["Teaser 4K", "/__l5e/assets-v1/ecc1dd5b-1138-4b31-a33e-b7b4797738e4/teaser-4k.mp4"],
   ["Teaser 2", "/__l5e/assets-v1/3d627946-c688-41b0-a178-5be9ffa6b586/teaser-2.mp4"],
   ["AI Video", "/__l5e/assets-v1/538fdbbc-2979-4fda-b87e-0c29e9b5cc4c/ai-video.mp4"],
+  ["Teaser", "/__l5e/assets-v1/8e6222c8-85e3-456e-8ec2-b096cb1f9c45/teaser.mp4"],
+  ["Wedding Teaser", "/__l5e/assets-v1/d1747472-e2a8-4e97-86cf-305122e77e2e/wedding-teaser.mp4"],
 ];
 
 describe("Home sample work clips", () => {

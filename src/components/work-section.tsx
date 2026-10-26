@@ -27,6 +27,10 @@ import thumbPreWedding2 from "../assets/thumb-pre-wedding-2.jpg";
 import thumbTeaser4k from "../assets/thumb-teaser-4k.jpg";
 import thumbTeaser2 from "../assets/thumb-teaser-2.jpg";
 import thumbAiVideo from "../assets/thumb-ai-video.jpg";
+import teaser from "../assets/teaser.mp4.asset.json";
+import weddingTeaser from "../assets/wedding-teaser.mp4.asset.json";
+import thumbTeaser from "../assets/thumb-teaser.jpg";
+import thumbWeddingTeaser from "../assets/thumb-wedding-teaser.jpg";
 
 type Clip = VideoClip;
 type Category = { name: string; clips: Clip[] };
@@ -77,6 +81,8 @@ export const featuredWork: Featured[] = [
   { title: "Teaser 4K", src: teaser4k.url, poster: thumbTeaser4k },
   { title: "Teaser 2", src: teaser2.url, poster: thumbTeaser2 },
   { title: "AI Video", src: aiVideo.url, poster: thumbAiVideo },
+  { title: "Teaser", src: teaser.url, poster: thumbTeaser },
+  { title: "Wedding Teaser", src: weddingTeaser.url, poster: thumbWeddingTeaser },
 ];
 
 export const workCategories: Category[] = NAMES.map((name, i) => ({
