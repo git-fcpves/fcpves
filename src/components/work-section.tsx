@@ -5,9 +5,16 @@ import clip2 from "../assets/sample-testvideos.mp4.asset.json";
 import clip3 from "../assets/sample-mdn.mp4.asset.json";
 import clip4 from "../assets/sample-w3.mp4.asset.json";
 import clip5 from "../assets/sample-samplelib.mp4.asset.json";
+import thumbBeach from "../assets/thumb-filesamples.jpg";
+import thumbFlower from "../assets/thumb-mdn.jpg";
+import thumbPark from "../assets/thumb-samplelib.jpg";
+import thumbTest from "../assets/thumb-testvideos.jpg";
+import thumbShortA from "../assets/thumb-w3a.jpg";
+import thumbShortB from "../assets/thumb-w3b.jpg";
 
 type Clip = { title: string; src: string };
 type Category = { name: string; clips: Clip[] };
+export type Featured = { title: string; src: string; poster: string };
 
 const SOURCES: string[] = [clip1, clip2, clip3, clip4, clip5]
   .map((c) => (typeof c.url === "string" ? c.url : ""))
@@ -35,12 +42,14 @@ export const workCategories: Category[] = NAMES.map((name, i) => ({
   ],
 }));
 
-export const featuredClips: Clip[] = [
-  { title: "Cinematic film", src: clipSrc(0) },
-  { title: "Teaser cut", src: clipSrc(2) },
-  { title: "Reel", src: clipSrc(4) },
+export const featuredWork: Featured[] = [
+  { title: "Cinematic film", src: clipSrc(0), poster: thumbBeach },
+  { title: "Teaser cut", src: clipSrc(1), poster: thumbTest },
+  { title: "Macro reel", src: clipSrc(2), poster: thumbFlower },
+  { title: "Short film", src: clipSrc(3), poster: thumbShortA },
+  { title: "Promo clip", src: clipSrc(4), poster: thumbPark },
+  { title: "Reel", src: clipSrc(3), poster: thumbShortB },
 ];
-
 
 export function WorkSection() {
   const [openName, setOpenName] = useState<string | null>(null);
