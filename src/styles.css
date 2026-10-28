@@ -30,28 +30,28 @@
 
 :root {
   --radius: 1rem;
-  /* Brand: Signal Orange (dominant), Pastel Orchid Pink (supporting), Deep Eggplant Violet (structure) */
+  /* Brand: Pastel Orchid Pink (primary surface), Deep Eggplant Violet (structure), Signal Orange (sparing accent) */
   --brand-orange: #ff5a0a;
   --brand-orange-hover: #e94d00;
   --brand-pink: #e7b0de;
   --brand-pink-hover: #d99acf;
   --brand-violet: #400849;
   --brand-violet-hover: #541260;
-  --background: var(--brand-orange);
+  --background: var(--brand-pink);
   --foreground: var(--brand-violet);
-  --card: var(--brand-pink);
-  --secondary: var(--brand-pink);
+  --card: #f6dcf1;
+  --secondary: color-mix(in oklab, var(--brand-violet) 14%, var(--brand-pink));
   --primary: var(--brand-orange);
   --primary-foreground: #ffffff;
   --tertiary: var(--brand-violet);
   --tertiary-foreground: #ffffff;
-  --muted-foreground: color-mix(in oklab, var(--brand-violet) 78%, var(--brand-pink));
+  --muted-foreground: color-mix(in oklab, var(--brand-violet) 80%, var(--brand-pink));
   --accent: var(--brand-violet);
   --accent-foreground: #ffffff;
   --soft-gold: var(--brand-pink);
   --highlight: var(--brand-violet);
-  --gradient-accent: linear-gradient(135deg, var(--brand-orange), var(--brand-violet));
-  --border: var(--brand-violet);
+  --gradient-accent: linear-gradient(135deg, var(--brand-pink), var(--brand-violet));
+  --border: color-mix(in oklab, var(--brand-violet) 35%, var(--brand-pink));
   --cherry: var(--brand-pink-hover);
   --shadow-brand: 0 12px 30px -12px color-mix(in oklab, var(--brand-violet) 55%, transparent);
 }
@@ -100,7 +100,7 @@ body :where(*) {
   &:hover {
     transform: translateY(-4px);
     border-color: var(--accent);
-    background-color: var(--brand-pink-hover);
+    background-color: #ffffff;
     box-shadow: var(--shadow-brand);
   }
 }
