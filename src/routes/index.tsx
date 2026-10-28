@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Bot, Github, Sparkles, Workflow } from "lucide-react";
 import { Dock } from "../components/dock";
-import { featuredWork } from "../components/work-section";
+import { useGalleryVideos } from "../components/work-section";
 import { VideoPreview, type VideoClip } from "../components/video-preview";
 import { SocialGraphs } from "../components/social-graphs";
 import { audienceQueryOptions, fallbackPayload } from "../lib/audience";
@@ -101,6 +101,7 @@ function Index() {
   const [active, setActive] = useState("home");
   const lock = useRef(0);
   const { data: audience } = useQuery(audienceQueryOptions());
+  const { videos: featuredWork, isPending: videosLoading } = useGalleryVideos();
 
   const pick = (id: string) => {
     lock.current = Date.now() + 800;
@@ -161,9 +162,13 @@ function Index() {
         <section className="mt-12">
           <SectionHead title="Sample work" to="/work" label="All work" />
           <div className="grid grid-cols-3 gap-2">
+            {videosLoading &&
+              Array.from({ length: 6 }, (_, i) => (
+                <span key={i} className="block aspect-[3/2] animate-pulse rounded-lg border bg-card" />
+              ))}
             {featuredWork.map((w) => (
               <Button
-                key={w.title}
+                key={w.id}
                 variant="ghost"
                 onClick={() => setSelectedVideo(w)}
                 aria-label={`Play ${w.title}`}
@@ -174,6 +179,7 @@ function Index() {
                     src={w.poster}
                     alt={w.title}
                     loading="lazy"
+                    draggable={false}
                     width={720}
                     height={480}
                     className="aspect-[3/2] w-full object-cover transition-transform duration-300 group-hover:scale-105"
