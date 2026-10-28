@@ -5,7 +5,7 @@ export const DRIVE_FOLDER_ID = "1FhYvffe8qS2FgewVCFHhz88rcwlnw0OR";
 export const VIDEO_REFRESH_MS = 5 * 60 * 1000;
 
 export type DriveFile = { id: string; name: string; mimeType: string; modifiedTime?: string };
-export type DriveVideo = { id: string; title: string; src: string; poster: string; modifiedTime?: string };
+export type DriveVideo = { id: string; title: string; src: string; poster: string; modifiedTime?: string | undefined };
 export type DriveVideosPayload = { videos: DriveVideo[]; syncedAt: string; ok: boolean };
 
 const DRIVE_ID = /^[A-Za-z0-9_-]{10,100}$/;

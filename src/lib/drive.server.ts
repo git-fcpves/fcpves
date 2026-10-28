@@ -14,8 +14,9 @@ export const driveUrl = (path: string) => `${GATEWAY}${path}`;
 type Listing = { files: (DriveFile & { thumbnailLink?: string })[]; nextPageToken?: string };
 
 // One shared reading of the folder for every visitor, renewed every 5 minutes.
-let cached: { at: number; payload: DriveVideosPayload; thumbs: Map<string, string> } | null = null;
-let inflight: Promise<NonNullable<typeof cached>> | null = null;
+type Gallery = { at: number; payload: DriveVideosPayload; thumbs: Map<string, string> };
+let cached: Gallery | null = null;
+let inflight: Promise<Gallery> | null = null;
 
 async function listFolder(): Promise<Listing["files"]> {
   const all: Listing["files"] = [];
@@ -38,7 +39,7 @@ async function listFolder(): Promise<Listing["files"]> {
   return all;
 }
 
-export async function getGallery(): Promise<NonNullable<typeof cached>> {
+export async function getGallery(): Promise<Gallery> {
   if (cached && Date.now() - cached.at < VIDEO_REFRESH_MS) return cached;
   if (inflight) return inflight;
   inflight = (async () => {
@@ -62,7 +63,7 @@ export async function getGallery(): Promise<NonNullable<typeof cached>> {
       console.error(error);
       // Keep showing the last good reading if Drive fails.
       if (cached) return cached;
-      return { at: 0, payload: { videos: [], syncedAt: "", ok: false }, thumbs: new Map() };
+      return { at: 0, payload: { videos: [], syncedAt: "", ok: false }, thumbs: new Map<string, string>() };
     } finally {
       inflight = null;
     }
