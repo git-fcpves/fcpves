@@ -15,6 +15,9 @@ import { Route as ConnectRouteImport } from './routes/connect'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as WorkRouteImport } from './routes/work'
 import { Route as ApiPublicAudienceRouteImport } from './routes/api/public/audience'
+import { Route as ApiPublicVideosRouteImport } from './routes/api/public/videos'
+import { Route as ApiPublicThumbIdRouteImport } from './routes/api/public/thumb.$id'
+import { Route as ApiPublicVideoIdRouteImport } from './routes/api/public/video.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -46,6 +49,21 @@ const ApiPublicAudienceRoute = ApiPublicAudienceRouteImport.update({
   path: '/api/public/audience',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicVideosRoute = ApiPublicVideosRouteImport.update({
+  id: '/api/public/videos',
+  path: '/api/public/videos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicThumbIdRoute = ApiPublicThumbIdRouteImport.update({
+  id: '/api/public/thumb/$id',
+  path: '/api/public/thumb/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicVideoIdRoute = ApiPublicVideoIdRouteImport.update({
+  id: '/api/public/video/$id',
+  path: '/api/public/video/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -54,6 +72,9 @@ export interface FileRoutesByFullPath {
   '/projects': typeof ProjectsRoute
   '/work': typeof WorkRoute
   '/api/public/audience': typeof ApiPublicAudienceRoute
+  '/api/public/videos': typeof ApiPublicVideosRoute
+  '/api/public/thumb/$id': typeof ApiPublicThumbIdRoute
+  '/api/public/video/$id': typeof ApiPublicVideoIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -62,6 +83,9 @@ export interface FileRoutesByTo {
   '/projects': typeof ProjectsRoute
   '/work': typeof WorkRoute
   '/api/public/audience': typeof ApiPublicAudienceRoute
+  '/api/public/videos': typeof ApiPublicVideosRoute
+  '/api/public/thumb/$id': typeof ApiPublicThumbIdRoute
+  '/api/public/video/$id': typeof ApiPublicVideoIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -71,14 +95,33 @@ export interface FileRoutesById {
   '/projects': typeof ProjectsRoute
   '/work': typeof WorkRoute
   '/api/public/audience': typeof ApiPublicAudienceRoute
+  '/api/public/videos': typeof ApiPublicVideosRoute
+  '/api/public/thumb/$id': typeof ApiPublicThumbIdRoute
+  '/api/public/video/$id': typeof ApiPublicVideoIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/about' | '/connect' | '/projects' | '/work' | '/api/public/audience'
+    | '/'
+    | '/about'
+    | '/connect'
+    | '/projects'
+    | '/work'
+    | '/api/public/audience'
+    | '/api/public/videos'
+    | '/api/public/thumb/$id'
+    | '/api/public/video/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
-    '/' | '/about' | '/connect' | '/projects' | '/work' | '/api/public/audience'
+    | '/'
+    | '/about'
+    | '/connect'
+    | '/projects'
+    | '/work'
+    | '/api/public/audience'
+    | '/api/public/videos'
+    | '/api/public/thumb/$id'
+    | '/api/public/video/$id'
   id:
     | '__root__'
     | '/'
@@ -87,6 +130,9 @@ export interface FileRouteTypes {
     | '/projects'
     | '/work'
     | '/api/public/audience'
+    | '/api/public/videos'
+    | '/api/public/thumb/$id'
+    | '/api/public/video/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -96,6 +142,9 @@ export interface RootRouteChildren {
   ProjectsRoute: typeof ProjectsRoute
   WorkRoute: typeof WorkRoute
   ApiPublicAudienceRoute: typeof ApiPublicAudienceRoute
+  ApiPublicVideosRoute: typeof ApiPublicVideosRoute
+  ApiPublicThumbIdRoute: typeof ApiPublicThumbIdRoute
+  ApiPublicVideoIdRoute: typeof ApiPublicVideoIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -142,6 +191,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicAudienceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/videos': {
+      id: '/api/public/videos'
+      path: '/api/public/videos'
+      fullPath: '/api/public/videos'
+      preLoaderRoute: typeof ApiPublicVideosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/thumb/$id': {
+      id: '/api/public/thumb/$id'
+      path: '/api/public/thumb/$id'
+      fullPath: '/api/public/thumb/$id'
+      preLoaderRoute: typeof ApiPublicThumbIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/video/$id': {
+      id: '/api/public/video/$id'
+      path: '/api/public/video/$id'
+      fullPath: '/api/public/video/$id'
+      preLoaderRoute: typeof ApiPublicVideoIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -152,6 +222,9 @@ const rootRouteChildren: RootRouteChildren = {
   ProjectsRoute: ProjectsRoute,
   WorkRoute: WorkRoute,
   ApiPublicAudienceRoute: ApiPublicAudienceRoute,
+  ApiPublicVideosRoute: ApiPublicVideosRoute,
+  ApiPublicThumbIdRoute: ApiPublicThumbIdRoute,
+  ApiPublicVideoIdRoute: ApiPublicVideoIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

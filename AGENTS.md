@@ -22,3 +22,6 @@
 ## Audience figures
 - Read social counts live server-side in src/routes/api/public/audience.ts behind a shared 5-minute cache, and poll from the client on the same interval; the saved figures in src/lib/social-stats.ts are fallback only. This keeps every visitor on one upstream read and never shows invented numbers.
 - Outbound reads must send accept-language: en-US,en;q=0.9, because YouTube only shows the subscriber count with it; a source that throttles or fails is retried once and the newest real figure is kept rather than an older or invented one.
+
+## Drive gallery
+- Gallery videos come from the configured Google Drive folder via src/lib/drive.server.ts (shared 5-minute cache) and stream only through /api/public/video/$id, which checks the file is in that folder; Drive links are never sent to the browser.

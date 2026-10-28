@@ -1,51 +1,14 @@
 import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { X } from "lucide-react";
 import { Button } from "./ui/button";
 import { VideoPreview, type VideoClip } from "./video-preview";
-import clip1 from "../assets/sample-filesamples.mp4.asset.json";
-import clip2 from "../assets/sample-testvideos.mp4.asset.json";
-import clip3 from "../assets/sample-mdn.mp4.asset.json";
-import clip4 from "../assets/sample-w3.mp4.asset.json";
-import clip5 from "../assets/sample-samplelib.mp4.asset.json";
-import thumbFlower from "../assets/thumb-mdn.jpg";
-import thumbPark from "../assets/thumb-samplelib.jpg";
-import muhurtham from "../assets/muhurtham-reel.mp4.asset.json";
-import reception from "../assets/reception-reel.mp4.asset.json";
-import wedding from "../assets/wedding-reel.mp4.asset.json";
-import preWedding1 from "../assets/pre-wedding-1.mp4.asset.json";
-import preWedding2 from "../assets/pre-wedding-2.mp4.asset.json";
-import teaser4k from "../assets/teaser-4k.mp4.asset.json";
-import teaser2 from "../assets/teaser-2.mp4.asset.json";
-import aiVideo from "../assets/ai-video.mp4.asset.json";
-import thumbMuhurtham from "../assets/thumb-muhurtham.jpg";
-import thumbReception from "../assets/thumb-reception.jpg";
-import thumbWedding from "../assets/thumb-wedding.jpg";
-import thumbPreWedding1 from "../assets/thumb-pre-wedding-1.jpg";
-import thumbPreWedding2 from "../assets/thumb-pre-wedding-2.jpg";
-import thumbTeaser4k from "../assets/thumb-teaser-4k.jpg";
-import thumbTeaser2 from "../assets/thumb-teaser-2.jpg";
-import thumbAiVideo from "../assets/thumb-ai-video.jpg";
-import teaser from "../assets/teaser.mp4.asset.json";
-import weddingTeaser from "../assets/wedding-teaser.mp4.asset.json";
-import thumbTeaser from "../assets/thumb-teaser.jpg";
-import thumbWeddingTeaser from "../assets/thumb-wedding-teaser.jpg";
-import farmer from "../assets/farmer.mp4.asset.json";
-import modern from "../assets/modern.mp4.asset.json";
-import retro from "../assets/retro.mp4.asset.json";
-import thumbFarmer from "../assets/thumb-farmer.jpg";
-import thumbModern from "../assets/thumb-modern.jpg";
-import thumbRetro from "../assets/thumb-retro.jpg";
+import { driveVideosQueryOptions } from "../lib/drive-videos";
 
-type Clip = VideoClip;
-type Category = { name: string; clips: Clip[] };
+type Category = { name: string; clips: VideoClip[] };
 
-const SOURCES: string[] = [clip1, clip2, clip3, clip4, clip5]
-  .map((c) => (typeof c.url === "string" ? c.url : ""))
-  .filter((u) => u.length > 0);
-
-const clipSrc = (i: number): string => SOURCES[i % SOURCES.length] ?? "";
-
-const NAMES = [
+// Every category shows the videos from the Google Drive folder until they are sorted.
+export const CATEGORY_NAMES = [
   "Cinematic videos",
   "Candid videos",
   "Teasers",
@@ -57,34 +20,20 @@ const NAMES = [
   "Political videos",
 ];
 
-export const featuredWork: Clip[] = [
-  { title: "Farmer", src: farmer.url, poster: thumbFarmer },
-  { title: "Modern", src: modern.url, poster: thumbModern },
-  { title: "Retro", src: retro.url, poster: thumbRetro },
-  { title: "Muhurtham Reel", src: muhurtham.url, poster: thumbMuhurtham },
-  { title: "Reception Reel", src: reception.url, poster: thumbReception },
-  { title: "Wedding Reel", src: wedding.url, poster: thumbWedding },
-  { title: "Pre Wedding 1", src: preWedding1.url, poster: thumbPreWedding1 },
-  { title: "Pre Wedding 2", src: preWedding2.url, poster: thumbPreWedding2 },
-  { title: "Teaser 4K", src: teaser4k.url, poster: thumbTeaser4k },
-  { title: "Teaser 2", src: teaser2.url, poster: thumbTeaser2 },
-  { title: "AI Video", src: aiVideo.url, poster: thumbAiVideo },
-  { title: "Teaser", src: teaser.url, poster: thumbTeaser },
-  { title: "Wedding Teaser", src: weddingTeaser.url, poster: thumbWeddingTeaser },
-];
-
-export const workCategories: Category[] = NAMES.map((name, i) => ({
-  name,
-  clips: name === "Cinematic videos" ? featuredWork.slice(0, 3) : [
-    { title: "Sample clip 1", src: clipSrc(i * 2) },
-    { title: "Sample clip 2", src: clipSrc(i * 2 + 1) },
-  ],
-}));
+export function useGalleryVideos() {
+  const { data, isPending, isError } = useQuery(driveVideosQueryOptions());
+  return { videos: data?.videos ?? [], isPending, isError: isError || data?.ok === false };
+}
 
 export function WorkSection() {
+  const { videos } = useGalleryVideos();
+  const categories: Category[] = CATEGORY_NAMES.map((name) => ({
+    name,
+    clips: name === "Cinematic videos" ? videos : [],
+  }));
   const [openName, setOpenName] = useState<string | null>(null);
   const [selectedClip, setSelectedClip] = useState<VideoClip | null>(null);
-  const open = workCategories.find((c) => c.name === openName) ?? null;
+  const open = categories.find((c) => c.name === openName) ?? null;
 
   useEffect(() => {
     if (!open) return;
@@ -92,24 +41,18 @@ export function WorkSection() {
       if (e.key === "Escape" && !selectedClip) setOpenName(null);
     };
     window.addEventListener("keydown", onKey);
-    return () => {
-      window.removeEventListener("keydown", onKey);
-    };
-  }, [open, selectedClip]);
-
-  useEffect(() => {
-    if (!open) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
+      window.removeEventListener("keydown", onKey);
       document.body.style.overflow = prev;
     };
-  }, [open]);
+  }, [open, selectedClip]);
 
   return (
     <>
       <div className="grid grid-cols-2 gap-3">
-        {workCategories.map((c) => (
+        {categories.map((c) => (
           <Button
             variant="ghost"
             key={c.name}
@@ -119,7 +62,7 @@ export function WorkSection() {
           >
             <span className="block text-sm font-medium">{c.name}</span>
             <span className="mt-1 block text-[11px] text-muted-foreground">
-              {c.clips.length} {c.name === "Cinematic videos" ? "films" : "sample clips"}
+              {c.clips.length > 0 ? `${c.clips.length} films` : "Coming soon"}
             </span>
           </Button>
         ))}
@@ -147,6 +90,9 @@ export function WorkSection() {
           </div>
 
           <div className="flex-1 space-y-6 overflow-y-auto px-5 py-5 pb-28">
+            {open.clips.length === 0 && (
+              <p className="text-center text-sm text-muted-foreground">Films for this category are coming soon.</p>
+            )}
             {open.clips.map((clip) => (
               <figure key={clip.src} className="space-y-2">
                 <Button
@@ -159,14 +105,13 @@ export function WorkSection() {
                     src={clip.poster}
                     alt={clip.title}
                     loading="lazy"
+                    draggable={false}
                     width={720}
                     height={405}
                     className="aspect-video w-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </Button>
-                <figcaption className="text-xs text-muted-foreground">
-                  {open.name} · {clip.title}
-                </figcaption>
+                <figcaption className="text-xs text-muted-foreground">{clip.title}</figcaption>
               </figure>
             ))}
           </div>
