@@ -43,7 +43,7 @@ export function Dock({ active, onPick }: { active: string; onPick: (id: string) 
       aria-label="Sections"
       className="fixed inset-x-0 bottom-0 z-50 flex justify-center pb-[max(0.75rem,env(safe-area-inset-bottom))]"
     >
-      <div className="mx-4 flex w-full max-w-sm items-stretch gap-1 rounded-full border bg-card p-1.5 shadow-[0_-6px_30px_rgba(0,0,0,0.55)]">
+      <div className="mx-4 flex w-full max-w-sm items-stretch gap-1 rounded-full border border-tertiary bg-tertiary p-1.5 shadow-brand">
         {dockItems.map(({ id, label, Icon }) => {
           const on = active === id;
           return (
@@ -54,7 +54,7 @@ export function Dock({ active, onPick }: { active: string; onPick: (id: string) 
               aria-label={label}
               aria-current={on ? "true" : undefined}
               className={`flex flex-1 flex-col items-center gap-1 rounded-full py-2 transition-colors duration-200 ${
-                on ? "bg-background text-accent ring-1 ring-border" : "text-muted-foreground"
+                on ? "bg-primary text-primary-foreground" : "text-secondary hover:text-primary-foreground"
               }`}
             >
               <Icon className="h-[18px] w-[18px]" strokeWidth={on ? 2.2 : 1.6} />

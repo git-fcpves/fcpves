@@ -3,8 +3,8 @@
 @import "tw-animate-css";
 
 @theme inline {
-  --font-display: "Cormorant Garamond", serif;
-  --font-sans: "Manrope", sans-serif;
+  --font-display: "Plus Jakarta Sans", sans-serif;
+  --font-sans: "Plus Jakarta Sans", sans-serif;
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
   --color-background: var(--background);
@@ -24,24 +24,40 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-border: var(--border);
+  --color-tertiary: var(--tertiary);
+  --color-tertiary-foreground: var(--tertiary-foreground);
 }
 
 :root {
   --radius: 1rem;
-  --background: #080608;
-  --secondary: #190c11;
-  --foreground: #fff1f3;
-  --card: #190c11;
-  --primary: #8f263d;
-  --primary-foreground: #fff1f3;
-  --muted-foreground: #b99aa1;
-  --accent: #ffbd66;
-  --accent-foreground: #080608;
-  --soft-gold: #ffbd66;
-  --highlight: #ff4568;
-  --gradient-accent: linear-gradient(90deg, var(--primary), var(--soft-gold));
-  --border: #43232d;
-  --cherry: #3a1722;
+  /* Brand: Signal Orange (dominant), Pastel Orchid Pink (supporting), Deep Eggplant Violet (structure) */
+  --brand-orange: #ff5a0a;
+  --brand-orange-hover: #e94d00;
+  --brand-pink: #e7b0de;
+  --brand-pink-hover: #d99acf;
+  --brand-violet: #400849;
+  --brand-violet-hover: #541260;
+  --background: var(--brand-orange);
+  --foreground: var(--brand-violet);
+  --card: var(--brand-pink);
+  --secondary: var(--brand-pink);
+  --primary: var(--brand-orange);
+  --primary-foreground: #ffffff;
+  --tertiary: var(--brand-violet);
+  --tertiary-foreground: #ffffff;
+  --muted-foreground: color-mix(in oklab, var(--brand-violet) 78%, var(--brand-pink));
+  --accent: var(--brand-violet);
+  --accent-foreground: #ffffff;
+  --soft-gold: var(--brand-pink);
+  --highlight: var(--brand-violet);
+  --gradient-accent: linear-gradient(135deg, var(--brand-orange), var(--brand-violet));
+  --border: var(--brand-violet);
+  --cherry: var(--brand-pink-hover);
+  --shadow-brand: 0 12px 30px -12px color-mix(in oklab, var(--brand-violet) 55%, transparent);
+}
+
+@utility shadow-brand {
+  box-shadow: var(--shadow-brand);
 }
 
 body,
@@ -84,7 +100,8 @@ body :where(*) {
   &:hover {
     transform: translateY(-4px);
     border-color: var(--accent);
-    box-shadow: 0 14px 34px -12px color-mix(in oklab, var(--accent) 40%, transparent);
+    background-color: var(--brand-pink-hover);
+    box-shadow: var(--shadow-brand);
   }
 }
 
