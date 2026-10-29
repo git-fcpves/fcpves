@@ -28,6 +28,6 @@
 - [x] Home sample work: Teaser and Wedding Teaser added as tiles 12 and 13 (13 tiles total); teaser_new_4k-3 and Wedding_Reel-2 were identical copies of clips already in the app, so they were not added again
 - [ ] Move the real clips into the matching /work categories (Cinematic, Teasers, AI videos) once Sagar confirms the mapping; the other categories still use placeholder clips
 - [x] Signal Orange glows everywhere it appears: menu pill, follower bars, circle rings, orange borders and chips
-- [ ] Publish the current preview live (Sagar asked to update the website)
+- [x] Publish requested for the current preview (orange glow update) at https://fcpves.lovable.app
 
 
