@@ -14,7 +14,27 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      maya_gateway_access_state: {
+        Row: {
+          message: string
+          status: number
+          surface: string
+          updated_at: string
+        }
+        Insert: {
+          message: string
+          status: number
+          surface: string
+          updated_at?: string
+        }
+        Update: {
+          message?: string
+          status?: number
+          surface?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
