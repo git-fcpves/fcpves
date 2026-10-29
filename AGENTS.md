@@ -9,7 +9,6 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 
-## Video playback
 ## Maya
 - Keep Maya lazy-loaded in the shared root, with in-memory temporary conversations and server-only AI/voice calls, so navigation and the existing intro stay independent.
 - Never store chat transcripts; persist only service access-denial state server-side so terminal provider blocks survive restarts.

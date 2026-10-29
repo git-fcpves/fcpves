@@ -80,9 +80,9 @@ function ChatWindow({ thread, update, sound, close }: { thread: Thread; update: 
           if (part.type === "text") return <MessageResponse key={i}>{part.text}</MessageResponse>;
           if (part.type === "reasoning") return <details key={i} className="text-xs text-muted-foreground"><summary>Thinking</summary><MessageResponse>{part.text}</MessageResponse></details>;
           if (!isToolUIPart(part)) return null;
-          const output = part.state === "output-available" ? part.output as Record<string, unknown> : null;
+          const output = part.state === "output-available" ? part.output as { page?: unknown; name?: unknown; contact?: unknown; message?: unknown } : null;
           const name = part.type === "dynamic-tool" ? part.toolName : part.type.slice(5);
-          return <div key={i}><Tool defaultOpen={false}><ToolHeader title={name === "offerNavigation" ? "Website destination" : "Enquiry preview"} type={part.type} state={part.state} {...(part.type === "dynamic-tool" ? { toolName: part.toolName } : {})} /><ToolContent><ToolInput input={part.input} />{part.state === "output-error" && <p role="alert">{part.errorText}</p>}</ToolContent></Tool>
+          return <div key={i}><Tool defaultOpen={false}>{part.type === "dynamic-tool" ? <ToolHeader title={name === "offerNavigation" ? "Website destination" : "Enquiry preview"} type="dynamic-tool" state={part.state} toolName={part.toolName} /> : <ToolHeader title={name === "offerNavigation" ? "Website destination" : "Enquiry preview"} type={part.type} state={part.state} />}<ToolContent><ToolInput input={part.input} />{part.state === "output-error" && <p role="alert">{part.errorText}</p>}</ToolContent></Tool>
             {output && name === "offerNavigation" && typeof output.page === "string" && output.page in destinations && <Button variant="secondary" size="sm" asChild><Link to={destinations[output.page as keyof typeof destinations]} onClick={() => { speech.current?.abort(); close(); }}>Open {output.page}<ArrowUpRight /></Link></Button>}
             {output && name === "prepareEnquiry" && typeof output.name === "string" && typeof output.contact === "string" && typeof output.message === "string" && <Enquiry draft={{ name: output.name, contact: output.contact, message: output.message }} />}
           </div>;
@@ -96,7 +96,7 @@ function ChatWindow({ thread, update, sound, close }: { thread: Thread; update: 
       {error && <p role="alert" className="mb-2 break-words text-xs text-primary">{error.message}</p>}
       {voiceError && <p role="status" className="mb-2 text-xs text-muted-foreground">{voiceError}</p>}
       {speaking && <div className="mb-2 flex items-center justify-between text-xs"><span>Maya is speaking</span><Button size="icon-sm" variant="ghost" aria-label="Stop speaking" title="Stop speaking" onClick={() => { speech.current?.abort(); setSpeaking(false); }}><Square /></Button></div>}
-      <PromptInput onSubmit={({ text }) => submit(text)}><PromptInputTextarea ref={input} aria-label="Message Maya" placeholder="Ask Maya anything about Sagar..." maxLength={6000} /><PromptInputFooter className="justify-end"><PromptInputSubmit status={status} disabled={!busy && status === "error"} onStop={() => { stop(); input.current?.focus(); }}><Send /></PromptInputSubmit></PromptInputFooter></PromptInput>
+      <PromptInput onSubmit={({ text }) => submit(text)}><PromptInputTextarea ref={input} aria-label="Message Maya" placeholder="Ask Maya anything about Sagar..." maxLength={6000} /><PromptInputFooter className="justify-end"><PromptInputSubmit status={status} onStop={() => { stop(); input.current?.focus(); }} /></PromptInputFooter></PromptInput>
     </div>
   </>;
 }
