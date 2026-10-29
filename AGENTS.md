@@ -9,6 +9,11 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 
+## Maya
+- Keep Maya lazy-loaded in the shared root, with in-memory temporary conversations and server-only AI/voice calls, so navigation and the existing intro stay independent.
+- Never store chat transcripts; persist only service access-denial state server-side so terminal provider blocks survive restarts.
+- Contact previews never send automatically; the dedicated endpoint must report unavailable until real managed email sending is configured, with verified WhatsApp drafts as an explicit alternative.
+
 ## Video playback
 - Play every featured clip inside the app with the native video player: clips come only from uploaded assets, never from YouTube links.
 - Never offer a download option for videos: the player hides the download control, blocks picture-in-picture and ignores the right-click save menu.

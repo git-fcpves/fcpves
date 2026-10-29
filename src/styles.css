@@ -3,6 +3,7 @@
 @import "tw-animate-css";
 
 @theme inline {
+  --color-destructive: var(--primary);
   --font-display: "Plus Jakarta Sans", sans-serif;
   --font-sans: "Plus Jakarta Sans", sans-serif;
   --radius-lg: var(--radius);
@@ -31,7 +32,7 @@
 :root {
   --cinema-black: #000000;
   --cinema-orange: #ff6a00;
-  --cinema-glow: 0 0 22px color-mix(in srgb, var(--cinema-orange) 55%, transparent);
+  --cinema-glow: none;
   --radius: 1rem;
   /* Brand: Pastel Orchid Pink (primary surface), Deep Eggplant Violet (structure), Signal Orange (sparing accent) */
   --brand-orange: #ff5a0a;
@@ -57,12 +58,10 @@
   --border: color-mix(in oklab, var(--brand-violet) 35%, var(--brand-pink));
   --cherry: var(--brand-pink-hover);
   --shadow-brand: 0 12px 30px -12px color-mix(in oklab, var(--brand-violet) 55%, transparent);
-  /* Signal Orange glow: every orange surface, ring, border or word lights up */
-  --glow-orange: 0 0 16px 0px color-mix(in oklab, var(--brand-orange) 80%, transparent),
-    0 0 38px -4px color-mix(in oklab, var(--brand-orange) 60%, transparent);
-  --glow-orange-soft: 0 0 12px -4px color-mix(in oklab, var(--brand-orange) 70%, transparent);
-
-  --glow-orange-text: 0 0 14px color-mix(in oklab, var(--brand-orange) 65%, transparent);
+  /* Orange accents remain crisp without luminous effects. */
+  --glow-orange: none;
+  --glow-orange-soft: none;
+  --glow-orange-text: none;
 }
 
 
@@ -139,8 +138,7 @@ body :where(*) {
   }
 }
 
-/* Signal Orange glow: written outside @layer so it always beats utility shadows.
-   Any element painted orange (fill, ring, border or word) lights up automatically. */
+/* Keep orange surfaces, text, chart strokes and borders free of glow. */
 .bg-primary {
   box-shadow: var(--glow-orange);
 }
@@ -151,7 +149,7 @@ body :where(*) {
 
 .stroke-primary,
 .fill-primary {
-  filter: drop-shadow(0 0 6px color-mix(in oklab, var(--brand-orange) 75%, transparent));
+  filter: none;
 }
 
 [class*="border-primary"] {
@@ -182,4 +180,28 @@ body :where(*) {
 @keyframes cinema-reveal { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 @media (max-width: 600px) { .cinema-title h1 { font-size: 42px; } .cinema-greeting { font-size: 30px; } .cinema-final { font-size: 28px; } }
 @media (prefers-reduced-motion: reduce) { .cinema-greeting, .cinema-title *, .cinema-final { animation: none; } .cinema-tour-highlight { transition: none; } }
+
+.maya-theme {
+  --background: #141414;
+  --foreground: #fafafa;
+  --card: #202020;
+  --secondary: #303030;
+  --muted-foreground: #c4c4c4;
+  --border: #454545;
+  --accent: #373737;
+  --accent-foreground: #fafafa;
+  --primary-foreground: #141414;
+  font-variant-caps: normal;
+}
+.maya-theme *, .maya-theme *::before, .maya-theme *::after { font-variant-caps: normal; letter-spacing: 0; }
+.maya-launcher { position: fixed; right: 16px; bottom: 104px; z-index: 48; height: 58px; width: 58px; padding: 3px; border-radius: 50%; background: var(--background); border: 2px solid var(--primary); color: var(--foreground); box-shadow: none; }
+.maya-launcher img { height: 48px; width: 48px; border-radius: 50%; object-fit: cover; }
+.maya-launcher-icon { position: absolute; bottom: -3px; right: -3px; background: var(--primary); color: var(--background); border-radius: 50%; padding: 3px; width: 22px !important; height: 22px !important; }
+.maya-panel { position: fixed; right: 16px; bottom: 104px; z-index: 49; display: flex; flex-direction: column; width: 410px; max-width: calc(100vw - 32px); height: 640px; max-height: calc(100dvh - 130px); overflow: hidden; border-radius: 8px; border: 1px solid var(--border); background: var(--background); color: var(--foreground); box-shadow: var(--shadow-brand); }
+.maya-panel .maya-message { color: var(--foreground); }
+.maya-panel .is-user .maya-message { background: var(--secondary); color: var(--foreground); }
+.maya-panel textarea { min-height: 68px; max-height: 140px; color: var(--foreground); }
+.maya-panel input, .maya-panel textarea { font-size: 14px; }
+@media (max-width: 600px) { .maya-panel { right: 8px; bottom: 100px; max-width: calc(100vw - 16px); width: calc(100vw - 16px); height: calc(100dvh - 112px); max-height: calc(100dvh - 112px); } }
+@media (prefers-reduced-motion: reduce) { .maya-theme * { scroll-behavior: auto; animation: none; } }
 

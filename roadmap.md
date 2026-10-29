@@ -35,7 +35,10 @@
 - [x] About page rebuilt from uploaded professional profile: portrait + name hero, summary, 13-role experience timeline, skills, tools, education, 8 awards, Bili Haale project, sports, animated language bars, interests; staggered fade-up animations
 - [x] Home sample work: Teaser and Wedding Teaser added as tiles 12 and 13 (13 tiles total); teaser_new_4k-3 and Wedding_Reel-2 were identical copies of clips already in the app, so they were not added again
 - [ ] Move the real clips into the matching /work categories (Cinematic, Teasers, AI videos) once Sagar confirms the mapping; the other categories still use placeholder clips
-- [x] Signal Orange glows everywhere it appears: menu pill, follower bars, circle rings, orange borders and chips
+- [x] Remove Signal Orange glow from accents, graphs, portrait borders and the cinematic intro.
+- [x] Add Maya with separate temporary conversations, streaming text, independent female voice, navigation offers and contact previews; verify follow-up context, chat isolation, reload clearing, mobile layout, voice Stop/mute and no orange glow.
+- [ ] Enable genuine in-app enquiry delivery after the owner configures an email sender domain; WhatsApp drafts are available without claiming delivery.
+- [ ] Add production abuse rate limiting after the owner confirms a custom approach; Lovable Cloud has no standard rate-limiting primitive.
 - [x] Publish requested for the current preview (orange glow update) at https://fcpves.lovable.app
 
 

@@ -8,11 +8,12 @@ import {
   Scripts,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, lazy, Suspense, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { CinematicIntro } from "../components/cinematic-intro";
+const MayaChat = lazy(() => import("../components/maya-chat"));
 
 function NotFoundComponent() {
   return (
@@ -124,6 +125,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <CinematicIntro><Outlet /></CinematicIntro>
+      <Suspense fallback={null}><MayaChat /></Suspense>
     </QueryClientProvider>
   );
 }
