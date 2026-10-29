@@ -103,6 +103,10 @@ function Index() {
   const { data: audience } = useQuery(audienceQueryOptions());
   const { videos: featuredWork, isPending: videosLoading } = useGalleryVideos();
 
+  useEffect(() => {
+    if (selectedVideo && !featuredWork.some((v) => v.src === selectedVideo.src)) setSelectedVideo(null);
+  }, [featuredWork, selectedVideo]);
+
   const pick = (id: string) => {
     lock.current = Date.now() + 800;
     setActive(id);

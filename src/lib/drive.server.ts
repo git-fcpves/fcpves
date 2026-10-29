@@ -24,7 +24,7 @@ async function listFolder(): Promise<Listing["files"]> {
   do {
     const q = new URLSearchParams({
       q: `'${DRIVE_FOLDER_ID}' in parents and trashed=false and mimeType contains 'video/'`,
-      fields: "nextPageToken,files(id,name,mimeType,modifiedTime,thumbnailLink)",
+      fields: "nextPageToken,files(id,name,mimeType,modifiedTime,thumbnailLink,trashed,size,capabilities(canDownload))",
       pageSize: "1000",
       supportsAllDrives: "true",
       includeItemsFromAllDrives: "true",
@@ -55,14 +55,14 @@ export async function getGallery(): Promise<Gallery> {
       for (const f of files) if (f.thumbnailLink) thumbs.set(f.id, f.thumbnailLink);
       cached = {
         at: Date.now(),
-        payload: { videos: toGallery(files), syncedAt: new Date().toISOString(), ok: true },
+        payload: { videos: toGallery(files.filter((f) => Boolean(f.thumbnailLink))), syncedAt: new Date().toISOString(), ok: true },
         thumbs,
       };
       return cached;
     } catch (error) {
       console.error(error);
       // Keep showing the last good reading if Drive fails.
-      if (cached) return cached;
+      if (cached) return { ...cached, payload: { ...cached.payload, ok: false } };
       return { at: 0, payload: { videos: [], syncedAt: "", ok: false }, thumbs: new Map<string, string>() };
     } finally {
       inflight = null;
@@ -74,4 +74,10 @@ export async function getGallery(): Promise<Gallery> {
 export async function isInFolder(id: string): Promise<boolean> {
   const g = await getGallery();
   return g.payload.videos.some((v) => v.id === id);
+}
+
+export function removeUnavailableVideo(id: string) {
+  if (!cached) return;
+  cached.payload = { ...cached.payload, videos: cached.payload.videos.filter((v) => v.id !== id) };
+  cached.thumbs.delete(id);
 }
