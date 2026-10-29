@@ -59,9 +59,9 @@ describe("Work page shelves", () => {
       { id: "c", title: "Wedding Groom", src: "/x", poster: "/y" },
     ]);
     expect(Object.keys(grouped)).toEqual([...WORK_CATEGORIES]);
-    expect(grouped["AI videos"].map((v) => v.title)).toEqual(["MOTION AI"]);
-    expect(grouped["Teasers"].map((v) => v.title)).toEqual(["Teaser"]);
-    expect(grouped["Cinematic videos"].map((v) => v.title)).toEqual(["Wedding Groom"]);
+    expect(grouped["AI videos"]?.map((v) => v.title)).toEqual(["MOTION AI"]);
+    expect(grouped["Teasers"]?.map((v) => v.title)).toEqual(["Teaser"]);
+    expect(grouped["Cinematic videos"]?.map((v) => v.title)).toEqual(["Wedding Groom"]);
     expect(grouped["Candid videos"]).toEqual([]);
   });
 });
