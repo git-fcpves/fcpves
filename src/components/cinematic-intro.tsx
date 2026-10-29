@@ -34,6 +34,18 @@ export function CinematicIntro({ children }: { children: React.ReactNode }) {
   const muteRef = useRef(false);
   const sound = useRef<AudioContext | null>(null);
 
+  useEffect(() => {
+    const context = sound.current;
+    if (!context || muteRef.current || context.state !== "running") return;
+    if (!(phase === "title" && titleBeat === 1) && !(phase === "opening" && text === FINAL_GREETING)) return;
+    const bass = context.createOscillator(); const gain = context.createGain();
+    bass.frequency.setValueAtTime(82, context.currentTime);
+    bass.frequency.exponentialRampToValueAtTime(38, context.currentTime + 0.6);
+    gain.gain.setValueAtTime(0.045, context.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.0001, context.currentTime + 0.8);
+    bass.connect(gain).connect(context.destination); bass.start(); bass.stop(context.currentTime + 0.8);
+  }, [phase, text, titleBeat]);
+
   const stop = () => {
     audio.current?.pause();
     if (audio.current) audio.current.src = "";
