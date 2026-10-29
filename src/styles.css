@@ -57,7 +57,7 @@
   /* Signal Orange glow: every orange surface, ring, border or word lights up */
   --glow-orange: 0 0 16px 0px color-mix(in oklab, var(--brand-orange) 80%, transparent),
     0 0 38px -4px color-mix(in oklab, var(--brand-orange) 60%, transparent);
-  --glow-orange-soft: 0 0 16px -3px color-mix(in oklab, var(--brand-orange) 75%, transparent);
+  --glow-orange-soft: 0 0 12px -4px color-mix(in oklab, var(--brand-orange) 70%, transparent);
 
   --glow-orange-text: 0 0 14px color-mix(in oklab, var(--brand-orange) 65%, transparent);
 }
