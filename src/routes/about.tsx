@@ -103,7 +103,9 @@ function AboutPage() {
           <img
             src={founderPortrait.url}
             alt="Sagar Salimath"
-            className="animate-pop h-28 w-28 rounded-full border-2 border-primary/50 object-cover shadow-[0_0_40px_-8px_var(--primary)]"
+            className="animate-pop h-28 w-28 rounded-full border-2 border-primary/50 object-cover"
+            style={{ boxShadow: "0 0 40px -8px var(--primary)" }}
+
           />
           <h1 className="mt-5 font-display text-4xl">Sagar Salimath</h1>
           <p className="mt-2 text-sm text-accent">Filmmaker · Cinematic Video Editor · AI & Digital Media Specialist</p>

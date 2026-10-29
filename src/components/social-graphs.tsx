@@ -17,7 +17,7 @@ function Bar({ stat, max }: { stat: AudienceStat; max: number }) {
       <div className="mt-1 text-[11px] text-muted-foreground">
         {stat.handle} · {stat.metric}
       </div>
-      <div className="mt-3 h-2 overflow-hidden rounded-full bg-secondary">
+      <div className="mt-3 h-2 overflow-hidden rounded-full bg-secondary glow-orange">
         <div
           className="h-full rounded-full bg-primary transition-all duration-500"
           style={{ width: `${pct}%` }}
