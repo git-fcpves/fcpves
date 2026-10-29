@@ -31,7 +31,7 @@
 :root {
   --cinema-black: #000000;
   --cinema-orange: #ff6a00;
-  --cinema-glow: 0 0 22px color-mix(in srgb, var(--cinema-orange) 55%, transparent);
+  --cinema-glow: none;
   --radius: 1rem;
   /* Brand: Pastel Orchid Pink (primary surface), Deep Eggplant Violet (structure), Signal Orange (sparing accent) */
   --brand-orange: #ff5a0a;
@@ -57,12 +57,10 @@
   --border: color-mix(in oklab, var(--brand-violet) 35%, var(--brand-pink));
   --cherry: var(--brand-pink-hover);
   --shadow-brand: 0 12px 30px -12px color-mix(in oklab, var(--brand-violet) 55%, transparent);
-  /* Signal Orange glow: every orange surface, ring, border or word lights up */
-  --glow-orange: 0 0 16px 0px color-mix(in oklab, var(--brand-orange) 80%, transparent),
-    0 0 38px -4px color-mix(in oklab, var(--brand-orange) 60%, transparent);
-  --glow-orange-soft: 0 0 12px -4px color-mix(in oklab, var(--brand-orange) 70%, transparent);
-
-  --glow-orange-text: 0 0 14px color-mix(in oklab, var(--brand-orange) 65%, transparent);
+  /* Orange accents remain crisp without luminous effects. */
+  --glow-orange: none;
+  --glow-orange-soft: none;
+  --glow-orange-text: none;
 }
 
 
@@ -139,8 +137,7 @@ body :where(*) {
   }
 }
 
-/* Signal Orange glow: written outside @layer so it always beats utility shadows.
-   Any element painted orange (fill, ring, border or word) lights up automatically. */
+/* Keep orange surfaces, text, chart strokes and borders free of glow. */
 .bg-primary {
   box-shadow: var(--glow-orange);
 }
@@ -151,7 +148,7 @@ body :where(*) {
 
 .stroke-primary,
 .fill-primary {
-  filter: drop-shadow(0 0 6px color-mix(in oklab, var(--brand-orange) 75%, transparent));
+  filter: none;
 }
 
 [class*="border-primary"] {
