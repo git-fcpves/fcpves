@@ -1,5 +1,7 @@
 # Roadmap
 
+- [x] Prebuffer selected videos, release closed streams, and verify player reopening and partial-content delivery; sampled 4K source is about 50 Mbps, so lag-free playback remains dependent on connection speed.
+
 - [x] Hide two samples with missing previews; verify Drive deletions update the gallery automatically with cache tests and a simulated browser refresh.
 - [x] Replace the founder portrait on Home and About with the newly uploaded image.
 

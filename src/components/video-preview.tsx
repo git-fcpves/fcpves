@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from "react";
-import { X } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { LoaderCircle, X } from "lucide-react";
 import { Button } from "./ui/button";
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -11,13 +11,19 @@ export function VideoPreview({ clip, onClose }: { clip: VideoClip | null; onClos
   const queryClient = useQueryClient();
   const [spot, setSpot] = useState(0);
   const [failed, setFailed] = useState(false);
+  const [buffering, setBuffering] = useState(true);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const closeRef = useRef(onClose);
+  closeRef.current = onClose;
   const session = useMemo(() => Math.random().toString(36).slice(2, 8).toUpperCase(), []);
 
   useEffect(() => {
     if (!clip) return;
     setFailed(false);
+    setBuffering(true);
+    const video = videoRef.current;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") closeRef.current();
     };
     window.addEventListener("keydown", onKey);
     const prev = document.body.style.overflow;
@@ -27,8 +33,14 @@ export function VideoPreview({ clip, onClose }: { clip: VideoClip | null; onClos
       window.removeEventListener("keydown", onKey);
       document.body.style.overflow = prev;
       window.clearInterval(t);
+      // Release the old stream so it cannot compete with the next selected film.
+      if (video) {
+        video.pause();
+        video.removeAttribute("src");
+        video.load();
+      }
     };
-  }, [clip, onClose]);
+  }, [clip?.src]);
 
   if (!clip) return null;
 
@@ -59,17 +71,24 @@ export function VideoPreview({ clip, onClose }: { clip: VideoClip | null; onClos
       <div className="flex flex-1 flex-col justify-center gap-3 px-5 py-5 pb-28">
         <div className="relative mx-auto w-full max-w-4xl" onContextMenu={(e) => e.preventDefault()}>
           <video
+            ref={videoRef}
             key={clip.src}
             src={clip.src}
             poster={clip.poster}
             controls
             autoPlay
             playsInline
-            preload="metadata"
+            preload="auto"
             controlsList="nodownload noremoteplayback"
             disablePictureInPicture
+            onWaiting={() => setBuffering(true)}
+            onSeeking={() => setBuffering(true)}
+            onPlaying={() => setBuffering(false)}
+            onCanPlay={() => setBuffering(false)}
+            onPause={() => setBuffering(false)}
             onError={() => {
               setFailed(true);
+              setBuffering(false);
               // A codec failure is not evidence of a deleted file. Check the server first.
               void fetch(clip.src, { headers: { Range: "bytes=0-0" } }).then(async (res) => {
                 await res.body?.cancel();
@@ -81,6 +100,11 @@ export function VideoPreview({ clip, onClose }: { clip: VideoClip | null; onClos
             }}
             className="aspect-video w-full rounded-lg border bg-background"
           />
+          {buffering && !failed && (
+            <div role="status" aria-label="Buffering video" className="pointer-events-none absolute inset-0 flex items-center justify-center">
+              <LoaderCircle className="h-8 w-8 animate-spin text-primary motion-reduce:animate-none" aria-hidden="true" />
+            </div>
+          )}
           <span
             aria-hidden
             className={`pointer-events-none absolute ${SPOTS[spot]} text-[10px] tracking-widest text-foreground/40 transition-all duration-1000`}

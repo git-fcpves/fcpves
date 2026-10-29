@@ -18,6 +18,7 @@ export const Route = createFileRoute("/api/public/video/$id")({
         if (range && /^bytes=\d*-\d*$/.test(range)) extra["Range"] = range;
         const upstream = await fetch(driveUrl(`/files/${id}?alt=media&supportsAllDrives=true`), {
           headers: driveHeaders(extra),
+          signal: request.signal,
         });
         if (!upstream.ok && upstream.status !== 206) {
           const detail = await upstream.text();
