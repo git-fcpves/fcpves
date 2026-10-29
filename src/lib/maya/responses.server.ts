@@ -1,5 +1,5 @@
 import { createOpenAI } from "@ai-sdk/openai";
-import { streamText, tool, stepCountIs, type ModelMessage } from "ai";
+import { streamText, tool, isStepCount, type ModelMessage } from "ai";
 import { z } from "zod";
 import { rememberBlock } from "./access.server";
 
@@ -34,7 +34,7 @@ export function createResponsesCall(
     messages,
     abortSignal: request.signal,
     maxRetries: 0,
-    stopWhen: stepCountIs(50),
+    stopWhen: isStepCount(50),
     tools: {
       offerNavigation: tool({
         description: "Offer a verified website page; requires the visitor to click, never navigates automatically.",
