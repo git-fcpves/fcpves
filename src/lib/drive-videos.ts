@@ -48,6 +48,7 @@ export function driveVideosQueryOptions() {
     },
     staleTime: 0,
     refetchInterval: (query) => {
+      if (query.state.data?.ok === false) return VIDEO_REFRESH_MS;
       const synced = Date.parse(query.state.data?.syncedAt ?? "");
       return Number.isFinite(synced) ? Math.max(1000, VIDEO_REFRESH_MS - (Date.now() - synced)) : VIDEO_REFRESH_MS;
     },

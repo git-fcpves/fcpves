@@ -1,7 +1,7 @@
 # Roadmap
 
-- [ ] Remove confirmed unavailable Drive samples and verify Drive deletions update the gallery automatically.
-- [ ] Replace the founder portrait on Home and About with the newly uploaded image.
+- [x] Hide two samples with missing previews; verify Drive deletions update the gallery automatically with cache tests and a simulated browser refresh.
+- [x] Replace the founder portrait on Home and About with the newly uploaded image.
 
 - [x] Add a back arrow to every page and verify previous-page navigation and the Home fallback
 
@@ -18,7 +18,7 @@
 - [x] Home sample work: 1st tile "Rooted in Love" opens its own video (youtu.be/er1WXxV_5KA) with its real YouTube thumbnail
 - [x] Home sample work: 2nd tile "Modern Love" opens its own video (youtu.be/0ASm37QZjdc) with its real YouTube thumbnail
 - [x] Home sample work: 3rd tile opens its own video (youtu.be/rJB3l8hkYB0), but that video is private so visitors can't play it
-- [ ] Fix 3rd tile: video must be public/unlisted, or Sagar sends a different link, title and frame
+- [x] Superseded: the private YouTube tile was removed when the gallery switched to Drive.
 - [x] Three YouTube films removed from sample work; the grid now holds only uploaded clips (13 tiles) and the player hides the download control
 
 - [x] Placeholder tiles 4-6 removed: the grid now runs 11 tiles, each opening its own video (3 YouTube films + 8 uploaded clips)
