@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Dock } from "../components/dock";
 import { BackButton } from "../components/back-button";
-import founderPortrait from "../assets/founder-portrait.webp.asset.json";
+import founderPortrait from "../assets/founder-current.webp.asset.json";
 
 export const Route = createFileRoute("/about")({
   head: () => ({

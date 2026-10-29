@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { isDriveId } from "@/lib/drive-videos";
-import { driveHeaders, driveUrl, isInFolder } from "@/lib/drive.server";
+import { driveHeaders, driveUrl, isInFolder, removeUnavailableVideo } from "@/lib/drive.server";
 
 // Streams a video from the configured Drive folder through the site, so the Drive file is never exposed.
 export const Route = createFileRoute("/api/public/video/$id")({
@@ -20,8 +20,10 @@ export const Route = createFileRoute("/api/public/video/$id")({
           headers: driveHeaders(extra),
         });
         if (!upstream.ok && upstream.status !== 206) {
-          console.error(`Drive stream failed [${upstream.status}]: ${await upstream.text()}`);
-          return new Response("Video unavailable", { status: 502 });
+          const detail = await upstream.text();
+          console.error(`Drive stream failed [${upstream.status}]: ${detail}`);
+          if (upstream.status === 404 || upstream.status === 410) removeUnavailableVideo(id);
+          return new Response(`Video unavailable [${upstream.status}]: ${detail}`, { status: upstream.status });
         }
         const headers = new Headers({
           "Content-Type": upstream.headers.get("content-type") ?? "video/mp4",

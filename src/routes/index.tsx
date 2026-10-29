@@ -8,7 +8,7 @@ import { VideoPreview, type VideoClip } from "../components/video-preview";
 import { SocialGraphs } from "../components/social-graphs";
 import { audienceQueryOptions, fallbackPayload } from "../lib/audience";
 import { Button } from "../components/ui/button";
-import founderPortrait from "../assets/founder-portrait.webp.asset.json";
+import founderPortrait from "../assets/founder-current.webp.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -102,6 +102,10 @@ function Index() {
   const lock = useRef(0);
   const { data: audience } = useQuery(audienceQueryOptions());
   const { videos: featuredWork, isPending: videosLoading } = useGalleryVideos();
+
+  useEffect(() => {
+    if (selectedVideo && !featuredWork.some((v) => v.src === selectedVideo.src)) setSelectedVideo(null);
+  }, [featuredWork, selectedVideo]);
 
   const pick = (id: string) => {
     lock.current = Date.now() + 800;

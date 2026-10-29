@@ -25,3 +25,4 @@
 
 ## Drive gallery
 - Gallery videos come from the configured Google Drive folder via src/lib/drive.server.ts (shared 5-minute cache) and stream only through /api/public/video/$id, which checks the file is in that folder; Drive links are never sent to the browser.
+- Replace gallery snapshots on refresh, exclude files without previews or stream access, and schedule client refresh from the server snapshot time so deletions do not linger for an extra cache interval. Only confirmed 404/410 responses evict files on playback errors; codec failures must never remove valid videos.

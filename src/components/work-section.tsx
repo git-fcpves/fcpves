@@ -36,6 +36,10 @@ export function WorkSection() {
   const open = categories.find((c) => c.name === openName) ?? null;
 
   useEffect(() => {
+    if (selectedClip && !videos.some((v) => v.src === selectedClip.src)) setSelectedClip(null);
+  }, [videos, selectedClip]);
+
+  useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape" && !selectedClip) setOpenName(null);

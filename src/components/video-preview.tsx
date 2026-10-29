@@ -1,12 +1,14 @@
 import { useEffect, useMemo, useState } from "react";
 import { X } from "lucide-react";
 import { Button } from "./ui/button";
+import { useQueryClient } from "@tanstack/react-query";
 
 export type VideoClip = { title: string; src: string; poster?: string; href?: string };
 
 const SPOTS = ["left-[6%] top-[8%]", "right-[6%] top-[8%]", "right-[6%] bottom-[18%]", "left-[6%] bottom-[18%]"];
 
 export function VideoPreview({ clip, onClose }: { clip: VideoClip | null; onClose: () => void }) {
+  const queryClient = useQueryClient();
   const [spot, setSpot] = useState(0);
   const [failed, setFailed] = useState(false);
   const session = useMemo(() => Math.random().toString(36).slice(2, 8).toUpperCase(), []);
@@ -66,7 +68,17 @@ export function VideoPreview({ clip, onClose }: { clip: VideoClip | null; onClos
             preload="metadata"
             controlsList="nodownload noremoteplayback"
             disablePictureInPicture
-            onError={() => setFailed(true)}
+            onError={() => {
+              setFailed(true);
+              // A codec failure is not evidence of a deleted file. Check the server first.
+              void fetch(clip.src, { headers: { Range: "bytes=0-0" } }).then(async (res) => {
+                await res.body?.cancel();
+                if (res.status === 404 || res.status === 410) {
+                  await queryClient.invalidateQueries({ queryKey: ["drive-videos"] });
+                  onClose();
+                }
+              }).catch(() => {});
+            }}
             className="aspect-video w-full rounded-lg border bg-background"
           />
           <span

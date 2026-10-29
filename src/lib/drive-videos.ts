@@ -4,7 +4,7 @@ import { queryOptions } from "@tanstack/react-query";
 export const DRIVE_FOLDER_ID = "1FhYvffe8qS2FgewVCFHhz88rcwlnw0OR";
 export const VIDEO_REFRESH_MS = 5 * 60 * 1000;
 
-export type DriveFile = { id: string; name: string; mimeType: string; modifiedTime?: string };
+export type DriveFile = { id: string; name: string; mimeType: string; modifiedTime?: string; trashed?: boolean; size?: string; capabilities?: { canDownload?: boolean } };
 export type DriveVideo = { id: string; title: string; src: string; poster: string; modifiedTime?: string | undefined };
 export type DriveVideosPayload = { videos: DriveVideo[]; syncedAt: string; ok: boolean };
 
@@ -26,7 +26,7 @@ export function titleFromName(name: string): string {
 export function toGallery(files: DriveFile[]): DriveVideo[] {
   const seen = new Set<string>();
   return files
-    .filter((f) => f.mimeType.startsWith("video/") && isDriveId(f.id))
+    .filter((f) => f.mimeType.startsWith("video/") && isDriveId(f.id) && !f.trashed && f.size !== "0" && f.capabilities?.canDownload !== false)
     .filter((f) => (seen.has(f.id) ? false : (seen.add(f.id), true)))
     .sort((a, b) => (b.modifiedTime ?? "").localeCompare(a.modifiedTime ?? ""))
     .map((f) => ({
@@ -46,8 +46,12 @@ export function driveVideosQueryOptions() {
       if (!res.ok) throw new Error("videos unavailable");
       return res.json();
     },
-    staleTime: VIDEO_REFRESH_MS,
-    refetchInterval: VIDEO_REFRESH_MS,
-    refetchOnWindowFocus: true,
+    staleTime: 0,
+    refetchInterval: (query) => {
+      if (query.state.data?.ok === false) return VIDEO_REFRESH_MS;
+      const synced = Date.parse(query.state.data?.syncedAt ?? "");
+      return Number.isFinite(synced) ? Math.max(1000, VIDEO_REFRESH_MS - (Date.now() - synced)) : VIDEO_REFRESH_MS;
+    },
+    refetchOnWindowFocus: "always",
   });
 }
