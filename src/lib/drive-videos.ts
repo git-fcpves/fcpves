@@ -38,6 +38,35 @@ export function toGallery(files: DriveFile[]): DriveVideo[] {
     }));
 }
 
+// The Work page shelves. Every film lands in exactly one of these.
+export const WORK_CATEGORIES = [
+  "Cinematic videos",
+  "Candid videos",
+  "Teasers",
+  "Corporate videos",
+  "Ad films",
+  "Promotional videos",
+  "AI videos",
+  "Biography videos",
+  "Political videos",
+] as const;
+
+// Films sort themselves by their own file names: anything called AI goes to AI videos,
+// anything called a teaser goes to Teasers, everything else stays in Cinematic videos.
+export function categoryForTitle(title: string): string {
+  const t = title.toLowerCase();
+  if (/(^|[^a-z0-9])ai([^a-z0-9]|$)/.test(t)) return "AI videos";
+  if (t.includes("teaser")) return "Teasers";
+  return "Cinematic videos";
+}
+
+export function groupByCategory(videos: DriveVideo[]): Record<string, DriveVideo[]> {
+  const grouped: Record<string, DriveVideo[]> = {};
+  for (const name of WORK_CATEGORIES) grouped[name] = [];
+  for (const video of videos) grouped[categoryForTitle(video.title)]?.push(video);
+  return grouped;
+}
+
 export function driveVideosQueryOptions() {
   return queryOptions({
     queryKey: ["drive-videos"],
