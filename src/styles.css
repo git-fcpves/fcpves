@@ -29,6 +29,9 @@
 }
 
 :root {
+  --cinema-black: #000000;
+  --cinema-orange: #ff6a00;
+  --cinema-glow: 0 0 22px color-mix(in srgb, var(--cinema-orange) 55%, transparent);
   --radius: 1rem;
   /* Brand: Pastel Orchid Pink (primary surface), Deep Eggplant Violet (structure), Signal Orange (sparing accent) */
   --brand-orange: #ff5a0a;
@@ -154,4 +157,29 @@ body :where(*) {
 [class*="border-primary"] {
   box-shadow: var(--glow-orange-soft);
 }
+
+.cinema-overlay {
+  position: fixed; inset: 0; z-index: 100; display: grid; place-items: center;
+  background: var(--cinema-black); color: var(--cinema-orange); padding: 24px;
+}
+.cinema-overlay *, .cinema-tour *, .cinema-replay { letter-spacing: 0; font-variant-caps: normal; }
+.cinema-controls { position: absolute; right: 16px; top: max(16px, env(safe-area-inset-top)); display: flex; align-items: center; gap: 8px; }
+.cinema-controls button, .cinema-enter, .cinema-tour button { color: var(--cinema-orange); background: transparent; font-size: 11px; }
+.cinema-controls button:hover, .cinema-enter:hover, .cinema-tour button:hover { color: var(--cinema-orange); background: var(--cinema-black); text-shadow: var(--cinema-glow); }
+.cinema-greeting { text-align: center; font-size: 44px; line-height: 1.6; font-weight: 800; max-width: 100%; overflow-wrap: anywhere; text-shadow: var(--cinema-glow); animation: cinema-cut 330ms both;
+  font-family: "Plus Jakarta Sans", "Noto Sans Kannada", "Noto Sans Tamil", "Noto Sans Telugu", "Noto Sans Devanagari", "Noto Sans Gurmukhi", "Noto Sans Gujarati", "Noto Sans Arabic", "Noto Sans Bengali", "Noto Sans Malayalam", sans-serif;
+}
+.cinema-final { animation: cinema-reveal 1.4s both; font-size: 36px; }
+.cinema-title { text-align: center; max-width: 720px; text-shadow: var(--cinema-glow); }
+.cinema-title p { font-size: 15px; animation: cinema-reveal 1s both; }
+.cinema-title h1 { font-size: 64px; line-height: 1.1; margin: 20px 0; animation: cinema-reveal 1s both; }
+.cinema-title .cinema-subtitle { font-size: 12px; line-height: 1.8; }
+.cinema-enter { border: 1px solid var(--cinema-orange); border-radius: 4px; padding: 24px; text-shadow: var(--cinema-glow); }
+.cinema-tour { position: fixed; z-index: 90; top: max(12px, env(safe-area-inset-top)); left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 12px; width: max-content; max-width: calc(100% - 24px); padding: 8px 12px; border-radius: 6px; background: var(--cinema-black); color: var(--cinema-orange); font-size: 12px; }
+.cinema-tour-highlight { outline: 2px solid var(--cinema-orange); outline-offset: 4px; box-shadow: var(--cinema-glow); transition: outline-color 350ms; }
+.cinema-replay { position: fixed; right: 16px; top: max(12px, env(safe-area-inset-top)); z-index: 45; color: var(--primary); }
+@keyframes cinema-cut { from { opacity: 0; transform: translateX(18px) scale(0.96); } 30%, 80% { opacity: 1; transform: none; } to { opacity: 0; transform: translateX(-10px); } }
+@keyframes cinema-reveal { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+@media (max-width: 600px) { .cinema-title h1 { font-size: 42px; } .cinema-greeting { font-size: 30px; } .cinema-final { font-size: 28px; } }
+@media (prefers-reduced-motion: reduce) { .cinema-greeting, .cinema-title *, .cinema-final { animation: none; } .cinema-tour-highlight { transition: none; } }
 

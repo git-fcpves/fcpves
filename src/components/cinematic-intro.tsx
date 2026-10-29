@@ -32,8 +32,6 @@ export function CinematicIntro({ children }: { children: React.ReactNode }) {
   const [titleBeat, setTitleBeat] = useState(0);
   const audio = useRef<HTMLAudioElement | null>(null);
   const muteRef = useRef(false);
-  const phaseRef = useRef(phase);
-  phaseRef.current = phase;
   const sound = useRef<AudioContext | null>(null);
 
   const stop = () => {
@@ -90,7 +88,7 @@ export function CinematicIntro({ children }: { children: React.ReactNode }) {
     let disposed = false;
     let silent = false;
     let started = performance.now();
-    const player = new Audio(phase === "opening" ? opening.url : phase === "title" ? welcome.url : TOUR[step]?.audio);
+    const player = phase === "opening" && audio.current && !audio.current.paused ? audio.current : new Audio(phase === "opening" ? opening.url : phase === "title" ? welcome.url : TOUR[step]?.audio);
     player.muted = muteRef.current;
     audio.current = player;
     setText(""); setTitleBeat(0);
@@ -158,7 +156,7 @@ export function CinematicIntro({ children }: { children: React.ReactNode }) {
   return <>
     <div inert={full || undefined}>{children}</div>
     {full && <div className="cinema-overlay" role="dialog" aria-modal="true" aria-label="Sagar's World cinematic introduction">
-      <div className="cinema-controls">
+      <div className={`cinema-controls ${phase === "boot" ? "invisible" : ""}`}>
         <Button variant="ghost" onClick={toggleSound} aria-label={muted ? "Unmute" : "Mute"} title={muted ? "Unmute" : "Mute"}><span>{muted ? <VolumeX /> : <Volume2 />}</span></Button>
         <Button variant="ghost" onClick={complete}>SKIP INTRO</Button>
       </div>

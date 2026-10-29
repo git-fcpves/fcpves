@@ -18,6 +18,7 @@
 - The sandbox browser cannot decode H.264, so any MP4 (uploaded or from an external CDN) reports "no supported sources" there while WebM plays; verify clip tiles, thumbnails and player controls in the preview and treat codec playback as unverified rather than broken.
 
 ## Page navigation
+- Keep the cinematic intro and real-page tour in the shared root wrapper with static generated narration assets, session-only completion storage, and an audio-clock-driven greeting sequence; this preserves route content and avoids per-visitor voice-generation costs.
 - Use the shared BackButton on content pages (not Home); it always returns to Home at the top, because every page is one step from Home.
 
 ## Audience figures

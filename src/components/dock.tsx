@@ -49,6 +49,7 @@ export function Dock({ active, onPick }: { active: string; onPick: (id: string) 
           return (
             <button
               key={id}
+              data-tour={id}
               type="button"
               onClick={() => go(id)}
               aria-label={label}
