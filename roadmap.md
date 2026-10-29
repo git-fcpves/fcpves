@@ -1,5 +1,7 @@
 # Roadmap
 
+- [ ] Remove confirmed unavailable Drive samples and verify Drive deletions update the gallery automatically.
+
 - [x] Add a back arrow to every page and verify previous-page navigation and the Home fallback
 
 - [x] Bottom dock with 5 categories (Home, About, Work, Projects, Connect)
