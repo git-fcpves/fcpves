@@ -8,7 +8,7 @@ import { VideoPreview, type VideoClip } from "../components/video-preview";
 import { SocialGraphs } from "../components/social-graphs";
 import { audienceQueryOptions, fallbackPayload } from "../lib/audience";
 import { Button } from "../components/ui/button";
-import founderPortrait from "../assets/founder-portrait.webp.asset.json";
+import founderPortrait from "../assets/founder-current.webp.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
