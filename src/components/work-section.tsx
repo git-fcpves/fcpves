@@ -3,22 +3,12 @@ import { useQuery } from "@tanstack/react-query";
 import { X } from "lucide-react";
 import { Button } from "./ui/button";
 import { VideoPreview, type VideoClip } from "./video-preview";
-import { driveVideosQueryOptions } from "../lib/drive-videos";
+import { driveVideosQueryOptions, groupByCategory, WORK_CATEGORIES } from "../lib/drive-videos";
 
 type Category = { name: string; clips: VideoClip[] };
 
-// Every category shows the videos from the Google Drive folder until they are sorted.
-export const CATEGORY_NAMES = [
-  "Cinematic videos",
-  "Candid videos",
-  "Teasers",
-  "Corporate videos",
-  "Ad films",
-  "Promotional videos",
-  "AI videos",
-  "Biography videos",
-  "Political videos",
-];
+// Films land in a shelf automatically from their own file names.
+export const CATEGORY_NAMES = WORK_CATEGORIES;
 
 export function useGalleryVideos() {
   const { data, isPending, isError } = useQuery(driveVideosQueryOptions());
@@ -27,10 +17,8 @@ export function useGalleryVideos() {
 
 export function WorkSection() {
   const { videos } = useGalleryVideos();
-  const categories: Category[] = CATEGORY_NAMES.map((name) => ({
-    name,
-    clips: name === "Cinematic videos" ? videos : [],
-  }));
+  const grouped = groupByCategory(videos);
+  const categories: Category[] = CATEGORY_NAMES.map((name) => ({ name, clips: grouped[name] ?? [] }));
   const [openName, setOpenName] = useState<string | null>(null);
   const [selectedClip, setSelectedClip] = useState<VideoClip | null>(null);
   const open = categories.find((c) => c.name === openName) ?? null;
