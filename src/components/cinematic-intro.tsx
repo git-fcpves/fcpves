@@ -126,11 +126,16 @@ export function CinematicIntro({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     if (phase !== "tour") return;
-    const target = document.querySelector(`[data-tour="${TOUR[step]?.key}"]`);
-    target?.classList.add("cinema-tour-highlight");
-    const heading = document.querySelector("main h1");
-    heading?.classList.add("cinema-tour-highlight");
-    return () => { target?.classList.remove("cinema-tour-highlight"); heading?.classList.remove("cinema-tour-highlight"); };
+    const marked = new Set<Element>();
+    const highlight = () => {
+      for (const element of [document.querySelector(`[data-tour="${TOUR[step]?.key}"]`), document.querySelector("main h1")]) {
+        if (element && !marked.has(element)) { marked.add(element); element.classList.add("cinema-tour-highlight"); }
+      }
+    };
+    highlight();
+    const observer = new MutationObserver(highlight);
+    observer.observe(document.body, { childList: true, subtree: true });
+    return () => { observer.disconnect(); marked.forEach((element) => element.classList.remove("cinema-tour-highlight")); };
   }, [phase, step, path]);
 
   const enter = () => {
