@@ -154,7 +154,8 @@ export function CinematicIntro({ children }: { children: React.ReactNode }) {
   };
   const full = phase !== "done" && phase !== "tour" && (path === "/" || phase !== "boot");
   return <>
-    <div inert={full || undefined}>{children}</div>
+    <noscript><style>{`.cinema-overlay { display: none; }`}</style></noscript>
+    <div inert={(full && phase !== "boot") || undefined}>{children}</div>
     {full && <div className="cinema-overlay" role="dialog" aria-modal="true" aria-label="Sagar's World cinematic introduction">
       <div className={`cinema-controls ${phase === "boot" ? "invisible" : ""}`}>
         <Button variant="ghost" onClick={toggleSound} aria-label={muted ? "Unmute" : "Mute"} title={muted ? "Unmute" : "Mute"}><span>{muted ? <VolumeX /> : <Volume2 />}</span></Button>
