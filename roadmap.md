@@ -1,6 +1,7 @@
 # Roadmap
 
 - [ ] Remove confirmed unavailable Drive samples and verify Drive deletions update the gallery automatically.
+- [ ] Replace the founder portrait on Home and About with the newly uploaded image.
 
 - [x] Add a back arrow to every page and verify previous-page navigation and the Home fallback
 
