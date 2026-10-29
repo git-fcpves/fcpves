@@ -14,6 +14,7 @@
 - Never offer a download option for videos: the player hides the download control, blocks picture-in-picture and ignores the right-click save menu.
 
 ## Verifying clips
+- Prebuffer only the selected film and release its media source when the player closes; pass request cancellation to Drive so abandoned streams do not compete with the next film.
 - The sandbox browser cannot decode H.264, so any MP4 (uploaded or from an external CDN) reports "no supported sources" there while WebM plays; verify clip tiles, thumbnails and player controls in the preview and treat codec playback as unverified rather than broken.
 
 ## Page navigation

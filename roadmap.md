@@ -1,5 +1,7 @@
 # Roadmap
 
+- [ ] Improve selected-video buffering and stop unnecessary video transfers after closing the player.
+
 - [x] Hide two samples with missing previews; verify Drive deletions update the gallery automatically with cache tests and a simulated browser refresh.
 - [x] Replace the founder portrait on Home and About with the newly uploaded image.
 
