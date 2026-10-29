@@ -16,6 +16,9 @@ import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as WorkRouteImport } from './routes/work'
 import { Route as ApiPublicAudienceRouteImport } from './routes/api/public/audience'
 import { Route as ApiPublicVideosRouteImport } from './routes/api/public/videos'
+import { Route as ApiPublicMayaChatRouteImport } from './routes/api/public/maya/chat'
+import { Route as ApiPublicMayaContactRouteImport } from './routes/api/public/maya/contact'
+import { Route as ApiPublicMayaSpeechRouteImport } from './routes/api/public/maya/speech'
 import { Route as ApiPublicThumbIdRouteImport } from './routes/api/public/thumb.$id'
 import { Route as ApiPublicVideoIdRouteImport } from './routes/api/public/video.$id'
 
@@ -54,6 +57,21 @@ const ApiPublicVideosRoute = ApiPublicVideosRouteImport.update({
   path: '/api/public/videos',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicMayaChatRoute = ApiPublicMayaChatRouteImport.update({
+  id: '/api/public/maya/chat',
+  path: '/api/public/maya/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicMayaContactRoute = ApiPublicMayaContactRouteImport.update({
+  id: '/api/public/maya/contact',
+  path: '/api/public/maya/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicMayaSpeechRoute = ApiPublicMayaSpeechRouteImport.update({
+  id: '/api/public/maya/speech',
+  path: '/api/public/maya/speech',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicThumbIdRoute = ApiPublicThumbIdRouteImport.update({
   id: '/api/public/thumb/$id',
   path: '/api/public/thumb/$id',
@@ -73,6 +91,9 @@ export interface FileRoutesByFullPath {
   '/work': typeof WorkRoute
   '/api/public/audience': typeof ApiPublicAudienceRoute
   '/api/public/videos': typeof ApiPublicVideosRoute
+  '/api/public/maya/chat': typeof ApiPublicMayaChatRoute
+  '/api/public/maya/contact': typeof ApiPublicMayaContactRoute
+  '/api/public/maya/speech': typeof ApiPublicMayaSpeechRoute
   '/api/public/thumb/$id': typeof ApiPublicThumbIdRoute
   '/api/public/video/$id': typeof ApiPublicVideoIdRoute
 }
@@ -84,6 +105,9 @@ export interface FileRoutesByTo {
   '/work': typeof WorkRoute
   '/api/public/audience': typeof ApiPublicAudienceRoute
   '/api/public/videos': typeof ApiPublicVideosRoute
+  '/api/public/maya/chat': typeof ApiPublicMayaChatRoute
+  '/api/public/maya/contact': typeof ApiPublicMayaContactRoute
+  '/api/public/maya/speech': typeof ApiPublicMayaSpeechRoute
   '/api/public/thumb/$id': typeof ApiPublicThumbIdRoute
   '/api/public/video/$id': typeof ApiPublicVideoIdRoute
 }
@@ -96,6 +120,9 @@ export interface FileRoutesById {
   '/work': typeof WorkRoute
   '/api/public/audience': typeof ApiPublicAudienceRoute
   '/api/public/videos': typeof ApiPublicVideosRoute
+  '/api/public/maya/chat': typeof ApiPublicMayaChatRoute
+  '/api/public/maya/contact': typeof ApiPublicMayaContactRoute
+  '/api/public/maya/speech': typeof ApiPublicMayaSpeechRoute
   '/api/public/thumb/$id': typeof ApiPublicThumbIdRoute
   '/api/public/video/$id': typeof ApiPublicVideoIdRoute
 }
@@ -109,6 +136,9 @@ export interface FileRouteTypes {
     | '/work'
     | '/api/public/audience'
     | '/api/public/videos'
+    | '/api/public/maya/chat'
+    | '/api/public/maya/contact'
+    | '/api/public/maya/speech'
     | '/api/public/thumb/$id'
     | '/api/public/video/$id'
   fileRoutesByTo: FileRoutesByTo
@@ -120,6 +150,9 @@ export interface FileRouteTypes {
     | '/work'
     | '/api/public/audience'
     | '/api/public/videos'
+    | '/api/public/maya/chat'
+    | '/api/public/maya/contact'
+    | '/api/public/maya/speech'
     | '/api/public/thumb/$id'
     | '/api/public/video/$id'
   id:
@@ -131,6 +164,9 @@ export interface FileRouteTypes {
     | '/work'
     | '/api/public/audience'
     | '/api/public/videos'
+    | '/api/public/maya/chat'
+    | '/api/public/maya/contact'
+    | '/api/public/maya/speech'
     | '/api/public/thumb/$id'
     | '/api/public/video/$id'
   fileRoutesById: FileRoutesById
@@ -143,6 +179,9 @@ export interface RootRouteChildren {
   WorkRoute: typeof WorkRoute
   ApiPublicAudienceRoute: typeof ApiPublicAudienceRoute
   ApiPublicVideosRoute: typeof ApiPublicVideosRoute
+  ApiPublicMayaChatRoute: typeof ApiPublicMayaChatRoute
+  ApiPublicMayaContactRoute: typeof ApiPublicMayaContactRoute
+  ApiPublicMayaSpeechRoute: typeof ApiPublicMayaSpeechRoute
   ApiPublicThumbIdRoute: typeof ApiPublicThumbIdRoute
   ApiPublicVideoIdRoute: typeof ApiPublicVideoIdRoute
 }
@@ -198,6 +237,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicVideosRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/maya/chat': {
+      id: '/api/public/maya/chat'
+      path: '/api/public/maya/chat'
+      fullPath: '/api/public/maya/chat'
+      preLoaderRoute: typeof ApiPublicMayaChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/maya/contact': {
+      id: '/api/public/maya/contact'
+      path: '/api/public/maya/contact'
+      fullPath: '/api/public/maya/contact'
+      preLoaderRoute: typeof ApiPublicMayaContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/maya/speech': {
+      id: '/api/public/maya/speech'
+      path: '/api/public/maya/speech'
+      fullPath: '/api/public/maya/speech'
+      preLoaderRoute: typeof ApiPublicMayaSpeechRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/thumb/$id': {
       id: '/api/public/thumb/$id'
       path: '/api/public/thumb/$id'
@@ -223,6 +283,9 @@ const rootRouteChildren: RootRouteChildren = {
   WorkRoute: WorkRoute,
   ApiPublicAudienceRoute: ApiPublicAudienceRoute,
   ApiPublicVideosRoute: ApiPublicVideosRoute,
+  ApiPublicMayaChatRoute: ApiPublicMayaChatRoute,
+  ApiPublicMayaContactRoute: ApiPublicMayaContactRoute,
+  ApiPublicMayaSpeechRoute: ApiPublicMayaSpeechRoute,
   ApiPublicThumbIdRoute: ApiPublicThumbIdRoute,
   ApiPublicVideoIdRoute: ApiPublicVideoIdRoute,
 }
